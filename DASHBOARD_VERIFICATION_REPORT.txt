@@ -1,0 +1,508 @@
+AERIS-TWIN SIH 2026
+DASHBOARD VERIFICATION REPORT
+================================
+
+DATE: 2026-09-02
+
+This report records checks actually executed after the visual-polish and full-
+system-verification prompt. PASS means the behavior was directly observed.
+PARTIAL means only part of the requested behavior was implemented or tested.
+NOT TESTED means no claim is made.
+
+1. SYSTEM OVERVIEW
+------------------
+STATUS: PASS
+
+The prototype consists of one Python server adapter and two browser routes:
+
+- /gcs: judge-facing UAV ground-control interface.
+- /engine: engine and digital-twin monitoring interface.
+
+Both routes connect to one server.py process and one EngineSimulator instance.
+The existing Python engine remains the source of truth for engine behavior,
+sensors, faults, mission inputs, and measured telemetry.
+
+2. REPOSITORY INSPECTION
+------------------------
+STATUS: PASS
+
+Inspected before implementation and verification:
+
+- simulation/engine_simulator.py
+- simulation/mission.py
+- sensors/sensor_model.py
+- telemetry/mqtt.py
+- faults/cooling.py
+- faults/misfire.py
+- faults/combustion_instability.py
+- faults/sensor_faults.py
+- data/logger.py
+- data/generated/
+- config/engine_config.py
+- main.py
+- existing physics and validation scripts
+
+The controlling integration seam is EngineSimulator.step(EngineInputs), which
+returns true engine state and observed SensorState.
+
+3. GCS VERIFICATION
+-------------------
+STATUS: PASS
+
+Browser inspection of http://localhost:8080/gcs confirmed:
+
+- GCS / FLIGHT CONTROL heading is present.
+- Mission map is visible.
+- Mission selector and flight controls are visible.
+- Engine status and operator alerts are visible.
+- Fault injection controls are visible.
+- Command timeline is visible.
+- Communication state changes to LINK / TELEMETRY RECEIVING.
+
+4. UAV ANIMATION VERIFICATION
+-----------------------------
+STATUS: PASS
+
+The previous triangular marker was replaced with an inline accessible SVG
+fixed-wing aircraft. Browser accessibility inspection reported:
+
+- image label: Fixed-wing UAV
+- visible AT-001 / UAV label
+- visible altitude readout
+
+The marker position is derived from the server's mission progress. The marker
+heading is derived from the server's heading state and rotates through CSS/SVG.
+
+The map remains explicitly labeled as a simulated operating area.
+
+5. MISSION CONTROL VERIFICATION
+-------------------------------
+STATUS: PASS
+
+The browser start-mission action produced a Start Mission acknowledged event
+and changed the UAV state from READY to FLYING. Available mission options were
+observed in the selector:
+
+- Cruise ISR
+- High Altitude
+- Long Endurance
+- Hot Weather
+- Rapid Throttle
+
+Mission selection is validated by server.py before it is accepted.
+
+6. ALTITUDE CONTROL VERIFICATION
+--------------------------------
+STATUS: PASS
+
+HTTP lifecycle test sent set_altitude with 6000. The resulting /api/state
+reported altitude_m: 6000.0. The GCS displayed the updated altitude and the
+SVG aircraft included the corresponding ALT readout.
+
+The value is an operating input applied to EngineInputs; it is not a fake-only
+label.
+
+7. HEADING CONTROL VERIFICATION
+-------------------------------
+STATUS: PASS
+
+Browser keyboard interaction moved the heading slider and resulted in:
+
+- Set Heading acknowledged in the command timeline.
+- server state heading: 180.0 degrees.
+- GCS telemetry heading: 180 degrees.
+- aircraft rotation driven by the same state value.
+
+The heading control is a UAV visualization/control state. It is not passed to
+the engine physics because the existing engine model has no heading input.
+
+8. ENGINE TELEMETRY VERIFICATION
+--------------------------------
+STATUS: PASS
+
+The Engine Monitor browser view received live telemetry and displayed nine
+parameter cards including:
+
+- RPM
+- CHT
+- Oil temperature
+- Oil pressure
+- Vibration
+- Fuel flow
+- Throttle
+- Engine load
+- Intake pressure
+
+A browser check observed live values such as RPM 2989, CHT 51.3 C, and oil
+pressure 85.7 psi. Values originated from the server's SensorState payload.
+
+9. DIGITAL TWIN VERIFICATION
+-----------------------------
+STATUS: PASS
+
+The Engine Monitor displayed:
+
+DIGITAL TWIN / SYNCHRONIZED / 10 HZ
+
+The state includes simulation time, active fault, telemetry rate, and a
+rule-based health percentage. The health score is explicitly labeled as
+telemetry-derived and not an ML prediction.
+
+10. FAULT INJECTION VERIFICATION
+---------------------------------
+STATUS: PASS
+
+The cooling fault was injected through the GCS browser button while the
+mission was running. The observed sequence was:
+
+- GCS command acknowledged.
+- GCS engine state changed to WARNING.
+- GCS displayed COOLING DEGRADATION.
+- Engine Monitor displayed FAULT COOLING DEGRADATION.
+- Engine Monitor health changed to 70.2%.
+- Engine Monitor displayed COOLING DEGRADATION as an active alert.
+- Vibration/RPM telemetry continued updating from the simulator.
+
+Existing simulator APIs were reused for cooling, misfire, combustion
+instability, and sensor drift. No frontend-only red warning was used as the
+fault mechanism.
+
+11. FAULT -> SENSOR -> TELEMETRY -> DASHBOARD CHAIN
+---------------------------------------------------
+STATUS: PASS
+
+Observed chain:
+
+GCS button
+  -> POST /api/command
+  -> server.py _inject_fault()
+  -> EngineSimulator.activate_cooling_fault()
+  -> EngineSimulator.step()
+  -> SensorModel observation
+  -> SSE state broadcast
+  -> GCS and Engine Monitor updates
+
+The second browser view reflected the fault from the same backend state.
+
+12. ENGINE MONITOR VERIFICATION
+-------------------------------
+STATUS: PASS
+
+Verified in browser:
+
+- engine process visualization labels: AIR INTAKE, COMBUSTION, POWER,
+  PROPELLER;
+- live parameter cards;
+- live chart canvases;
+- engine condition percentage;
+- thermal, lubrication, and vibration contributors;
+- digital-twin synchronization;
+- active alerts;
+- ML placeholder;
+- bounded history and replay controls;
+- mission report control.
+
+A normal-state presentation issue where thermal contribution could display
+203% was corrected by clamping the display to 0-100%.
+
+13. MISSION REPLAY VERIFICATION
+-------------------------------
+STATUS: PARTIAL
+
+The UI exposes PLAY REPLAY and STOP REPLAY. The replay code reads the current
+/api/history buffer, walks samples sequentially, and updates the Engine Monitor
+telemetry, health, fault, and alert presentation.
+
+The history buffer is bounded to 600 samples in server.py. The browser verified
+that history rows were rendered. A full visual replay progression with a long
+recorded session was not independently timed from start to finish.
+
+Historical CSV replay from data/generated is NOT implemented and is not claimed.
+
+14. MISSION REPORT VERIFICATION
+------------------------------
+STATUS: PASS
+
+/api/report was exercised and the browser MISSION REPORT action rendered a
+table containing mission, duration, maximum RPM, maximum CHT, average load,
+and condition. Values are calculated from the in-memory telemetry history.
+
+15. API VERIFICATION
+--------------------
+STATUS: PASS
+
+The following endpoints were checked against the running server:
+
+- /gcs: HTTP 200
+- /engine: HTTP 200
+- /api/state: HTTP 200, valid JSON
+- /api/history: HTTP 200, valid JSON
+- /api/report: HTTP 200, valid JSON
+- /api/command: exercised successfully with mission, altitude, heading,
+  fault, and reset commands
+- /api/stream: browser EventSource connected and delivered live state
+
+16. MQTT VERIFICATION
+---------------------
+STATUS: PARTIAL
+
+Inspected existing telemetry MQTT implementation and preserved the existing
+telemetry topic:
+
+- aeris-twin/engine/telemetry
+
+server.py supports optional MQTT publishing controlled by AERIS_MQTT and
+AERIS_MQTT_HOST/AERIS_MQTT_PORT environment variables. MQTT was not enabled
+against a live broker during this verification, so broker delivery is NOT
+TESTED.
+
+Browser commands continue to use HTTP POST /api/command. No duplicate MQTT
+telemetry topic was added.
+
+17. TWO-DEVICE NETWORK VERIFICATION
+-----------------------------------
+STATUS: PARTIAL
+
+The architecture supports the intended shape because server.py binds to
+0.0.0.0 by default and both routes share one backend process. One-computer
+verification used two separate browser pages connected to the same server and
+confirmed cross-view fault propagation.
+
+A physically separate laptop/phone on the LAN was NOT TESTED. Firewall rules,
+LAN routing, and access through the host's actual IP remain to be verified.
+
+18. ERROR-HANDLING VERIFICATION
+-------------------------------
+STATUS: PARTIAL
+
+Verified:
+
+- invalid mission was rejected with Unsupported mission;
+- invalid/non-finite numeric values are guarded by server validation;
+- numeric controls are clamped to defined ranges;
+- invalid fault names are rejected;
+- browser displays LINK / TELEMETRY LOST on SSE error;
+- normal SSE client disconnects no longer produce server stack traces.
+
+Simulator process termination and restart reconnection were NOT tested as a
+full operational procedure. The server does not currently expose an explicit
+ENGINE SIMULATOR OFFLINE state separate from the telemetry link indicator.
+
+19. DATA CONSISTENCY CHECK
+--------------------------
+STATUS: PASS
+
+The HTTP lifecycle test compared command results and live state for key fields:
+
+- altitude: requested 6000, observed 6000.0 m;
+- heading: requested 180, observed 180.0 degrees;
+- fault: requested cooling, observed COOLING_DEGRADATION;
+- GCS and Engine Monitor observed the same active fault;
+- engine values changed continuously from the shared simulator state.
+
+A full automated field-by-field comparison of every displayed sensor value was
+NOT performed. No undocumented unit conversion was added to displayed sensor
+values; labels use the simulator's existing units.
+
+20. FAKE/HARDCODED DATA AUDIT
+------------------------------
+STATUS: PARTIAL
+
+Live RPM, temperature, oil pressure, vibration, fuel flow, throttle, load,
+torque, intake pressure, fault, and health values are populated from server
+state derived from the simulator.
+
+The following are intentionally simulated/static UI elements:
+
+- map latitude/longitude labels;
+- route geometry and waypoint positions;
+- UAV identity AT-001;
+- initial placeholder values such as --;
+- CSS route/map styling.
+
+These are not presented as real GPS or hardware data. No fake ML failure
+probability or confidence value is displayed.
+
+21. ML INTEGRATION STATUS
+-------------------------
+STATUS: PASS
+
+ML is not implemented. The UI clearly displays READY FOR INTEGRATION and No
+prediction service connected. No fabricated anomaly score, failure
+probability, confidence, or remaining-useful-life value is present.
+
+22. PERFORMANCE CHECK
+---------------------
+STATUS: PARTIAL
+
+The server history uses deque(maxlen=600). Browser chartHistory is bounded to
+120 samples. The server tick interval is 0.1 seconds, corresponding to the
+reported 10 Hz adapter stream. Browser controls and charts remained responsive
+during the checks.
+
+Long-duration CPU, memory, and multi-client load testing were NOT performed.
+
+23. SECURITY/VALIDATION CHECK
+-----------------------------
+STATUS: PASS
+
+The command surface is allow-listed. Mission names, fault names, control
+ranges, and finite numeric values are validated before simulator calls.
+Arbitrary command names are rejected.
+
+Authentication, authorization, TLS, and production network hardening are NOT
+implemented and are not appropriate to claim for the current trusted-LAN
+prototype.
+
+24. KNOWN LIMITATIONS
+---------------------
+STATUS: DOCUMENTED
+
+- UAV position follows mission progress along a predefined simulated route.
+- No real GPS or flight-dynamics model exists in the adapter.
+- Heading is visual/UAV state only, not an engine input.
+- Throttle follows MissionProfile; direct runtime throttle is rejected.
+- Start sequence has READY and FLYING states only; STARTING/TAKEOFF states are
+  not modeled by the existing backend.
+- Replay uses the in-memory 600-sample buffer, not historical CSV files.
+- MQTT was not live-tested.
+- Separate physical LAN devices were not tested.
+- Offline simulator restart behavior was not fully tested.
+- Health and contributor values are rule-based, not ML output.
+- No real hardware sensor data is used.
+
+25. FILES CREATED
+-----------------
+- server.py
+- web/index.html
+- DASHBOARD_IMPLEMENTATION_REPORT.txt
+- DASHBOARD_VERIFICATION_REPORT.txt
+
+26. FILES MODIFIED
+------------------
+- server.py
+  - added mission/numeric validation;
+  - added mission report calculation;
+  - added /api/report;
+  - hardened SSE disconnect handling.
+- web/index.html
+  - upgraded the UAV map marker to a fixed-wing SVG;
+  - added state-driven aircraft position, rotation, and altitude display;
+  - synchronized the heading control with server state;
+  - clamped thermal contributor presentation;
+  - retained replay/report UI and live dashboard behavior.
+
+27. FILES LEFT UNTOUCHED
+------------------------
+- engine/*.py
+- simulation/engine_simulator.py
+- simulation/mission.py
+- sensors/*.py
+- faults/*.py
+- telemetry/mqtt.py
+- telemetry/can.py
+- data/logger.py
+- config/*.py
+- main.py
+- existing generated datasets and validation scripts
+
+28. HOW TO RUN
+--------------
+From the repository root:
+
+  python server.py
+
+Open locally:
+
+  http://localhost:8080/gcs
+  http://localhost:8080/engine
+
+For LAN access, use the host machine's LAN address:
+
+  http://<host-lan-ip>:8080/gcs
+  http://<host-lan-ip>:8080/engine
+
+The host firewall must allow TCP port 8080. MQTT is optional:
+
+  AERIS_MQTT=1
+  AERIS_MQTT_HOST=<broker-host>
+  AERIS_MQTT_PORT=1883
+
+29. SIH DEMONSTRATION PROCEDURE
+-------------------------------
+1. Start server.py.
+2. Open /gcs and /engine in separate browser tabs.
+3. Select Cruise ISR.
+4. Click START MISSION and observe READY -> FLYING.
+5. Adjust altitude and verify the map readout changes.
+6. Adjust heading and verify the SVG aircraft rotates.
+7. Click INJECT OVERHEATING / COOLING while flying.
+8. Confirm GCS WARNING and COOLING DEGRADATION.
+9. Confirm Engine Monitor fault, alert, telemetry, and health change.
+10. Use CLEAR FAULT or RESET SYSTEM and confirm recovery.
+11. Load session history on /engine.
+12. Use PLAY REPLAY and STOP REPLAY.
+13. Use MISSION REPORT to show the telemetry-derived summary.
+
+30. FINAL SYSTEM STATUS
+-----------------------
+
+VERIFIED WORKING
+-----------------
+- Shared GCS and Engine Monitor routes.
+- Shared simulator state across two browser views.
+- Fixed-wing SVG UAV marker.
+- State-driven UAV position, heading, and altitude display.
+- Mission start, altitude, heading, fault, clear/reset command paths.
+- Existing cooling fault propagation through the real simulator.
+- Live SensorState-driven engine telemetry.
+- Digital-twin synchronization presentation.
+- Rule-based condition and alerts.
+- API endpoint responses and JSON state.
+- Mission report rendering.
+- Bounded history rendering.
+- Command validation.
+- No fake ML output.
+
+PARTIALLY WORKING
+------------------
+- Replay is bounded in-memory session replay, not CSV/database replay.
+- MQTT integration is configured but not live-broker tested.
+- Two browser pages were verified; separate physical devices were not tested.
+- Offline simulator recovery and long-duration performance were not fully tested.
+- Map flight path is a simulated route driven by mission progress.
+
+NOT IMPLEMENTED
+---------------
+- ML anomaly detection, classification, prediction, confidence, and RUL.
+- Real GPS/aircraft flight dynamics.
+- Historical CSV replay service.
+- MQTT command subscriber.
+- Authentication and production security controls.
+
+CRITICAL ISSUES
+---------------
+- No blocker was found in the tested local demonstration flow.
+- A trusted-LAN firewall rule is required for physical second-device access.
+- The simulator must be restarted with the current server.py before testing
+  newly added endpoints after an older process has been running.
+
+RECOMMENDED NEXT STEPS
+----------------------
+1. Test /gcs and /engine from two physical LAN devices.
+2. Add explicit simulator-offline and reconnect state handling.
+3. Load generated CSV mission files through a dedicated replay API.
+4. Add a validated MQTT command bridge only if the deployment requires it.
+5. Add automated API tests for all command ranges and error responses.
+6. Add the independent Python ML service after the telemetry contract is
+   finalized.
+
+FINAL CONCLUSION
+----------------
+The local shared-source GCS and Engine Monitor demonstration flow is working
+and has been verified through browser and HTTP checks. The system is visually
+clearer because the UAV is now recognizable as a fixed-wing aircraft, and the
+normal -> fault -> warning -> reset lifecycle is observable across both views.
+The unverified areas are explicitly limited to physical LAN testing, live MQTT,
+full offline recovery, long-duration performance, and future historical/ML
+services.

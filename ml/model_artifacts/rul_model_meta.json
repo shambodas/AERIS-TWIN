@@ -1,0 +1,14 @@
+{
+  "selected_model": "D",
+  "selected_hp": {
+    "n_estimators": 100,
+    "max_depth": 15
+  },
+  "val_mae": 3.4280935860248722,
+  "test_mae": 2.777790850597723,
+  "test_rmse": 3.547991719895196,
+  "test_r2": 0.9718836353499433,
+  "confidence_method": "none",
+  "confidence_value": null,
+  "status": "EXPERIMENTAL"
+}

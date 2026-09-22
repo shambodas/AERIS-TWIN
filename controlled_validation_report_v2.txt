@@ -1,0 +1,4201 @@
+AERIS-TWIN CONTROLLED SIX-CONDITION VALIDATION
+================================================================================
+
+Generated: 2026-09-13T09:58:50.595801
+Route: Delhi -> Jaipur
+
+
+SUMMARY
+================================================================================
+Condition             Start Oil   End Oil     Start Wear   End Wear     AI Classification           Expected                    PASS   CLOSED  
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Healthy               84.0        77.9        None         None         NORMAL                      NORMAL                      True   False   
+overheating           84.0        78.2        None         None         NORMAL                      OVERHEATING                 False  False   
+low_oil_pressure      77.9        85.5        None         None         NORMAL                      OIL_PRESSURE_DEGRADATION    False  False   
+excessive_vibration   84.3000000000000177.7        None         None         NORMAL                      EXCESSIVE_VIBRATION         False  False   
+sensor_drift          77.6000000000000185.5        None         None         NORMAL                      SENSOR_DRIFT                False  False   
+misfire               84.0        76.80000000000001None         None         EXCESSIVE_VIBRATION         MISFIRE                     False  False   
+
+
+DETAILED RESULTS
+================================================================================
+
+{
+  "condition": "Healthy",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789272718.481768,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 0.00015686274509803922,
+        "position": {
+          "lat": 28.6139,
+          "lng": 77.209
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 2809.0,
+        "cht_c": 51.400000000000006,
+        "egt_c": 47.1,
+        "oil_temperature_c": 49.6,
+        "oil_pressure_psi": 86.2,
+        "vibration_rms": 0.17,
+        "fuel_flow_kg_s": 0.00047000000000000004,
+        "throttle_pct": 0.0,
+        "load_pct": 16.44811007630581,
+        "torque_nm": 15.0,
+        "intake_pressure_kpa": 20.03
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 0.2,
+        "health_pct": 93.0,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 93.01,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.64,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 0.00015686274509803922,
+        "elapsed_s": 0.2,
+        "running": true,
+        "paused": false,
+        "status": "COMPLETED",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 2809.0,
+        "manifold_pressure_kpa": 20.03,
+        "intake_temperature_c": 0.0,
+        "fuel_flow_kg_s": 0.00047000000000000004,
+        "torque_nm": 15.0,
+        "power_kw": 4.08,
+        "cht_cylinder_1_c": 48.0,
+        "cht_cylinder_2_c": 51.400000000000006,
+        "cht_cylinder_3_c": 49.1,
+        "cht_cylinder_4_c": 49.0,
+        "egt_cylinder_1_c": 45.800000000000004,
+        "egt_cylinder_2_c": 44.300000000000004,
+        "egt_cylinder_3_c": 47.1,
+        "egt_cylinder_4_c": 45.800000000000004,
+        "oil_temperature_c": 49.6,
+        "oil_pressure_psi": 86.2,
+        "oil_flow_l_min": 0.05,
+        "battery_voltage_v": 24.11,
+        "battery_current_a": 2.35,
+        "battery_soc": 1.0,
+        "vibration_rms": 0.17,
+        "vibration_peak": 0.388,
+        "vibration_0_5x": 0.018000000000000002,
+        "vibration_1x": 0.10200000000000001,
+        "vibration_2x": 0.056
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 41.125885,
+          "expected_egt": 49.4757,
+          "expected_oil_temperature": 73.55735,
+          "expected_oil_pressure": 85.53375,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16164050000000002,
+          "expected_rpm": 2809.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 15.0,
+          "expected_power_kw": 4.08,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": 10.274115000000009,
+            "absolute": 10.274115000000009,
+            "normalized": 0.8561762500000007,
+            "percent": 24.982112846933287,
+            "direction": "POSITIVE",
+            "magnitude": 10.274115000000009
+          },
+          "egt_deviation": {
+            "value": -2.375700000000002,
+            "absolute": 2.375700000000002,
+            "normalized": -0.13198333333333345,
+            "percent": 4.801751162691992,
+            "direction": "NEGATIVE",
+            "magnitude": 2.375700000000002
+          },
+          "oil_temperature_deviation": {
+            "value": -23.957349999999998,
+            "absolute": 23.957349999999998,
+            "normalized": -1.9964458333333333,
+            "percent": 32.569620846863025,
+            "direction": "NEGATIVE",
+            "magnitude": 23.957349999999998
+          },
+          "oil_pressure_deviation": {
+            "value": 0.6662500000000051,
+            "absolute": 0.6662500000000051,
+            "normalized": 0.08328125000000064,
+            "percent": 0.7789322928084004,
+            "direction": "POSITIVE",
+            "magnitude": 0.6662500000000051
+          },
+          "fuel_flow_deviation": {
+            "value": 0.00046,
+            "absolute": 0.00046,
+            "normalized": 1.3142857142857143,
+            "percent": 131.42857142857142,
+            "direction": "POSITIVE",
+            "magnitude": 0.00046
+          },
+          "vibration_deviation": {
+            "value": 0.008359499999999992,
+            "absolute": 0.008359499999999992,
+            "normalized": 0.06966249999999993,
+            "percent": 5.17166180505504,
+            "direction": "POSITIVE",
+            "magnitude": 0.008359499999999992
+          }
+        },
+        "features": {
+          "rpm": 2809.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 0.00047000000000000004,
+          "oil_temperature_c": 49.6,
+          "oil_pressure_psi": 86.2,
+          "vibration_rms": 0.17,
+          "torque_nm": 15.0,
+          "power_kw": 4.08,
+          "engine_load_pct": 4.112027519076452,
+          "expected_cht": 41.125885,
+          "expected_egt": 49.4757,
+          "expected_oil_temperature": 73.55735,
+          "expected_oil_pressure": 85.53375,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16164050000000002,
+          "cht_deviation": 10.274115000000009,
+          "egt_deviation": -2.375700000000002,
+          "oil_temperature_deviation": -23.957349999999998,
+          "oil_pressure_deviation": 0.6662500000000051,
+          "fuel_flow_deviation": 0.00046,
+          "vibration_deviation": 0.008359499999999992,
+          "thermal_deviation_consistency": 12.649815000000011,
+          "cross_sensor_alignment": 0.4288502275740497,
+          "rolling_mean": 0.0,
+          "rolling_std": 0.0,
+          "rate_of_change": 0.0,
+          "slope": 0.0,
+          "persistence": 0.0
+        },
+        "anomaly": {
+          "score": 0.4656864047669009,
+          "is_anomaly": false,
+          "normalized_score": 0.4656864047669009,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.64,
+          "probabilities": {
+            "COMBUSTION_INSTABILITY": 0.02,
+            "COOLING_DEGRADATION": 0.04,
+            "EXCESSIVE_VIBRATION": 0.04666666666666667,
+            "MISFIRE": 0.013333333333333334,
+            "NORMAL": 0.64,
+            "OIL_PRESSURE_DEGRADATION": 0.01,
+            "SENSOR_DRIFT": 0.23
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.6985296071503513,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 93.01,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.64,
+          "primary_signal": "thermal_deviation",
+          "evidence": [
+            "CHT above expectation for current operating conditions."
+          ],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.466
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 72.73466666666828,
+          "raw_estimated_rul": 72.73466666666828,
+          "filtered_estimated_rul": 72.73466666666828,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2bf3f0ac590>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-404221f2"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Inject Fault acknowledged"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": null,
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:42:02",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 84.0,
+    "oil_temperature": 49.2,
+    "cht": 49.400000000000006,
+    "egt": 39.5,
+    "vibration": 0.14100000000000001,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789272726.1874058,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.0010980392156862747,
+      "position": {
+        "lat": 28.65055645219317,
+        "lng": 77.25076417867008
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "HEALTHY",
+      "rpm": 2204.0,
+      "cht_c": 49.300000000000004,
+      "egt_c": 34.5,
+      "oil_temperature_c": 49.2,
+      "oil_pressure_psi": 84.0,
+      "vibration_rms": 0.179,
+      "fuel_flow_kg_s": 0.00035000000000000005,
+      "throttle_pct": 0.0,
+      "load_pct": 12.386732787665975,
+      "torque_nm": 12.8,
+      "intake_pressure_kpa": 19.84
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 1.4000000000000001,
+      "health_pct": 93.0,
+      "fault": "NORMAL",
+      "active_fault_name": "",
+      "fault_severity": 0.0,
+      "ai_health": 93.02,
+      "ai_severity": "NORMAL",
+      "ai_fault": "NORMAL",
+      "ai_confidence": 0.6133333333333333,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.0010980392156862747,
+      "elapsed_s": 1.4000000000000001,
+      "running": true,
+      "paused": false,
+      "status": "COMPLETED",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "CLEAR",
+      "return_recommended": false,
+      "risk_message": "MISSION STABLE"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [],
+    "telemetry": {
+      "rpm": 2204.0,
+      "manifold_pressure_kpa": 19.84,
+      "intake_temperature_c": 0.1,
+      "fuel_flow_kg_s": 0.00035000000000000005,
+      "torque_nm": 12.8,
+      "power_kw": 3.09,
+      "cht_cylinder_1_c": 48.300000000000004,
+      "cht_cylinder_2_c": 49.300000000000004,
+      "cht_cylinder_3_c": 47.5,
+      "cht_cylinder_4_c": 47.900000000000006,
+      "egt_cylinder_1_c": 31.3,
+      "egt_cylinder_2_c": 33.2,
+      "egt_cylinder_3_c": 33.2,
+      "egt_cylinder_4_c": 34.5,
+      "oil_temperature_c": 49.2,
+      "oil_pressure_psi": 84.0,
+      "oil_flow_l_min": 0.13,
+      "battery_voltage_v": 24.8,
+      "battery_current_a": -3.25,
+      "battery_soc": 1.0,
+      "vibration_rms": 0.179,
+      "vibration_peak": 0.385,
+      "vibration_0_5x": 0.01,
+      "vibration_1x": 0.091,
+      "vibration_2x": 0.07200000000000001
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 40.66306,
+        "expected_egt": 34.4717,
+        "expected_oil_temperature": 72.5591,
+        "expected_oil_pressure": 83.26499999999999,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.158918,
+        "expected_rpm": 2204.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 12.8,
+        "expected_power_kw": 3.09,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": 8.636940000000003,
+          "absolute": 8.636940000000003,
+          "normalized": 0.7197450000000002,
+          "percent": 21.240260816574068,
+          "direction": "POSITIVE",
+          "magnitude": 8.636940000000003
+        },
+        "egt_deviation": {
+          "value": 0.028300000000001546,
+          "absolute": 0.028300000000001546,
+          "normalized": 0.0015722222222223081,
+          "percent": 0.08209632829248789,
+          "direction": "POSITIVE",
+          "magnitude": 0.028300000000001546
+        },
+        "oil_temperature_deviation": {
+          "value": -23.359099999999998,
+          "absolute": 23.359099999999998,
+          "normalized": -1.9465916666666665,
+          "percent": 32.193205263020076,
+          "direction": "NEGATIVE",
+          "magnitude": 23.359099999999998
+        },
+        "oil_pressure_deviation": {
+          "value": 0.7350000000000136,
+          "absolute": 0.7350000000000136,
+          "normalized": 0.0918750000000017,
+          "percent": 0.8827238335435222,
+          "direction": "POSITIVE",
+          "magnitude": 0.7350000000000136
+        },
+        "fuel_flow_deviation": {
+          "value": 0.00034,
+          "absolute": 0.00034,
+          "normalized": 0.9714285714285715,
+          "percent": 97.14285714285715,
+          "direction": "POSITIVE",
+          "magnitude": 0.00034
+        },
+        "vibration_deviation": {
+          "value": 0.02008199999999999,
+          "absolute": 0.02008199999999999,
+          "normalized": 0.16734999999999992,
+          "percent": 12.636705722448047,
+          "direction": "POSITIVE",
+          "magnitude": 0.02008199999999999
+        }
+      },
+      "features": {
+        "rpm": 2204.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00035000000000000005,
+        "oil_temperature_c": 49.2,
+        "oil_pressure_psi": 84.0,
+        "vibration_rms": 0.179,
+        "torque_nm": 12.8,
+        "power_kw": 3.09,
+        "engine_load_pct": 3.096683196916494,
+        "expected_cht": 40.66306,
+        "expected_egt": 34.4717,
+        "expected_oil_temperature": 72.5591,
+        "expected_oil_pressure": 83.26499999999999,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.158918,
+        "cht_deviation": 8.636940000000003,
+        "egt_deviation": 0.028300000000001546,
+        "oil_temperature_deviation": -23.359099999999998,
+        "oil_pressure_deviation": 0.7350000000000136,
+        "fuel_flow_deviation": 0.00034,
+        "vibration_deviation": 0.02008199999999999,
+        "thermal_deviation_consistency": 8.665240000000004,
+        "cross_sensor_alignment": 0.36974626589338877,
+        "cht_deviation_rolling_mean": 9.080258500000003,
+        "cht_deviation_rolling_std": 0.5151059707285974,
+        "cht_deviation_rate_of_change": 0.08252444444444348,
+        "cht_deviation_slope": 0.08252444444444348,
+        "cht_deviation_persistence": 1.0,
+        "egt_deviation_rolling_mean": -0.82778,
+        "egt_deviation_rolling_std": 1.0502745058316876,
+        "egt_deviation_rate_of_change": -0.13217777777777842,
+        "egt_deviation_slope": -0.13217777777777842,
+        "egt_deviation_persistence": 0.82778,
+        "oil_temperature_deviation_rolling_mean": -23.043315,
+        "oil_temperature_deviation_rolling_std": 0.5890590853428865,
+        "oil_temperature_deviation_rate_of_change": -0.01786666666666687,
+        "oil_temperature_deviation_slope": -0.01786666666666687,
+        "oil_temperature_deviation_persistence": 0.9864812856237407,
+        "oil_pressure_deviation_rolling_mean": 0.20087500000000347,
+        "oil_pressure_deviation_rolling_std": 0.6657322214111298,
+        "oil_pressure_deviation_rate_of_change": 0.020000000000000757,
+        "oil_pressure_deviation_slope": 0.020000000000000757,
+        "oil_pressure_deviation_persistence": 0.20087500000000347,
+        "fuel_flow_deviation_rolling_mean": 0.000366,
+        "fuel_flow_deviation_rolling_std": 6.829348431585549e-05,
+        "fuel_flow_deviation_rate_of_change": -1.3333333333333332e-05,
+        "fuel_flow_deviation_slope": -1.3333333333333332e-05,
+        "fuel_flow_deviation_persistence": 0.000366,
+        "vibration_deviation_rolling_mean": 0.004225050000000003,
+        "vibration_deviation_rolling_std": 0.014552930588802384,
+        "vibration_deviation_rate_of_change": -0.0009982222222222213,
+        "vibration_deviation_slope": -0.0009982222222222213,
+        "vibration_deviation_persistence": 0.004225050000000003
+      },
+      "anomaly": {
+        "score": 0.46510303924873575,
+        "is_anomaly": false,
+        "normalized_score": 0.46510303924873575,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "NORMAL",
+        "confidence": 0.6133333333333333,
+        "probabilities": {
+          "COMBUSTION_INSTABILITY": 0.023333333333333334,
+          "COOLING_DEGRADATION": 0.03,
+          "EXCESSIVE_VIBRATION": 0.04,
+          "MISFIRE": 0.013333333333333334,
+          "NORMAL": 0.6133333333333333,
+          "OIL_PRESSURE_DEGRADATION": 0.013333333333333334,
+          "SENSOR_DRIFT": 0.26666666666666666
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.0,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.0,
+        "likely_condition": "AMBIGUOUS"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.6976545588731036,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 93.02,
+        "severity": "NORMAL"
+      },
+      "severity": "NORMAL",
+      "diagnosis": {
+        "title": "NORMAL ENGINE OPERATION",
+        "severity": "NORMAL",
+        "fault_type": "NORMAL",
+        "confidence": 0.613,
+        "primary_signal": "thermal_deviation",
+        "evidence": [
+          "CHT above expectation for current operating conditions."
+        ],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+        "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.465
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 74.85480000000301,
+        "raw_estimated_rul": 74.85480000000301,
+        "filtered_estimated_rul": 74.85480000000301,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2bf3f0ac590>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-404221f2"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Inject Fault acknowledged"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:42:49",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.4,
+    "oil_temperature": 49.400000000000006,
+    "cht": 44.300000000000004,
+    "egt": 6.9,
+    "vibration": 0.17200000000000001,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:44:25",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.9,
+    "oil_temperature": 47.300000000000004,
+    "cht": 37.2,
+    "egt": 2.2,
+    "vibration": 0.179,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "expected_classification": "NORMAL",
+  "actual_classification": "NORMAL",
+  "classification_pass": true,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": []
+  }
+}
+
+{
+  "condition": "overheating",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789272891.4539864,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 7.843137254901961e-05,
+        "position": {
+          "lat": 28.6139,
+          "lng": 77.209
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 2864.0,
+        "cht_c": 50.7,
+        "egt_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "vibration_rms": 0.162,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "throttle_pct": 0.0,
+        "load_pct": 16.881267683499857,
+        "torque_nm": 14.5,
+        "intake_pressure_kpa": 19.990000000000002
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 0.1,
+        "health_pct": 93.0,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 93.02,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.6,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 7.843137254901961e-05,
+        "elapsed_s": 0.1,
+        "running": true,
+        "paused": false,
+        "status": "READY",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 2864.0,
+        "manifold_pressure_kpa": 19.990000000000002,
+        "intake_temperature_c": -0.1,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "torque_nm": 14.5,
+        "power_kw": 4.25,
+        "cht_cylinder_1_c": 50.7,
+        "cht_cylinder_2_c": 47.7,
+        "cht_cylinder_3_c": 49.300000000000004,
+        "cht_cylinder_4_c": 49.1,
+        "egt_cylinder_1_c": 48.800000000000004,
+        "egt_cylinder_2_c": 48.5,
+        "egt_cylinder_3_c": 45.7,
+        "egt_cylinder_4_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "oil_flow_l_min": 0.16,
+        "battery_voltage_v": 24.02,
+        "battery_current_a": 2.93,
+        "battery_soc": 0.998,
+        "vibration_rms": 0.162,
+        "vibration_peak": 0.362,
+        "vibration_0_5x": 0.031,
+        "vibration_1x": 0.093,
+        "vibration_2x": 0.038
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "expected_rpm": 2864.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 14.5,
+          "expected_power_kw": 4.25,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": 9.53204000000001,
+            "absolute": 9.53204000000001,
+            "normalized": 0.7943366666666675,
+            "percent": 23.154025606321056,
+            "direction": "POSITIVE",
+            "magnitude": 9.53204000000001
+          },
+          "egt_deviation": {
+            "value": -2.039699999999989,
+            "absolute": 2.039699999999989,
+            "normalized": -0.11331666666666607,
+            "percent": 4.012022100838497,
+            "direction": "NEGATIVE",
+            "magnitude": 2.039699999999989
+          },
+          "oil_temperature_deviation": {
+            "value": -23.448099999999997,
+            "absolute": 23.448099999999997,
+            "normalized": -1.9540083333333331,
+            "percent": 31.838024334639993,
+            "direction": "NEGATIVE",
+            "magnitude": 23.448099999999997
+          },
+          "oil_pressure_deviation": {
+            "value": 0.36000000000001364,
+            "absolute": 0.36000000000001364,
+            "normalized": 0.045000000000001705,
+            "percent": 0.4198740377886793,
+            "direction": "POSITIVE",
+            "magnitude": 0.36000000000001364
+          },
+          "fuel_flow_deviation": {
+            "value": 0.00044,
+            "absolute": 0.00044,
+            "normalized": 1.2571428571428571,
+            "percent": 125.71428571428571,
+            "direction": "POSITIVE",
+            "magnitude": 0.00044
+          },
+          "vibration_deviation": {
+            "value": 0.00011199999999997323,
+            "absolute": 0.00011199999999997323,
+            "normalized": 0.0009333333333331103,
+            "percent": 0.06918363312906035,
+            "direction": "POSITIVE",
+            "magnitude": 0.00011199999999997323
+          }
+        },
+        "features": {
+          "rpm": 2864.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 0.00045000000000000004,
+          "oil_temperature_c": 50.2,
+          "oil_pressure_psi": 86.10000000000001,
+          "vibration_rms": 0.162,
+          "torque_nm": 14.5,
+          "power_kw": 4.25,
+          "engine_load_pct": 4.220316920874964,
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "cht_deviation": 9.53204000000001,
+          "egt_deviation": -2.039699999999989,
+          "oil_temperature_deviation": -23.448099999999997,
+          "oil_pressure_deviation": 0.36000000000001364,
+          "fuel_flow_deviation": 0.00044,
+          "vibration_deviation": 0.00011199999999997323,
+          "thermal_deviation_consistency": 11.571739999999998,
+          "cross_sensor_alignment": 0.40651651944479483,
+          "cht_deviation_rolling_mean": -8.420684999999992,
+          "cht_deviation_rolling_std": 0.0,
+          "cht_deviation_rate_of_change": 0.0,
+          "cht_deviation_slope": 0.0,
+          "cht_deviation_persistence": 0.883408483295976,
+          "egt_deviation_rolling_mean": -16.2892,
+          "egt_deviation_rolling_std": 0.0,
+          "egt_deviation_rate_of_change": 0.0,
+          "egt_deviation_slope": 0.0,
+          "egt_deviation_persistence": 1.0,
+          "oil_temperature_deviation_rolling_mean": -42.38284999999998,
+          "oil_temperature_deviation_rolling_std": 0.0,
+          "oil_temperature_deviation_rate_of_change": 0.0,
+          "oil_temperature_deviation_slope": 0.0,
+          "oil_temperature_deviation_persistence": 1.0,
+          "oil_pressure_deviation_rolling_mean": -0.4837500000000148,
+          "oil_pressure_deviation_rolling_std": 0.0,
+          "oil_pressure_deviation_rate_of_change": 0.0,
+          "oil_pressure_deviation_slope": 0.0,
+          "oil_pressure_deviation_persistence": 0.4837500000000148,
+          "fuel_flow_deviation_rolling_mean": 0.00071,
+          "fuel_flow_deviation_rolling_std": 0.0,
+          "fuel_flow_deviation_rate_of_change": 0.0,
+          "fuel_flow_deviation_slope": 0.0,
+          "fuel_flow_deviation_persistence": 0.00071,
+          "vibration_deviation_rolling_mean": 0.017819499999999988,
+          "vibration_deviation_rolling_std": 0.0,
+          "vibration_deviation_rate_of_change": 0.0,
+          "vibration_deviation_slope": 0.0,
+          "vibration_deviation_persistence": 0.017819499999999988
+        },
+        "anomaly": {
+          "score": 0.46512084972206863,
+          "is_anomaly": false,
+          "normalized_score": 0.46512084972206863,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "probabilities": {
+            "COMBUSTION_INSTABILITY": 0.02,
+            "COOLING_DEGRADATION": 0.04,
+            "EXCESSIVE_VIBRATION": 0.04,
+            "MISFIRE": 0.013333333333333334,
+            "NORMAL": 0.6,
+            "OIL_PRESSURE_DEGRADATION": 0.016666666666666666,
+            "SENSOR_DRIFT": 0.27
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.6976812745831029,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 93.02,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "primary_signal": "thermal_deviation",
+          "evidence": [
+            "CHT above expectation for current operating conditions."
+          ],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.465
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 71.40445476190555,
+          "raw_estimated_rul": 71.40445476190555,
+          "filtered_estimated_rul": 71.40445476190555,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x194aceb4ad0>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-3cdb1514"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:44:55",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 84.0,
+    "oil_temperature": 50.0,
+    "cht": 48.7,
+    "egt": 37.2,
+    "vibration": 0.151,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789272903.0863905,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.00219607843137255,
+      "position": {
+        "lat": 28.696377017434635,
+        "lng": 77.30298993946556
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "HEALTHY",
+      "rpm": 1641.0,
+      "cht_c": 48.400000000000006,
+      "egt_c": 24.700000000000003,
+      "oil_temperature_c": 49.300000000000004,
+      "oil_pressure_psi": 81.80000000000001,
+      "vibration_rms": 0.17200000000000001,
+      "fuel_flow_kg_s": 0.00021,
+      "throttle_pct": 0.0,
+      "load_pct": 8.801504150832274,
+      "torque_nm": 13.0,
+      "intake_pressure_kpa": 19.85
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 2.800000000000001,
+      "health_pct": 93.0,
+      "fault": "NORMAL",
+      "active_fault_name": "",
+      "fault_severity": 0.0,
+      "ai_health": 92.98,
+      "ai_severity": "NORMAL",
+      "ai_fault": "NORMAL",
+      "ai_confidence": 0.53,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.00219607843137255,
+      "elapsed_s": 2.800000000000001,
+      "running": true,
+      "paused": false,
+      "status": "READY",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "CLEAR",
+      "return_recommended": false,
+      "risk_message": "MISSION STABLE"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [],
+    "telemetry": {
+      "rpm": 1641.0,
+      "manifold_pressure_kpa": 19.85,
+      "intake_temperature_c": 0.5,
+      "fuel_flow_kg_s": 0.00021,
+      "torque_nm": 13.0,
+      "power_kw": 2.16,
+      "cht_cylinder_1_c": 47.300000000000004,
+      "cht_cylinder_2_c": 48.2,
+      "cht_cylinder_3_c": 45.900000000000006,
+      "cht_cylinder_4_c": 48.400000000000006,
+      "egt_cylinder_1_c": 20.900000000000002,
+      "egt_cylinder_2_c": 23.8,
+      "egt_cylinder_3_c": 24.700000000000003,
+      "egt_cylinder_4_c": 23.0,
+      "oil_temperature_c": 49.300000000000004,
+      "oil_pressure_psi": 81.80000000000001,
+      "oil_flow_l_min": 0.18,
+      "battery_voltage_v": 24.28,
+      "battery_current_a": -9.39,
+      "battery_soc": 1.0,
+      "vibration_rms": 0.17200000000000001,
+      "vibration_peak": 0.435,
+      "vibration_0_5x": 0.014,
+      "vibration_1x": 0.091,
+      "vibration_2x": 0.062
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 40.232365,
+        "expected_egt": 20.509299999999996,
+        "expected_oil_temperature": 71.63015,
+        "expected_oil_pressure": 81.15375,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15638449999999998,
+        "expected_rpm": 1641.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 13.0,
+        "expected_power_kw": 2.16,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": 8.167635000000004,
+          "absolute": 8.167635000000004,
+          "normalized": 0.6806362500000004,
+          "percent": 20.301155549766968,
+          "direction": "POSITIVE",
+          "magnitude": 8.167635000000004
+        },
+        "egt_deviation": {
+          "value": 4.190700000000007,
+          "absolute": 4.190700000000007,
+          "normalized": 0.23281666666666703,
+          "percent": 20.433169342688476,
+          "direction": "POSITIVE",
+          "magnitude": 4.190700000000007
+        },
+        "oil_temperature_deviation": {
+          "value": -22.330149999999996,
+          "absolute": 22.330149999999996,
+          "normalized": -1.860845833333333,
+          "percent": 31.174233196496164,
+          "direction": "NEGATIVE",
+          "magnitude": 22.330149999999996
+        },
+        "oil_pressure_deviation": {
+          "value": 0.6462500000000091,
+          "absolute": 0.6462500000000091,
+          "normalized": 0.08078125000000114,
+          "percent": 0.7963279577345583,
+          "direction": "POSITIVE",
+          "magnitude": 0.6462500000000091
+        },
+        "fuel_flow_deviation": {
+          "value": 0.0002,
+          "absolute": 0.0002,
+          "normalized": 0.5714285714285715,
+          "percent": 57.14285714285715,
+          "direction": "POSITIVE",
+          "magnitude": 0.0002
+        },
+        "vibration_deviation": {
+          "value": 0.015615500000000032,
+          "absolute": 0.015615500000000032,
+          "normalized": 0.13012916666666693,
+          "percent": 9.985324632556317,
+          "direction": "POSITIVE",
+          "magnitude": 0.015615500000000032
+        }
+      },
+      "features": {
+        "rpm": 1641.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00021,
+        "oil_temperature_c": 49.300000000000004,
+        "oil_pressure_psi": 81.80000000000001,
+        "vibration_rms": 0.17200000000000001,
+        "torque_nm": 13.0,
+        "power_kw": 2.16,
+        "engine_load_pct": 2.2003760377080686,
+        "expected_cht": 40.232365,
+        "expected_egt": 20.509299999999996,
+        "expected_oil_temperature": 71.63015,
+        "expected_oil_pressure": 81.15375,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15638449999999998,
+        "cht_deviation": 8.167635000000004,
+        "egt_deviation": 4.190700000000007,
+        "oil_temperature_deviation": -22.330149999999996,
+        "oil_pressure_deviation": 0.6462500000000091,
+        "fuel_flow_deviation": 0.0002,
+        "vibration_deviation": 0.015615500000000032,
+        "thermal_deviation_consistency": 12.358335000000011,
+        "cross_sensor_alignment": 0.36576713544845146,
+        "cht_deviation_rolling_mean": 8.079509500000004,
+        "cht_deviation_rolling_std": 0.4783724956790994,
+        "cht_deviation_rate_of_change": -0.08127611111111183,
+        "cht_deviation_slope": -0.08127611111111183,
+        "cht_deviation_persistence": 0.9892104016659399,
+        "egt_deviation_rolling_mean": 2.634540000000002,
+        "egt_deviation_rolling_std": 0.9639938788187409,
+        "egt_deviation_rate_of_change": 0.056088888888890014,
+        "egt_deviation_slope": 0.056088888888890014,
+        "egt_deviation_persistence": 0.628663468960158,
+        "oil_temperature_deviation_rolling_mean": -22.421204999999993,
+        "oil_temperature_deviation_rolling_std": 0.6716088476375225,
+        "oil_temperature_deviation_rate_of_change": 0.1754611111111125,
+        "oil_temperature_deviation_slope": 0.1754611111111125,
+        "oil_temperature_deviation_persistence": 1.0,
+        "oil_pressure_deviation_rolling_mean": -0.12887499999999646,
+        "oil_pressure_deviation_rolling_std": 0.41844744667042694,
+        "oil_pressure_deviation_rate_of_change": -0.08708333333333308,
+        "oil_pressure_deviation_slope": -0.08708333333333308,
+        "oil_pressure_deviation_persistence": 0.12887499999999646,
+        "fuel_flow_deviation_rolling_mean": 0.00023700000000000001,
+        "fuel_flow_deviation_rolling_std": 5.762811813689563e-05,
+        "fuel_flow_deviation_rate_of_change": -9.999999999999999e-06,
+        "fuel_flow_deviation_slope": -9.999999999999999e-06,
+        "fuel_flow_deviation_persistence": 0.00023700000000000001,
+        "vibration_deviation_rolling_mean": 0.0008853499999999959,
+        "vibration_deviation_rolling_std": 0.007953060385945782,
+        "vibration_deviation_rate_of_change": -0.0019356111111111117,
+        "vibration_deviation_slope": -0.0019356111111111117,
+        "vibration_deviation_persistence": 0.0008853499999999959
+      },
+      "anomaly": {
+        "score": 0.46813081858540906,
+        "is_anomaly": false,
+        "normalized_score": 0.46813081858540906,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "NORMAL",
+        "confidence": 0.53,
+        "probabilities": {
+          "COMBUSTION_INSTABILITY": 0.02666666666666667,
+          "COOLING_DEGRADATION": 0.02,
+          "EXCESSIVE_VIBRATION": 0.03666666666666667,
+          "MISFIRE": 0.013333333333333334,
+          "NORMAL": 0.53,
+          "OIL_PRESSURE_DEGRADATION": 0.013333333333333334,
+          "SENSOR_DRIFT": 0.36
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.0,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.0,
+        "likely_condition": "AMBIGUOUS"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.7021962278781135,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 92.98,
+        "severity": "NORMAL"
+      },
+      "severity": "NORMAL",
+      "diagnosis": {
+        "title": "NORMAL ENGINE OPERATION",
+        "severity": "NORMAL",
+        "fault_type": "NORMAL",
+        "confidence": 0.53,
+        "primary_signal": "thermal_deviation",
+        "evidence": [
+          "CHT above expectation for current operating conditions."
+        ],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+        "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.468
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 56.50790000000223,
+        "raw_estimated_rul": 71.4260666666689,
+        "filtered_estimated_rul": 56.50790000000223,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x194aceb4ad0>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-3cdb1514"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:45:46",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 78.5,
+    "oil_temperature": 49.6,
+    "cht": 43.900000000000006,
+    "egt": 7.6000000000000005,
+    "vibration": 0.164,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:47:22",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 78.2,
+    "oil_temperature": 47.400000000000006,
+    "cht": 35.300000000000004,
+    "egt": 2.0,
+    "vibration": 0.157,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "expected_classification": "OVERHEATING",
+  "actual_classification": "NORMAL",
+  "classification_pass": false,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": [
+      {
+        "flight_id": "aeris-404221f2",
+        "mission_name": "Cruise ISR",
+        "mission_key": "cruise_isr",
+        "status": "STOPPED",
+        "start_time": 1789272715.756134,
+        "end_time": 1789272873.230544,
+        "duration_seconds": 157.47441,
+        "max_altitude_m": 3500.0,
+        "max_rpm": 2809.0,
+        "max_cht_c": 51.400000000000006,
+        "max_egt_c": 47.1,
+        "max_vibration_rms": 0.185,
+        "minimum_health_score": 92.32,
+        "final_health_score": 92.82,
+        "fault_detected": false,
+        "fault_type": "NORMAL",
+        "fault_first_seen": 0.0,
+        "fault_last_seen": 0.0,
+        "fault_event_count": 0,
+        "mission_progress": 0.014666666666666663,
+        "telemetry_points": 186
+      }
+    ]
+  }
+}
+
+{
+  "condition": "low_oil_pressure",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789273062.4398196,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 0.018509803921568677,
+        "position": {
+          "lat": 29.32870081776683,
+          "lng": 78.02606427585954
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 801.0,
+        "cht_c": 34.1,
+        "egt_c": 2.9000000000000004,
+        "oil_temperature_c": 48.2,
+        "oil_pressure_psi": 77.7,
+        "vibration_rms": 0.138,
+        "fuel_flow_kg_s": 4e-05,
+        "throttle_pct": 0.0,
+        "load_pct": 3.9292194328828787,
+        "torque_nm": 11.200000000000001,
+        "intake_pressure_kpa": 19.98
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 23.600000000000065,
+        "health_pct": 92.8,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 92.79,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.6,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 0.018509803921568677,
+        "elapsed_s": 23.600000000000065,
+        "running": true,
+        "paused": false,
+        "status": "COMPLETED",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 801.0,
+        "manifold_pressure_kpa": 19.98,
+        "intake_temperature_c": -0.30000000000000004,
+        "fuel_flow_kg_s": 4e-05,
+        "torque_nm": 11.200000000000001,
+        "power_kw": 1.02,
+        "cht_cylinder_1_c": 32.4,
+        "cht_cylinder_2_c": 33.2,
+        "cht_cylinder_3_c": 33.2,
+        "cht_cylinder_4_c": 34.1,
+        "egt_cylinder_1_c": 2.1,
+        "egt_cylinder_2_c": 2.9000000000000004,
+        "egt_cylinder_3_c": 2.8000000000000003,
+        "egt_cylinder_4_c": 0.30000000000000004,
+        "oil_temperature_c": 48.2,
+        "oil_pressure_psi": 77.7,
+        "oil_flow_l_min": 0.13,
+        "battery_voltage_v": 23.19,
+        "battery_current_a": -21.51,
+        "battery_soc": 0.987,
+        "vibration_rms": 0.138,
+        "vibration_peak": 0.335,
+        "vibration_0_5x": 0.018000000000000002,
+        "vibration_1x": 0.093,
+        "vibration_2x": 0.026000000000000002
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 39.589765,
+          "expected_egt": -0.32270000000000065,
+          "expected_oil_temperature": 70.24415,
+          "expected_oil_pressure": 78.00375,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.15260450000000003,
+          "expected_rpm": 801.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 11.200000000000001,
+          "expected_power_kw": 1.02,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": -5.4897649999999985,
+            "absolute": 5.4897649999999985,
+            "normalized": -0.45748041666666656,
+            "percent": 13.866626892076775,
+            "direction": "NEGATIVE",
+            "magnitude": 5.4897649999999985
+          },
+          "egt_deviation": {
+            "value": 3.222700000000001,
+            "absolute": 3.222700000000001,
+            "normalized": 0.17903888888888894,
+            "percent": 17.903888888888893,
+            "direction": "POSITIVE",
+            "magnitude": 3.222700000000001
+          },
+          "oil_temperature_deviation": {
+            "value": -22.044150000000002,
+            "absolute": 22.044150000000002,
+            "normalized": -1.8370125000000002,
+            "percent": 31.382186274586566,
+            "direction": "NEGATIVE",
+            "magnitude": 22.044150000000002
+          },
+          "oil_pressure_deviation": {
+            "value": -0.30374999999999375,
+            "absolute": 0.30374999999999375,
+            "normalized": -0.03796874999999922,
+            "percent": 0.3894043555598209,
+            "direction": "NEGATIVE",
+            "magnitude": 0.30374999999999375
+          },
+          "fuel_flow_deviation": {
+            "value": 3.0000000000000004e-05,
+            "absolute": 3.0000000000000004e-05,
+            "normalized": 0.08571428571428573,
+            "percent": 8.571428571428573,
+            "direction": "POSITIVE",
+            "magnitude": 3.0000000000000004e-05
+          },
+          "vibration_deviation": {
+            "value": -0.01460450000000002,
+            "absolute": 0.01460450000000002,
+            "normalized": -0.12170416666666684,
+            "percent": 9.570163396230136,
+            "direction": "NEGATIVE",
+            "magnitude": 0.01460450000000002
+          }
+        },
+        "features": {
+          "rpm": 801.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 4e-05,
+          "oil_temperature_c": 48.2,
+          "oil_pressure_psi": 77.7,
+          "vibration_rms": 0.138,
+          "torque_nm": 11.200000000000001,
+          "power_kw": 1.02,
+          "engine_load_pct": 0.9823048582207197,
+          "expected_cht": 39.589765,
+          "expected_egt": -0.32270000000000065,
+          "expected_oil_temperature": 70.24415,
+          "expected_oil_pressure": 78.00375,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.15260450000000003,
+          "cht_deviation": -5.4897649999999985,
+          "egt_deviation": 3.222700000000001,
+          "oil_temperature_deviation": -22.044150000000002,
+          "oil_pressure_deviation": -0.30374999999999375,
+          "fuel_flow_deviation": 3.0000000000000004e-05,
+          "vibration_deviation": -0.01460450000000002,
+          "thermal_deviation_consistency": 8.712465,
+          "cross_sensor_alignment": 0.2490350047405304,
+          "rolling_mean": 0.0,
+          "rolling_std": 0.0,
+          "rate_of_change": 0.0,
+          "slope": 0.0,
+          "persistence": 0.0
+        },
+        "anomaly": {
+          "score": 0.4807036434138988,
+          "is_anomaly": false,
+          "normalized_score": 0.4807036434138988,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "probabilities": {
+            "NORMAL": 1.0
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.7210554651208483,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 92.79,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "primary_signal": "thermal_deviation",
+          "evidence": [],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.481
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 23.328600000003572,
+          "raw_estimated_rul": 23.328600000003572,
+          "filtered_estimated_rul": 23.328600000003572,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-d2732399"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT CLOSED: aeris-3cdb1514 (STOPPED)"
+        },
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x194aceb4ad0>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-3cdb1514"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:47:46",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.9,
+    "oil_temperature": 47.7,
+    "cht": 32.9,
+    "egt": 3.0,
+    "vibration": 0.163,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789273074.1851141,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.01984313725490203,
+      "position": {
+        "lat": 29.380630791707155,
+        "lng": 78.08564509144445
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "HEALTHY",
+      "rpm": 796.0,
+      "cht_c": 33.7,
+      "egt_c": 2.3000000000000003,
+      "oil_temperature_c": 46.800000000000004,
+      "oil_pressure_psi": 78.30000000000001,
+      "vibration_rms": 0.157,
+      "fuel_flow_kg_s": 0.00013000000000000002,
+      "throttle_pct": 0.0,
+      "load_pct": 3.9292194328828787,
+      "torque_nm": 12.3,
+      "intake_pressure_kpa": 20.18
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 25.30000000000009,
+      "health_pct": 93.0,
+      "fault": "NORMAL",
+      "active_fault_name": "",
+      "fault_severity": 0.0,
+      "ai_health": 93.04,
+      "ai_severity": "NORMAL",
+      "ai_fault": "NORMAL",
+      "ai_confidence": 0.6,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.01984313725490203,
+      "elapsed_s": 25.30000000000009,
+      "running": true,
+      "paused": false,
+      "status": "COMPLETED",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "CLEAR",
+      "return_recommended": false,
+      "risk_message": "MISSION STABLE"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [],
+    "telemetry": {
+      "rpm": 796.0,
+      "manifold_pressure_kpa": 20.18,
+      "intake_temperature_c": 0.2,
+      "fuel_flow_kg_s": 0.00013000000000000002,
+      "torque_nm": 12.3,
+      "power_kw": 1.0,
+      "cht_cylinder_1_c": 32.2,
+      "cht_cylinder_2_c": 33.7,
+      "cht_cylinder_3_c": 32.2,
+      "cht_cylinder_4_c": 33.0,
+      "egt_cylinder_1_c": 2.3000000000000003,
+      "egt_cylinder_2_c": 1.6,
+      "egt_cylinder_3_c": 2.2,
+      "egt_cylinder_4_c": 1.1,
+      "oil_temperature_c": 46.800000000000004,
+      "oil_pressure_psi": 78.30000000000001,
+      "oil_flow_l_min": 0.1,
+      "battery_voltage_v": 23.26,
+      "battery_current_a": -21.56,
+      "battery_soc": 0.993,
+      "vibration_rms": 0.157,
+      "vibration_peak": 0.32,
+      "vibration_0_5x": 0.015,
+      "vibration_1x": 0.095,
+      "vibration_2x": 0.012
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 39.585939999999994,
+        "expected_egt": -0.44669999999999943,
+        "expected_oil_temperature": 70.2359,
+        "expected_oil_pressure": 77.985,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.152582,
+        "expected_rpm": 796.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 12.3,
+        "expected_power_kw": 1.0,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": -5.885939999999991,
+          "absolute": 5.885939999999991,
+          "normalized": -0.49049499999999924,
+          "percent": 14.868764010656289,
+          "direction": "NEGATIVE",
+          "magnitude": 5.885939999999991
+        },
+        "egt_deviation": {
+          "value": 2.7466999999999997,
+          "absolute": 2.7466999999999997,
+          "normalized": 0.15259444444444442,
+          "percent": 15.259444444444442,
+          "direction": "POSITIVE",
+          "magnitude": 2.7466999999999997
+        },
+        "oil_temperature_deviation": {
+          "value": -23.435899999999997,
+          "absolute": 23.435899999999997,
+          "normalized": -1.9529916666666665,
+          "percent": 33.367408974612694,
+          "direction": "NEGATIVE",
+          "magnitude": 23.435899999999997
+        },
+        "oil_pressure_deviation": {
+          "value": 0.31500000000001194,
+          "absolute": 0.31500000000001194,
+          "normalized": 0.03937500000000149,
+          "percent": 0.4039238315060742,
+          "direction": "POSITIVE",
+          "magnitude": 0.31500000000001194
+        },
+        "fuel_flow_deviation": {
+          "value": 0.00012000000000000002,
+          "absolute": 0.00012000000000000002,
+          "normalized": 0.3428571428571429,
+          "percent": 34.28571428571429,
+          "direction": "POSITIVE",
+          "magnitude": 0.00012000000000000002
+        },
+        "vibration_deviation": {
+          "value": 0.004418000000000005,
+          "absolute": 0.004418000000000005,
+          "normalized": 0.03681666666666671,
+          "percent": 2.8954922598995987,
+          "direction": "POSITIVE",
+          "magnitude": 0.004418000000000005
+        }
+      },
+      "features": {
+        "rpm": 796.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00013000000000000002,
+        "oil_temperature_c": 46.800000000000004,
+        "oil_pressure_psi": 78.30000000000001,
+        "vibration_rms": 0.157,
+        "torque_nm": 12.3,
+        "power_kw": 1.0,
+        "engine_load_pct": 0.9823048582207197,
+        "expected_cht": 39.585939999999994,
+        "expected_egt": -0.44669999999999943,
+        "expected_oil_temperature": 70.2359,
+        "expected_oil_pressure": 77.985,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.152582,
+        "cht_deviation": -5.885939999999991,
+        "egt_deviation": 2.7466999999999997,
+        "oil_temperature_deviation": -23.435899999999997,
+        "oil_pressure_deviation": 0.31500000000001194,
+        "fuel_flow_deviation": 0.00012000000000000002,
+        "vibration_deviation": 0.004418000000000005,
+        "thermal_deviation_consistency": 8.632639999999991,
+        "cross_sensor_alignment": 0.25115058520256706,
+        "cht_deviation_rolling_mean": -5.266858000000001,
+        "cht_deviation_rolling_std": 0.34899688551762414,
+        "cht_deviation_rate_of_change": -0.04333944444444408,
+        "cht_deviation_slope": -0.04333944444444408,
+        "cht_deviation_persistence": 0.8948201984908424,
+        "egt_deviation_rolling_mean": 4.8269400000000005,
+        "egt_deviation_rolling_std": 0.856967457025062,
+        "egt_deviation_rate_of_change": -0.08640000000000035,
+        "egt_deviation_slope": -0.08640000000000035,
+        "egt_deviation_persistence": 1.0,
+        "oil_temperature_deviation_rolling_mean": -23.267879999999998,
+        "oil_temperature_deviation_rolling_std": 0.7803592519474606,
+        "oil_temperature_deviation_rate_of_change": 0.1912722222222227,
+        "oil_temperature_deviation_slope": 0.1912722222222227,
+        "oil_temperature_deviation_persistence": 0.9928306571971706,
+        "oil_pressure_deviation_rolling_mean": -0.019499999999990792,
+        "oil_pressure_deviation_rolling_std": 0.4171616143654664,
+        "oil_pressure_deviation_rate_of_change": -0.07236111111111161,
+        "oil_pressure_deviation_slope": -0.07236111111111161,
+        "oil_pressure_deviation_persistence": 0.019499999999990792,
+        "fuel_flow_deviation_rolling_mean": 9.700000000000001e-05,
+        "fuel_flow_deviation_rolling_std": 4.712748667179272e-05,
+        "fuel_flow_deviation_rate_of_change": -3.3333333333333346e-06,
+        "fuel_flow_deviation_slope": -3.3333333333333346e-06,
+        "fuel_flow_deviation_persistence": 9.700000000000001e-05,
+        "vibration_deviation_rolling_mean": 0.00801259999999998,
+        "vibration_deviation_rolling_std": 0.010975695654034879,
+        "vibration_deviation_rate_of_change": -0.001549055555555555,
+        "vibration_deviation_slope": -0.001549055555555555,
+        "vibration_deviation_persistence": 0.00801259999999998
+      },
+      "anomaly": {
+        "score": 0.4639680736896012,
+        "is_anomaly": false,
+        "normalized_score": 0.4639680736896012,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "NORMAL",
+        "confidence": 0.6,
+        "probabilities": {
+          "NORMAL": 1.0
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.0,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.0,
+        "likely_condition": "AMBIGUOUS"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.6959521105344018,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 93.04,
+        "severity": "NORMAL"
+      },
+      "severity": "NORMAL",
+      "diagnosis": {
+        "title": "NORMAL ENGINE OPERATION",
+        "severity": "NORMAL",
+        "fault_type": "NORMAL",
+        "confidence": 0.6,
+        "primary_signal": "thermal_deviation",
+        "evidence": [],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+        "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.464
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 23.49390000000368,
+        "raw_estimated_rul": 26.381800000003064,
+        "filtered_estimated_rul": 23.49390000000368,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-d2732399"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT CLOSED: aeris-3cdb1514 (STOPPED)"
+      },
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x194aceb4ad0>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-3cdb1514"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:48:37",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 82.10000000000001,
+    "oil_temperature": 45.300000000000004,
+    "cht": 31.6,
+    "egt": 13.700000000000001,
+    "vibration": 0.145,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "INFORMATION",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:50:14",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 85.5,
+    "oil_temperature": 49.1,
+    "cht": 50.2,
+    "egt": 50.6,
+    "vibration": 0.166,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "expected_classification": "OIL_PRESSURE_DEGRADATION",
+  "actual_classification": "NORMAL",
+  "classification_pass": false,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": []
+  }
+}
+
+{
+  "condition": "excessive_vibration",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789273235.0631034,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 7.843137254901961e-05,
+        "position": {
+          "lat": 28.6139,
+          "lng": 77.209
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 2864.0,
+        "cht_c": 50.7,
+        "egt_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "vibration_rms": 0.163,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "throttle_pct": 0.0,
+        "load_pct": 16.881267683499857,
+        "torque_nm": 14.5,
+        "intake_pressure_kpa": 19.990000000000002
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 0.1,
+        "health_pct": 93.0,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 93.02,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.6166666666666667,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 7.843137254901961e-05,
+        "elapsed_s": 0.1,
+        "running": true,
+        "paused": false,
+        "status": "COMPLETED",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 2864.0,
+        "manifold_pressure_kpa": 19.990000000000002,
+        "intake_temperature_c": -0.1,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "torque_nm": 14.5,
+        "power_kw": 4.25,
+        "cht_cylinder_1_c": 50.7,
+        "cht_cylinder_2_c": 47.7,
+        "cht_cylinder_3_c": 49.300000000000004,
+        "cht_cylinder_4_c": 49.1,
+        "egt_cylinder_1_c": 48.800000000000004,
+        "egt_cylinder_2_c": 48.5,
+        "egt_cylinder_3_c": 45.7,
+        "egt_cylinder_4_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "oil_flow_l_min": 0.16,
+        "battery_voltage_v": 24.02,
+        "battery_current_a": 2.93,
+        "battery_soc": 0.998,
+        "vibration_rms": 0.163,
+        "vibration_peak": 0.36,
+        "vibration_0_5x": 0.032,
+        "vibration_1x": 0.094,
+        "vibration_2x": 0.039
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "expected_rpm": 2864.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 14.5,
+          "expected_power_kw": 4.25,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": 9.53204000000001,
+            "absolute": 9.53204000000001,
+            "normalized": 0.7943366666666675,
+            "percent": 23.154025606321056,
+            "direction": "POSITIVE",
+            "magnitude": 9.53204000000001
+          },
+          "egt_deviation": {
+            "value": -2.039699999999989,
+            "absolute": 2.039699999999989,
+            "normalized": -0.11331666666666607,
+            "percent": 4.012022100838497,
+            "direction": "NEGATIVE",
+            "magnitude": 2.039699999999989
+          },
+          "oil_temperature_deviation": {
+            "value": -23.448099999999997,
+            "absolute": 23.448099999999997,
+            "normalized": -1.9540083333333331,
+            "percent": 31.838024334639993,
+            "direction": "NEGATIVE",
+            "magnitude": 23.448099999999997
+          },
+          "oil_pressure_deviation": {
+            "value": 0.36000000000001364,
+            "absolute": 0.36000000000001364,
+            "normalized": 0.045000000000001705,
+            "percent": 0.4198740377886793,
+            "direction": "POSITIVE",
+            "magnitude": 0.36000000000001364
+          },
+          "fuel_flow_deviation": {
+            "value": 0.00044,
+            "absolute": 0.00044,
+            "normalized": 1.2571428571428571,
+            "percent": 125.71428571428571,
+            "direction": "POSITIVE",
+            "magnitude": 0.00044
+          },
+          "vibration_deviation": {
+            "value": 0.0011119999999999741,
+            "absolute": 0.0011119999999999741,
+            "normalized": 0.009266666666666451,
+            "percent": 0.6868946432101045,
+            "direction": "POSITIVE",
+            "magnitude": 0.0011119999999999741
+          }
+        },
+        "features": {
+          "rpm": 2864.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 0.00045000000000000004,
+          "oil_temperature_c": 50.2,
+          "oil_pressure_psi": 86.10000000000001,
+          "vibration_rms": 0.163,
+          "torque_nm": 14.5,
+          "power_kw": 4.25,
+          "engine_load_pct": 4.220316920874964,
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "cht_deviation": 9.53204000000001,
+          "egt_deviation": -2.039699999999989,
+          "oil_temperature_deviation": -23.448099999999997,
+          "oil_pressure_deviation": 0.36000000000001364,
+          "fuel_flow_deviation": 0.00044,
+          "vibration_deviation": 0.0011119999999999741,
+          "thermal_deviation_consistency": 11.571739999999998,
+          "cross_sensor_alignment": 0.40651651944479483,
+          "rolling_mean": 0.0,
+          "rolling_std": 0.0,
+          "rate_of_change": 0.0,
+          "slope": 0.0,
+          "persistence": 0.0
+        },
+        "anomaly": {
+          "score": 0.46512084972206863,
+          "is_anomaly": false,
+          "normalized_score": 0.46512084972206863,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.6166666666666667,
+          "probabilities": {
+            "COMBUSTION_INSTABILITY": 0.02,
+            "COOLING_DEGRADATION": 0.04,
+            "EXCESSIVE_VIBRATION": 0.04,
+            "MISFIRE": 0.013333333333333334,
+            "NORMAL": 0.6166666666666667,
+            "OIL_PRESSURE_DEGRADATION": 0.013333333333333334,
+            "SENSOR_DRIFT": 0.25666666666666665
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.6976812745831029,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 93.02,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.617,
+          "primary_signal": "thermal_deviation",
+          "evidence": [
+            "CHT above expectation for current operating conditions."
+          ],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.465
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 71.40445476190557,
+          "raw_estimated_rul": 71.40445476190557,
+          "filtered_estimated_rul": 71.40445476190557,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2167a5b3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-1c4dafea"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:50:39",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 84.30000000000001,
+    "oil_temperature": 49.800000000000004,
+    "cht": 48.6,
+    "egt": 40.300000000000004,
+    "vibration": 0.178,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789273246.9525015,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.0020392156862745108,
+      "position": {
+        "lat": 28.690267608735773,
+        "lng": 77.29602518452596
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "HEALTHY",
+      "rpm": 1710.0,
+      "cht_c": 48.300000000000004,
+      "egt_c": 26.0,
+      "oil_temperature_c": 50.6,
+      "oil_pressure_psi": 81.10000000000001,
+      "vibration_rms": 0.152,
+      "fuel_flow_kg_s": 0.00021,
+      "throttle_pct": 0.0,
+      "load_pct": 9.262991688938827,
+      "torque_nm": 12.8,
+      "intake_pressure_kpa": 20.19
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 2.600000000000001,
+      "health_pct": 93.0,
+      "fault": "NORMAL",
+      "active_fault_name": "",
+      "fault_severity": 0.0,
+      "ai_health": 93.0,
+      "ai_severity": "NORMAL",
+      "ai_fault": "NORMAL",
+      "ai_confidence": 0.5366666666666666,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.0020392156862745108,
+      "elapsed_s": 2.600000000000001,
+      "running": true,
+      "paused": false,
+      "status": "COMPLETED",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "CLEAR",
+      "return_recommended": false,
+      "risk_message": "MISSION STABLE"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [],
+    "telemetry": {
+      "rpm": 1710.0,
+      "manifold_pressure_kpa": 20.19,
+      "intake_temperature_c": 0.30000000000000004,
+      "fuel_flow_kg_s": 0.00021,
+      "torque_nm": 12.8,
+      "power_kw": 2.2800000000000002,
+      "cht_cylinder_1_c": 46.400000000000006,
+      "cht_cylinder_2_c": 45.900000000000006,
+      "cht_cylinder_3_c": 47.800000000000004,
+      "cht_cylinder_4_c": 48.300000000000004,
+      "egt_cylinder_1_c": 23.700000000000003,
+      "egt_cylinder_2_c": 23.5,
+      "egt_cylinder_3_c": 26.0,
+      "egt_cylinder_4_c": 25.6,
+      "oil_temperature_c": 50.6,
+      "oil_pressure_psi": 81.10000000000001,
+      "oil_flow_l_min": 0.07,
+      "battery_voltage_v": 24.35,
+      "battery_current_a": -8.59,
+      "battery_soc": 1.0,
+      "vibration_rms": 0.152,
+      "vibration_peak": 0.28800000000000003,
+      "vibration_0_5x": 0.005,
+      "vibration_1x": 0.08700000000000001,
+      "vibration_2x": 0.009000000000000001
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 40.28515,
+        "expected_egt": 22.2205,
+        "expected_oil_temperature": 71.744,
+        "expected_oil_pressure": 81.4125,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15669500000000003,
+        "expected_rpm": 1710.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 12.8,
+        "expected_power_kw": 2.2800000000000002,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": 8.014850000000003,
+          "absolute": 8.014850000000003,
+          "normalized": 0.6679041666666669,
+          "percent": 19.895296405747533,
+          "direction": "POSITIVE",
+          "magnitude": 8.014850000000003
+        },
+        "egt_deviation": {
+          "value": 3.7794999999999987,
+          "absolute": 3.7794999999999987,
+          "normalized": 0.20997222222222214,
+          "percent": 17.00906820278571,
+          "direction": "POSITIVE",
+          "magnitude": 3.7794999999999987
+        },
+        "oil_temperature_deviation": {
+          "value": -21.144,
+          "absolute": 21.144,
+          "normalized": -1.7619999999999998,
+          "percent": 29.471454058876002,
+          "direction": "NEGATIVE",
+          "magnitude": 21.144
+        },
+        "oil_pressure_deviation": {
+          "value": -0.3124999999999858,
+          "absolute": 0.3124999999999858,
+          "normalized": -0.039062499999998224,
+          "percent": 0.38384768923689333,
+          "direction": "NEGATIVE",
+          "magnitude": 0.3124999999999858
+        },
+        "fuel_flow_deviation": {
+          "value": 0.0002,
+          "absolute": 0.0002,
+          "normalized": 0.5714285714285715,
+          "percent": 57.14285714285715,
+          "direction": "POSITIVE",
+          "magnitude": 0.0002
+        },
+        "vibration_deviation": {
+          "value": -0.0046950000000000325,
+          "absolute": 0.0046950000000000325,
+          "normalized": -0.03912500000000027,
+          "percent": 2.9962666326302894,
+          "direction": "NEGATIVE",
+          "magnitude": 0.0046950000000000325
+        }
+      },
+      "features": {
+        "rpm": 1710.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00021,
+        "oil_temperature_c": 50.6,
+        "oil_pressure_psi": 81.10000000000001,
+        "vibration_rms": 0.152,
+        "torque_nm": 12.8,
+        "power_kw": 2.2800000000000002,
+        "engine_load_pct": 2.315747922234707,
+        "expected_cht": 40.28515,
+        "expected_egt": 22.2205,
+        "expected_oil_temperature": 71.744,
+        "expected_oil_pressure": 81.4125,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15669500000000003,
+        "cht_deviation": 8.014850000000003,
+        "egt_deviation": 3.7794999999999987,
+        "oil_temperature_deviation": -21.144,
+        "oil_pressure_deviation": -0.3124999999999858,
+        "fuel_flow_deviation": 0.0002,
+        "vibration_deviation": -0.0046950000000000325,
+        "thermal_deviation_consistency": 11.794350000000001,
+        "cross_sensor_alignment": 0.37906025348188344,
+        "cht_deviation_rolling_mean": 8.148386000000002,
+        "cht_deviation_rolling_std": 0.3955476367126964,
+        "cht_deviation_rate_of_change": -0.04641277777777791,
+        "cht_deviation_slope": -0.04641277777777791,
+        "cht_deviation_persistence": 1.0,
+        "egt_deviation_rolling_mean": 1.9730200000000018,
+        "egt_deviation_rolling_std": 1.607681498805035,
+        "egt_deviation_rate_of_change": 0.5390222222222225,
+        "egt_deviation_slope": 0.5390222222222225,
+        "egt_deviation_persistence": 0.5220320146786533,
+        "oil_temperature_deviation_rolling_mean": -22.663039999999995,
+        "oil_temperature_deviation_rolling_std": 0.38515485054715415,
+        "oil_temperature_deviation_rate_of_change": 0.03431666666666741,
+        "oil_temperature_deviation_slope": 0.03431666666666741,
+        "oil_temperature_deviation_persistence": 1.0,
+        "oil_pressure_deviation_rolling_mean": -0.08849999999999625,
+        "oil_pressure_deviation_rolling_std": 0.43866195697826366,
+        "oil_pressure_deviation_rate_of_change": -0.046249999999998986,
+        "oil_pressure_deviation_slope": -0.046249999999998986,
+        "oil_pressure_deviation_persistence": 0.08849999999999625,
+        "fuel_flow_deviation_rolling_mean": 0.000261,
+        "fuel_flow_deviation_rolling_std": 6.268173577685927e-05,
+        "fuel_flow_deviation_rate_of_change": -1.3333333333333335e-05,
+        "fuel_flow_deviation_slope": -1.3333333333333335e-05,
+        "fuel_flow_deviation_persistence": 0.000261,
+        "vibration_deviation_rolling_mean": 0.0021257999999999997,
+        "vibration_deviation_rolling_std": 0.008764597869269307,
+        "vibration_deviation_rate_of_change": 0.00040672222222222346,
+        "vibration_deviation_slope": 0.00040672222222222346,
+        "vibration_deviation_persistence": 0.0021257999999999997
+      },
+      "anomaly": {
+        "score": 0.4664309224754691,
+        "is_anomaly": false,
+        "normalized_score": 0.4664309224754691,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "NORMAL",
+        "confidence": 0.5366666666666666,
+        "probabilities": {
+          "COMBUSTION_INSTABILITY": 0.023333333333333334,
+          "COOLING_DEGRADATION": 0.02666666666666667,
+          "EXCESSIVE_VIBRATION": 0.03333333333333333,
+          "MISFIRE": 0.01,
+          "NORMAL": 0.5366666666666666,
+          "OIL_PRESSURE_DEGRADATION": 0.02,
+          "SENSOR_DRIFT": 0.35
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.0,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.0,
+        "likely_condition": "AMBIGUOUS"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.6996463837132036,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 93.0,
+        "severity": "NORMAL"
+      },
+      "severity": "NORMAL",
+      "diagnosis": {
+        "title": "NORMAL ENGINE OPERATION",
+        "severity": "NORMAL",
+        "fault_type": "NORMAL",
+        "confidence": 0.537,
+        "primary_signal": "thermal_deviation",
+        "evidence": [
+          "CHT above expectation for current operating conditions."
+        ],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+        "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.466
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 55.69110000000208,
+        "raw_estimated_rul": 55.69110000000208,
+        "filtered_estimated_rul": 55.69110000000208,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2167a5b3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-1c4dafea"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:51:29",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 78.30000000000001,
+    "oil_temperature": 48.900000000000006,
+    "cht": 43.900000000000006,
+    "egt": 5.7,
+    "vibration": 0.178,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:53:05",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.7,
+    "oil_temperature": 46.5,
+    "cht": 36.2,
+    "egt": -0.30000000000000004,
+    "vibration": 0.171,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "expected_classification": "EXCESSIVE_VIBRATION",
+  "actual_classification": "NORMAL",
+  "classification_pass": false,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": []
+  }
+}
+
+{
+  "condition": "sensor_drift",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789273405.338738,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 0.017333333333333367,
+        "position": {
+          "lat": 29.282880252525366,
+          "lng": 77.97351816121528
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 800.0,
+        "cht_c": 35.7,
+        "egt_c": 4.0,
+        "oil_temperature_c": 47.800000000000004,
+        "oil_pressure_psi": 78.60000000000001,
+        "vibration_rms": 0.157,
+        "fuel_flow_kg_s": 7.000000000000001e-05,
+        "throttle_pct": 0.0,
+        "load_pct": 3.9292194328828787,
+        "torque_nm": 12.0,
+        "intake_pressure_kpa": 19.7
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 22.100000000000044,
+        "health_pct": 92.9,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 92.87,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.6,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 0.017333333333333367,
+        "elapsed_s": 22.100000000000044,
+        "running": true,
+        "paused": false,
+        "status": "COMPLETED",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 800.0,
+        "manifold_pressure_kpa": 19.7,
+        "intake_temperature_c": 0.5,
+        "fuel_flow_kg_s": 7.000000000000001e-05,
+        "torque_nm": 12.0,
+        "power_kw": 0.9400000000000001,
+        "cht_cylinder_1_c": 35.7,
+        "cht_cylinder_2_c": 34.6,
+        "cht_cylinder_3_c": 34.300000000000004,
+        "cht_cylinder_4_c": 35.0,
+        "egt_cylinder_1_c": 4.0,
+        "egt_cylinder_2_c": 3.8000000000000003,
+        "egt_cylinder_3_c": 1.2000000000000002,
+        "egt_cylinder_4_c": 3.0,
+        "oil_temperature_c": 47.800000000000004,
+        "oil_pressure_psi": 78.60000000000001,
+        "oil_flow_l_min": 0.13,
+        "battery_voltage_v": 23.2,
+        "battery_current_a": -21.64,
+        "battery_soc": 0.993,
+        "vibration_rms": 0.157,
+        "vibration_peak": 0.365,
+        "vibration_0_5x": 0.025,
+        "vibration_1x": 0.09,
+        "vibration_2x": 0.052000000000000005
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 39.589,
+          "expected_egt": -0.3474999999999997,
+          "expected_oil_temperature": 70.24249999999999,
+          "expected_oil_pressure": 78.0,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.1526,
+          "expected_rpm": 800.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 12.0,
+          "expected_power_kw": 0.9400000000000001,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": -3.888999999999996,
+            "absolute": 3.888999999999996,
+            "normalized": -0.324083333333333,
+            "percent": 9.823435802874524,
+            "direction": "NEGATIVE",
+            "magnitude": 3.888999999999996
+          },
+          "egt_deviation": {
+            "value": 4.3475,
+            "absolute": 4.3475,
+            "normalized": 0.24152777777777779,
+            "percent": 24.15277777777778,
+            "direction": "POSITIVE",
+            "magnitude": 4.3475
+          },
+          "oil_temperature_deviation": {
+            "value": -22.44249999999999,
+            "absolute": 22.44249999999999,
+            "normalized": -1.8702083333333324,
+            "percent": 31.950030252340095,
+            "direction": "NEGATIVE",
+            "magnitude": 22.44249999999999
+          },
+          "oil_pressure_deviation": {
+            "value": 0.6000000000000085,
+            "absolute": 0.6000000000000085,
+            "normalized": 0.07500000000000107,
+            "percent": 0.7692307692307802,
+            "direction": "POSITIVE",
+            "magnitude": 0.6000000000000085
+          },
+          "fuel_flow_deviation": {
+            "value": 6.000000000000001e-05,
+            "absolute": 6.000000000000001e-05,
+            "normalized": 0.17142857142857146,
+            "percent": 17.142857142857146,
+            "direction": "POSITIVE",
+            "magnitude": 6.000000000000001e-05
+          },
+          "vibration_deviation": {
+            "value": 0.004399999999999987,
+            "absolute": 0.004399999999999987,
+            "normalized": 0.03666666666666656,
+            "percent": 2.88335517693315,
+            "direction": "POSITIVE",
+            "magnitude": 0.004399999999999987
+          }
+        },
+        "features": {
+          "rpm": 800.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 7.000000000000001e-05,
+          "oil_temperature_c": 47.800000000000004,
+          "oil_pressure_psi": 78.60000000000001,
+          "vibration_rms": 0.157,
+          "torque_nm": 12.0,
+          "power_kw": 0.9400000000000001,
+          "engine_load_pct": 0.9823048582207197,
+          "expected_cht": 39.589,
+          "expected_egt": -0.3474999999999997,
+          "expected_oil_temperature": 70.24249999999999,
+          "expected_oil_pressure": 78.0,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.1526,
+          "cht_deviation": -3.888999999999996,
+          "egt_deviation": 4.3475,
+          "oil_temperature_deviation": -22.44249999999999,
+          "oil_pressure_deviation": 0.6000000000000085,
+          "fuel_flow_deviation": 6.000000000000001e-05,
+          "vibration_deviation": 0.004399999999999987,
+          "thermal_deviation_consistency": 8.236499999999996,
+          "cross_sensor_alignment": 0.17328728973272634,
+          "rolling_mean": 0.0,
+          "rolling_std": 0.0,
+          "rate_of_change": 0.0,
+          "slope": 0.0,
+          "persistence": 0.0
+        },
+        "anomaly": {
+          "score": 0.4754408377052022,
+          "is_anomaly": false,
+          "normalized_score": 0.4754408377052022,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "probabilities": {
+            "NORMAL": 1.0
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.7131612565578033,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 92.87,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.6,
+          "primary_signal": "thermal_deviation",
+          "evidence": [],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.475
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 26.284300000002883,
+          "raw_estimated_rul": 26.284300000002883,
+          "filtered_estimated_rul": 26.284300000002883,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-e6870134"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT CLOSED: aeris-1c4dafea (STOPPED)"
+        },
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2167a5b3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-1c4dafea"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:53:29",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.60000000000001,
+    "oil_temperature": 47.6,
+    "cht": 35.5,
+    "egt": 1.1,
+    "vibration": 0.171,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789273416.6480136,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.018352941176470638,
+      "position": {
+        "lat": 29.322591409067968,
+        "lng": 78.01905676394504
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "HEALTHY",
+      "rpm": 797.0,
+      "cht_c": 35.300000000000004,
+      "egt_c": 5.4,
+      "oil_temperature_c": 47.7,
+      "oil_pressure_psi": 77.30000000000001,
+      "vibration_rms": 0.177,
+      "fuel_flow_kg_s": 0.00011,
+      "throttle_pct": 0.0,
+      "load_pct": 3.9292194328828787,
+      "torque_nm": 12.4,
+      "intake_pressure_kpa": 19.98
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 23.400000000000063,
+      "health_pct": 93.0,
+      "fault": "NORMAL",
+      "active_fault_name": "",
+      "fault_severity": 0.0,
+      "ai_health": 93.0,
+      "ai_severity": "NORMAL",
+      "ai_fault": "NORMAL",
+      "ai_confidence": 0.6,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.018352941176470638,
+      "elapsed_s": 23.400000000000063,
+      "running": true,
+      "paused": false,
+      "status": "COMPLETED",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "CLEAR",
+      "return_recommended": false,
+      "risk_message": "MISSION STABLE"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [],
+    "telemetry": {
+      "rpm": 797.0,
+      "manifold_pressure_kpa": 19.98,
+      "intake_temperature_c": 0.1,
+      "fuel_flow_kg_s": 0.00011,
+      "torque_nm": 12.4,
+      "power_kw": 1.06,
+      "cht_cylinder_1_c": 33.4,
+      "cht_cylinder_2_c": 34.0,
+      "cht_cylinder_3_c": 34.300000000000004,
+      "cht_cylinder_4_c": 35.300000000000004,
+      "egt_cylinder_1_c": 5.4,
+      "egt_cylinder_2_c": 1.3,
+      "egt_cylinder_3_c": 3.5,
+      "egt_cylinder_4_c": 3.6,
+      "oil_temperature_c": 47.7,
+      "oil_pressure_psi": 77.30000000000001,
+      "oil_flow_l_min": 0.15,
+      "battery_voltage_v": 23.16,
+      "battery_current_a": -21.48,
+      "battery_soc": 0.989,
+      "vibration_rms": 0.177,
+      "vibration_peak": 0.421,
+      "vibration_0_5x": 0.015,
+      "vibration_1x": 0.10300000000000001,
+      "vibration_2x": 0.059000000000000004
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 39.586704999999995,
+        "expected_egt": -0.4219000000000004,
+        "expected_oil_temperature": 70.23755,
+        "expected_oil_pressure": 77.98875,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.1525865,
+        "expected_rpm": 797.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 12.4,
+        "expected_power_kw": 1.06,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": -4.286704999999991,
+          "absolute": 4.286704999999991,
+          "normalized": -0.3572254166666659,
+          "percent": 10.828648153464632,
+          "direction": "NEGATIVE",
+          "magnitude": 4.286704999999991
+        },
+        "egt_deviation": {
+          "value": 5.821900000000001,
+          "absolute": 5.821900000000001,
+          "normalized": 0.32343888888888894,
+          "percent": 32.34388888888889,
+          "direction": "POSITIVE",
+          "magnitude": 5.821900000000001
+        },
+        "oil_temperature_deviation": {
+          "value": -22.537549999999996,
+          "absolute": 22.537549999999996,
+          "normalized": -1.8781291666666664,
+          "percent": 32.087608408892386,
+          "direction": "NEGATIVE",
+          "magnitude": 22.537549999999996
+        },
+        "oil_pressure_deviation": {
+          "value": -0.6887499999999847,
+          "absolute": 0.6887499999999847,
+          "normalized": -0.08609374999999808,
+          "percent": 0.883140196502681,
+          "direction": "NEGATIVE",
+          "magnitude": 0.6887499999999847
+        },
+        "fuel_flow_deviation": {
+          "value": 0.0001,
+          "absolute": 0.0001,
+          "normalized": 0.28571428571428575,
+          "percent": 28.571428571428577,
+          "direction": "POSITIVE",
+          "magnitude": 0.0001
+        },
+        "vibration_deviation": {
+          "value": 0.024413499999999977,
+          "absolute": 0.024413499999999977,
+          "normalized": 0.20344583333333316,
+          "percent": 15.999777175569251,
+          "direction": "POSITIVE",
+          "magnitude": 0.024413499999999977
+        }
+      },
+      "features": {
+        "rpm": 797.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00011,
+        "oil_temperature_c": 47.7,
+        "oil_pressure_psi": 77.30000000000001,
+        "vibration_rms": 0.177,
+        "torque_nm": 12.4,
+        "power_kw": 1.06,
+        "engine_load_pct": 0.9823048582207197,
+        "expected_cht": 39.586704999999995,
+        "expected_egt": -0.4219000000000004,
+        "expected_oil_temperature": 70.23755,
+        "expected_oil_pressure": 77.98875,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.1525865,
+        "cht_deviation": -4.286704999999991,
+        "egt_deviation": 5.821900000000001,
+        "oil_temperature_deviation": -22.537549999999996,
+        "oil_pressure_deviation": -0.6887499999999847,
+        "fuel_flow_deviation": 0.0001,
+        "vibration_deviation": 0.024413499999999977,
+        "thermal_deviation_consistency": 10.108604999999992,
+        "cross_sensor_alignment": 0.19020279488275293,
+        "cht_deviation_rolling_mean": -4.118770499999999,
+        "cht_deviation_rolling_std": 0.4232665352732831,
+        "cht_deviation_rate_of_change": 0.02290222222222127,
+        "cht_deviation_slope": 0.02290222222222127,
+        "cht_deviation_persistence": 0.9608243392160608,
+        "egt_deviation_rolling_mean": 4.954940000000001,
+        "egt_deviation_rolling_std": 1.3548465678444928,
+        "egt_deviation_rate_of_change": -0.4001777777777779,
+        "egt_deviation_slope": -0.4001777777777779,
+        "egt_deviation_persistence": 0.8510864149416708,
+        "oil_temperature_deviation_rolling_mean": -22.602005,
+        "oil_temperature_deviation_rolling_std": 0.5704536705333737,
+        "oil_temperature_deviation_rate_of_change": 0.012577777777777676,
+        "oil_temperature_deviation_slope": 0.012577777777777676,
+        "oil_temperature_deviation_persistence": 1.0,
+        "oil_pressure_deviation_rolling_mean": 0.14112500000000666,
+        "oil_pressure_deviation_rolling_std": 0.6543026941905395,
+        "oil_pressure_deviation_rate_of_change": 0.21444444444444521,
+        "oil_pressure_deviation_slope": 0.21444444444444521,
+        "oil_pressure_deviation_persistence": 0.14112500000000666,
+        "fuel_flow_deviation_rolling_mean": 7.900000000000001e-05,
+        "fuel_flow_deviation_rolling_std": 5.088221693283421e-05,
+        "fuel_flow_deviation_rate_of_change": 3.3333333333333346e-06,
+        "fuel_flow_deviation_slope": 3.3333333333333346e-06,
+        "fuel_flow_deviation_persistence": 7.900000000000001e-05,
+        "vibration_deviation_rolling_mean": 0.007801349999999996,
+        "vibration_deviation_rolling_std": 0.007754318983798649,
+        "vibration_deviation_rate_of_change": -0.0022182222222222265,
+        "vibration_deviation_slope": -0.0022182222222222265,
+        "vibration_deviation_persistence": 0.007801349999999996
+      },
+      "anomaly": {
+        "score": 0.4667848101657482,
+        "is_anomaly": false,
+        "normalized_score": 0.4667848101657482,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "NORMAL",
+        "confidence": 0.6,
+        "probabilities": {
+          "NORMAL": 1.0
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.0,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.0,
+        "likely_condition": "AMBIGUOUS"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.7001772152486223,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 93.0,
+        "severity": "NORMAL"
+      },
+      "severity": "NORMAL",
+      "diagnosis": {
+        "title": "NORMAL ENGINE OPERATION",
+        "severity": "NORMAL",
+        "fault_type": "NORMAL",
+        "confidence": 0.6,
+        "primary_signal": "thermal_deviation",
+        "evidence": [],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+        "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.467
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 27.546800000002772,
+        "raw_estimated_rul": 22.103500000003628,
+        "filtered_estimated_rul": 27.546800000002772,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-e6870134"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT CLOSED: aeris-1c4dafea (STOPPED)"
+      },
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x2167a5b3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-1c4dafea"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:54:19",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.4,
+    "oil_temperature": 47.300000000000004,
+    "cht": 31.0,
+    "egt": 3.1,
+    "vibration": 0.179,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:55:54",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 85.5,
+    "oil_temperature": 49.1,
+    "cht": 50.2,
+    "egt": 50.6,
+    "vibration": 0.168,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "expected_classification": "SENSOR_DRIFT",
+  "actual_classification": "NORMAL",
+  "classification_pass": false,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": [
+      {
+        "flight_id": "aeris-1c4dafea",
+        "mission_name": "Cruise ISR",
+        "mission_key": "cruise_isr",
+        "status": "STOPPED",
+        "start_time": 1789273233.612855,
+        "end_time": 1789273392.312522,
+        "duration_seconds": 158.699667,
+        "max_altitude_m": 3500.0,
+        "max_rpm": 2864.0,
+        "max_cht_c": 51.400000000000006,
+        "max_egt_c": 48.800000000000004,
+        "max_vibration_rms": 0.185,
+        "minimum_health_score": 92.37,
+        "final_health_score": 93.02,
+        "fault_detected": false,
+        "fault_type": "NORMAL",
+        "fault_first_seen": 0.0,
+        "fault_last_seen": 0.0,
+        "fault_event_count": 0,
+        "mission_progress": 0.017254901960784347,
+        "telemetry_points": 220
+      }
+    ]
+  }
+}
+
+{
+  "condition": "misfire",
+  "route": [
+    "Delhi",
+    "Jaipur"
+  ],
+  "flight_id": null,
+  "route_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "start_command": {
+    "ok": true,
+    "state": {
+      "timestamp": 1789273575.6405277,
+      "uav": {
+        "status": "FLYING",
+        "altitude_m": 3500.0,
+        "speed_mps": 32.0,
+        "heading": 45.0,
+        "progress": 7.843137254901961e-05,
+        "position": {
+          "lat": 28.6139,
+          "lng": 77.209
+        },
+        "distance_to_next_km": 0.0
+      },
+      "flight_path": {
+        "waypoints": [],
+        "route": [],
+        "following": false
+      },
+      "engine": {
+        "status": "HEALTHY",
+        "rpm": 2864.0,
+        "cht_c": 50.7,
+        "egt_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "vibration_rms": 0.163,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "throttle_pct": 0.0,
+        "load_pct": 16.881267683499857,
+        "torque_nm": 14.5,
+        "intake_pressure_kpa": 19.990000000000002
+      },
+      "digital_twin": {
+        "status": "SYNCHRONIZED",
+        "telemetry_rate_hz": 10.0,
+        "simulation_time_s": 0.1,
+        "health_pct": 93.0,
+        "fault": "NORMAL",
+        "active_fault_name": "",
+        "fault_severity": 0.0,
+        "ai_health": 93.02,
+        "ai_severity": "NORMAL",
+        "ai_fault": "NORMAL",
+        "ai_confidence": 0.6166666666666667,
+        "intelligence_mode": "MACHINE_LEARNING"
+      },
+      "mission": {
+        "id": "AT-001",
+        "name": "Cruise ISR",
+        "key": "cruise_isr",
+        "phase": "GROUND",
+        "progress": 7.843137254901961e-05,
+        "elapsed_s": 0.1,
+        "running": true,
+        "paused": false,
+        "status": "COMPLETED",
+        "route": [],
+        "base": "Delhi",
+        "risk_level": "CLEAR",
+        "return_recommended": false,
+        "risk_message": "MISSION STABLE"
+      },
+      "telemetry_status": "LIVE",
+      "alerts": [],
+      "telemetry": {
+        "rpm": 2864.0,
+        "manifold_pressure_kpa": 19.990000000000002,
+        "intake_temperature_c": -0.1,
+        "fuel_flow_kg_s": 0.00045000000000000004,
+        "torque_nm": 14.5,
+        "power_kw": 4.25,
+        "cht_cylinder_1_c": 50.7,
+        "cht_cylinder_2_c": 47.7,
+        "cht_cylinder_3_c": 49.300000000000004,
+        "cht_cylinder_4_c": 49.1,
+        "egt_cylinder_1_c": 48.800000000000004,
+        "egt_cylinder_2_c": 48.5,
+        "egt_cylinder_3_c": 45.7,
+        "egt_cylinder_4_c": 48.800000000000004,
+        "oil_temperature_c": 50.2,
+        "oil_pressure_psi": 86.10000000000001,
+        "oil_flow_l_min": 0.16,
+        "battery_voltage_v": 24.02,
+        "battery_current_a": 2.93,
+        "battery_soc": 0.998,
+        "vibration_rms": 0.163,
+        "vibration_peak": 0.374,
+        "vibration_0_5x": 0.031,
+        "vibration_1x": 0.095,
+        "vibration_2x": 0.038
+      },
+      "intelligence": {
+        "expected": {
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "expected_rpm": 2864.0,
+          "expected_throttle_pct": 0.0,
+          "expected_altitude_m": 3500.0,
+          "expected_torque_nm": 14.5,
+          "expected_power_kw": 4.25,
+          "expected_pressure_kpa": 20.0,
+          "expected_ambient_temperature_c": -7.75,
+          "expected_air_density_kg_m3": 0.8632286260247354
+        },
+        "deviations": {
+          "cht_deviation": {
+            "value": 9.53204000000001,
+            "absolute": 9.53204000000001,
+            "normalized": 0.7943366666666675,
+            "percent": 23.154025606321056,
+            "direction": "POSITIVE",
+            "magnitude": 9.53204000000001
+          },
+          "egt_deviation": {
+            "value": -2.039699999999989,
+            "absolute": 2.039699999999989,
+            "normalized": -0.11331666666666607,
+            "percent": 4.012022100838497,
+            "direction": "NEGATIVE",
+            "magnitude": 2.039699999999989
+          },
+          "oil_temperature_deviation": {
+            "value": -23.448099999999997,
+            "absolute": 23.448099999999997,
+            "normalized": -1.9540083333333331,
+            "percent": 31.838024334639993,
+            "direction": "NEGATIVE",
+            "magnitude": 23.448099999999997
+          },
+          "oil_pressure_deviation": {
+            "value": 0.36000000000001364,
+            "absolute": 0.36000000000001364,
+            "normalized": 0.045000000000001705,
+            "percent": 0.4198740377886793,
+            "direction": "POSITIVE",
+            "magnitude": 0.36000000000001364
+          },
+          "fuel_flow_deviation": {
+            "value": 0.00044,
+            "absolute": 0.00044,
+            "normalized": 1.2571428571428571,
+            "percent": 125.71428571428571,
+            "direction": "POSITIVE",
+            "magnitude": 0.00044
+          },
+          "vibration_deviation": {
+            "value": 0.0011119999999999741,
+            "absolute": 0.0011119999999999741,
+            "normalized": 0.009266666666666451,
+            "percent": 0.6868946432101045,
+            "direction": "POSITIVE",
+            "magnitude": 0.0011119999999999741
+          }
+        },
+        "features": {
+          "rpm": 2864.0,
+          "throttle_pct": 0.0,
+          "altitude_m": 3500.0,
+          "ambient_temperature_c": -7.75,
+          "pressure_kpa": 20.0,
+          "fuel_flow_kg_s": 0.00045000000000000004,
+          "oil_temperature_c": 50.2,
+          "oil_pressure_psi": 86.10000000000001,
+          "vibration_rms": 0.163,
+          "torque_nm": 14.5,
+          "power_kw": 4.25,
+          "engine_load_pct": 4.220316920874964,
+          "expected_cht": 41.167959999999994,
+          "expected_egt": 50.83969999999999,
+          "expected_oil_temperature": 73.6481,
+          "expected_oil_pressure": 85.74,
+          "expected_fuel_flow": 1e-05,
+          "expected_vibration": 0.16188800000000003,
+          "cht_deviation": 9.53204000000001,
+          "egt_deviation": -2.039699999999989,
+          "oil_temperature_deviation": -23.448099999999997,
+          "oil_pressure_deviation": 0.36000000000001364,
+          "fuel_flow_deviation": 0.00044,
+          "vibration_deviation": 0.0011119999999999741,
+          "thermal_deviation_consistency": 11.571739999999998,
+          "cross_sensor_alignment": 0.40651651944479483,
+          "rolling_mean": 0.0,
+          "rolling_std": 0.0,
+          "rate_of_change": 0.0,
+          "slope": 0.0,
+          "persistence": 0.0
+        },
+        "anomaly": {
+          "score": 0.46512084972206863,
+          "is_anomaly": false,
+          "normalized_score": 0.46512084972206863,
+          "threshold": 0.55
+        },
+        "fault_classification": {
+          "fault_type": "NORMAL",
+          "confidence": 0.6166666666666667,
+          "probabilities": {
+            "COMBUSTION_INSTABILITY": 0.02,
+            "COOLING_DEGRADATION": 0.04,
+            "EXCESSIVE_VIBRATION": 0.04,
+            "MISFIRE": 0.013333333333333334,
+            "NORMAL": 0.6166666666666667,
+            "OIL_PRESSURE_DEGRADATION": 0.013333333333333334,
+            "SENSOR_DRIFT": 0.25666666666666665
+          }
+        },
+        "sensor_fault_analysis": {
+          "engine_fault_evidence": 0.0,
+          "sensor_fault_evidence": 0.0,
+          "ambiguous_evidence": 0.0,
+          "likely_condition": "AMBIGUOUS"
+        },
+        "thermal_condition": "NORMAL",
+        "trend": {
+          "persistence": 0.6976812745831029,
+          "direction": "stable"
+        },
+        "health": {
+          "score": 93.02,
+          "severity": "NORMAL"
+        },
+        "severity": "NORMAL",
+        "diagnosis": {
+          "title": "NORMAL ENGINE OPERATION",
+          "severity": "NORMAL",
+          "fault_type": "NORMAL",
+          "confidence": 0.617,
+          "primary_signal": "thermal_deviation",
+          "evidence": [
+            "CHT above expectation for current operating conditions."
+          ],
+          "supporting_signals": [
+            "Physics expectation comparison",
+            "Trend persistence",
+            "Cross-sensor consistency"
+          ],
+          "contradictory_signals": [
+            "No contradictory sensor evidence"
+          ],
+          "interpretation": "No strong evidence of abnormal engine behaviour is present in the current telemetry.",
+          "recommended_action": "Continue nominal operation and monitor for drift or persistence.",
+          "timestamp": null,
+          "persistence_duration": 0.0,
+          "anomaly_score": 0.465
+        },
+        "rul": {
+          "available": true,
+          "estimated_rul": 71.41065476190559,
+          "raw_estimated_rul": 71.41065476190559,
+          "filtered_estimated_rul": 71.41065476190559,
+          "confidence": null,
+          "status": "EXPERIMENTAL",
+          "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+        }
+      },
+      "events": [
+        {
+          "kind": "warning",
+          "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x1f02afc3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+        },
+        {
+          "kind": "command",
+          "message": "Start Uav acknowledged"
+        },
+        {
+          "kind": "flight",
+          "message": "FLIGHT SESSION STARTED: aeris-97cc12ff"
+        },
+        {
+          "kind": "command",
+          "message": "Clear Fault acknowledged"
+        },
+        {
+          "kind": "command",
+          "message": "Stop Uav acknowledged"
+        },
+        {
+          "kind": "info",
+          "message": "Simulation reset"
+        }
+      ]
+    }
+  },
+  "injection_command": {
+    "_error": "HTTP Error 400: Bad Request"
+  },
+  "simulator_fault": "Unknown",
+  "starting_state": {
+    "timestamp": "2026-09-13T09:56:19",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 84.0,
+    "oil_temperature": 49.2,
+    "cht": 49.300000000000004,
+    "egt": 38.7,
+    "vibration": 0.14,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "NORMAL",
+    "confidence": null,
+    "severity": "NORMAL",
+    "mission_risk": null
+  },
+  "state_after_injection": {
+    "timestamp": 1789273587.8594058,
+    "uav": {
+      "status": "FLYING",
+      "altitude_m": 3500.0,
+      "speed_mps": 32.0,
+      "heading": 45.0,
+      "progress": 0.0018823529411764713,
+      "position": {
+        "lat": 28.68110349568748,
+        "lng": 77.28557881414683
+      },
+      "distance_to_next_km": 0.0
+    },
+    "flight_path": {
+      "waypoints": [],
+      "route": [],
+      "following": false
+    },
+    "engine": {
+      "status": "CRITICAL",
+      "rpm": 1789.0,
+      "cht_c": 48.1,
+      "egt_c": 28.0,
+      "oil_temperature_c": 49.300000000000004,
+      "oil_pressure_psi": 81.0,
+      "vibration_rms": 0.983,
+      "fuel_flow_kg_s": 0.00028000000000000003,
+      "throttle_pct": 0.0,
+      "load_pct": 9.740475497786825,
+      "torque_nm": 12.9,
+      "intake_pressure_kpa": 20.0
+    },
+    "digital_twin": {
+      "status": "SYNCHRONIZED",
+      "telemetry_rate_hz": 10.0,
+      "simulation_time_s": 2.400000000000001,
+      "health_pct": 37.2,
+      "fault": "EXCESSIVE_VIBRATION",
+      "active_fault_name": "excessive_vibration",
+      "fault_severity": 0.8,
+      "ai_health": 37.23,
+      "ai_severity": "SEVERE",
+      "ai_fault": "EXCESSIVE_VIBRATION",
+      "ai_confidence": 0.8533333333333334,
+      "intelligence_mode": "MACHINE_LEARNING"
+    },
+    "mission": {
+      "id": "AT-001",
+      "name": "Cruise ISR",
+      "key": "cruise_isr",
+      "phase": "GROUND",
+      "progress": 0.0018823529411764713,
+      "elapsed_s": 2.400000000000001,
+      "running": true,
+      "paused": false,
+      "status": "COMPLETED",
+      "route": [],
+      "base": "Delhi",
+      "risk_level": "AT_RISK",
+      "return_recommended": true,
+      "risk_message": "RETURN TO BASE RECOMMENDED"
+    },
+    "telemetry_status": "LIVE",
+    "alerts": [
+      {
+        "id": "fault_excessive_vibration",
+        "level": "critical",
+        "text": "EXCESSIVE VIBRATION"
+      }
+    ],
+    "telemetry": {
+      "rpm": 1789.0,
+      "manifold_pressure_kpa": 20.0,
+      "intake_temperature_c": -0.6000000000000001,
+      "fuel_flow_kg_s": 0.00028000000000000003,
+      "torque_nm": 12.9,
+      "power_kw": 2.47,
+      "cht_cylinder_1_c": 46.5,
+      "cht_cylinder_2_c": 46.7,
+      "cht_cylinder_3_c": 48.1,
+      "cht_cylinder_4_c": 47.400000000000006,
+      "egt_cylinder_1_c": 26.400000000000002,
+      "egt_cylinder_2_c": 28.0,
+      "egt_cylinder_3_c": 26.3,
+      "egt_cylinder_4_c": 26.6,
+      "oil_temperature_c": 49.300000000000004,
+      "oil_pressure_psi": 81.0,
+      "oil_flow_l_min": 0.05,
+      "battery_voltage_v": 24.47,
+      "battery_current_a": -7.49,
+      "battery_soc": 0.996,
+      "vibration_rms": 0.983,
+      "vibration_peak": 1.547,
+      "vibration_0_5x": 0.024,
+      "vibration_1x": 0.681,
+      "vibration_2x": 0.019
+    },
+    "intelligence": {
+      "expected": {
+        "expected_cht": 40.345585,
+        "expected_egt": 24.179699999999997,
+        "expected_oil_temperature": 71.87434999999999,
+        "expected_oil_pressure": 81.70875000000001,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15705049999999998,
+        "expected_rpm": 1789.0,
+        "expected_throttle_pct": 0.0,
+        "expected_altitude_m": 3500.0,
+        "expected_torque_nm": 12.9,
+        "expected_power_kw": 2.47,
+        "expected_pressure_kpa": 20.0,
+        "expected_ambient_temperature_c": -7.75,
+        "expected_air_density_kg_m3": 0.8632286260247354
+      },
+      "deviations": {
+        "cht_deviation": {
+          "value": 7.754415000000002,
+          "absolute": 7.754415000000002,
+          "normalized": 0.6462012500000002,
+          "percent": 19.219984045342265,
+          "direction": "POSITIVE",
+          "magnitude": 7.754415000000002
+        },
+        "egt_deviation": {
+          "value": 3.820300000000003,
+          "absolute": 3.820300000000003,
+          "normalized": 0.21223888888888906,
+          "percent": 15.799617034123681,
+          "direction": "POSITIVE",
+          "magnitude": 3.820300000000003
+        },
+        "oil_temperature_deviation": {
+          "value": -22.57434999999999,
+          "absolute": 22.57434999999999,
+          "normalized": -1.8811958333333323,
+          "percent": 31.408075342594387,
+          "direction": "NEGATIVE",
+          "magnitude": 22.57434999999999
+        },
+        "oil_pressure_deviation": {
+          "value": -0.7087500000000091,
+          "absolute": 0.7087500000000091,
+          "normalized": -0.08859375000000114,
+          "percent": 0.8674101610904695,
+          "direction": "NEGATIVE",
+          "magnitude": 0.7087500000000091
+        },
+        "fuel_flow_deviation": {
+          "value": 0.00027,
+          "absolute": 0.00027,
+          "normalized": 0.7714285714285715,
+          "percent": 77.14285714285715,
+          "direction": "POSITIVE",
+          "magnitude": 0.00027
+        },
+        "vibration_deviation": {
+          "value": 0.8259495,
+          "absolute": 0.8259495,
+          "normalized": 6.882912500000001,
+          "percent": 525.9133208744959,
+          "direction": "POSITIVE",
+          "magnitude": 0.8259495
+        }
+      },
+      "features": {
+        "rpm": 1789.0,
+        "throttle_pct": 0.0,
+        "altitude_m": 3500.0,
+        "ambient_temperature_c": -7.75,
+        "pressure_kpa": 20.0,
+        "fuel_flow_kg_s": 0.00028000000000000003,
+        "oil_temperature_c": 49.300000000000004,
+        "oil_pressure_psi": 81.0,
+        "vibration_rms": 0.983,
+        "torque_nm": 12.9,
+        "power_kw": 2.47,
+        "engine_load_pct": 2.4351188744467063,
+        "expected_cht": 40.345585,
+        "expected_egt": 24.179699999999997,
+        "expected_oil_temperature": 71.87434999999999,
+        "expected_oil_pressure": 81.70875000000001,
+        "expected_fuel_flow": 1e-05,
+        "expected_vibration": 0.15705049999999998,
+        "cht_deviation": 7.754415000000002,
+        "egt_deviation": 3.820300000000003,
+        "oil_temperature_deviation": -22.57434999999999,
+        "oil_pressure_deviation": -0.7087500000000091,
+        "fuel_flow_deviation": 0.00027,
+        "vibration_deviation": 0.8259495,
+        "thermal_deviation_consistency": 11.574715000000005,
+        "cross_sensor_alignment": 0.3435055715737773,
+        "cht_deviation_rolling_mean": 8.264508500000002,
+        "cht_deviation_rolling_std": 0.37242497095421606,
+        "cht_deviation_rate_of_change": -0.02283055555555475,
+        "cht_deviation_slope": -0.02283055555555475,
+        "cht_deviation_persistence": 1.0,
+        "egt_deviation_rolling_mean": 1.152220000000002,
+        "egt_deviation_rolling_std": 1.6910867871283248,
+        "egt_deviation_rate_of_change": 0.39422222222222203,
+        "egt_deviation_slope": 0.39422222222222203,
+        "egt_deviation_persistence": 0.30160458594832773,
+        "oil_temperature_deviation_rolling_mean": -22.690814999999994,
+        "oil_temperature_deviation_rolling_std": 0.5294931699512299,
+        "oil_temperature_deviation_rate_of_change": 0.09280555555555578,
+        "oil_temperature_deviation_slope": 0.09280555555555578,
+        "oil_temperature_deviation_persistence": 1.0,
+        "oil_pressure_deviation_rolling_mean": -0.021624999999997386,
+        "oil_pressure_deviation_rolling_std": 0.5295623340316034,
+        "oil_pressure_deviation_rate_of_change": -0.05069444444444255,
+        "oil_pressure_deviation_slope": -0.05069444444444255,
+        "oil_pressure_deviation_persistence": 0.021624999999997386,
+        "fuel_flow_deviation_rolling_mean": 0.00027499999999999996,
+        "fuel_flow_deviation_rolling_std": 6.530696746902278e-05,
+        "fuel_flow_deviation_rate_of_change": -6.666666666666672e-06,
+        "fuel_flow_deviation_slope": -6.666666666666672e-06,
+        "fuel_flow_deviation_persistence": 0.00027499999999999996,
+        "vibration_deviation_rolling_mean": 0.25405004999999997,
+        "vibration_deviation_rolling_std": 0.3788262447093951,
+        "vibration_deviation_rate_of_change": 0.08997027777777777,
+        "vibration_deviation_slope": 0.08997027777777777,
+        "vibration_deviation_persistence": 0.25405004999999997
+      },
+      "anomaly": {
+        "score": 0.6,
+        "is_anomaly": true,
+        "normalized_score": 0.6,
+        "threshold": 0.55
+      },
+      "fault_classification": {
+        "fault_type": "EXCESSIVE_VIBRATION",
+        "confidence": 0.8533333333333334,
+        "probabilities": {
+          "COMBUSTION_INSTABILITY": 0.06333333333333334,
+          "COOLING_DEGRADATION": 0.023333333333333334,
+          "EXCESSIVE_VIBRATION": 0.8533333333333334,
+          "MISFIRE": 0.05,
+          "NORMAL": 0.0,
+          "OIL_PRESSURE_DEGRADATION": 0.0,
+          "SENSOR_DRIFT": 0.01
+        }
+      },
+      "sensor_fault_analysis": {
+        "engine_fault_evidence": 0.8,
+        "sensor_fault_evidence": 0.0,
+        "ambiguous_evidence": 0.8,
+        "likely_condition": "POSSIBLE_ENGINE_FAULT"
+      },
+      "thermal_condition": "NORMAL",
+      "trend": {
+        "persistence": 0.8999999999999999,
+        "direction": "stable"
+      },
+      "health": {
+        "score": 37.23,
+        "severity": "CRITICAL"
+      },
+      "severity": "SEVERE",
+      "diagnosis": {
+        "title": "Excessive Vibration",
+        "severity": "SEVERE",
+        "fault_type": "EXCESSIVE_VIBRATION",
+        "confidence": 0.853,
+        "primary_signal": "vibration_deviation",
+        "evidence": [
+          "Vibration deviates from expected baseline."
+        ],
+        "supporting_signals": [
+          "Physics expectation comparison",
+          "Trend persistence",
+          "Cross-sensor consistency"
+        ],
+        "contradictory_signals": [
+          "No contradictory sensor evidence"
+        ],
+        "interpretation": "The system is showing sustained observable drift relative to the physics expectation model.",
+        "recommended_action": "Continue monitoring and inspect the most affected subsystem; if degradation persists, perform maintenance checks.",
+        "timestamp": null,
+        "persistence_duration": 0.0,
+        "anomaly_score": 0.6
+      },
+      "rul": {
+        "available": true,
+        "estimated_rul": 70.70616666666824,
+        "raw_estimated_rul": 50.77590000000103,
+        "filtered_estimated_rul": 70.70616666666824,
+        "confidence": null,
+        "status": "EXPERIMENTAL",
+        "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+      }
+    },
+    "events": [
+      {
+        "kind": "command",
+        "message": "Inject Fault acknowledged"
+      },
+      {
+        "kind": "warning",
+        "message": "InfluxDB unavailable at http://localhost:8086; telemetry writes paused for 30s: HTTPConnectionPool(host='localhost', port=8086): Max retries exceeded with url: /api/v2/write?org=AERIS-TWIN&bucket=aeris_telemetry&precision=ns (Caused by ConnectTimeoutError(<HTTPConnection(host='localhost', port=8086) at 0x1f02afc3890>, 'Connection to localhost timed out. (connect timeout=0.5)'))"
+      },
+      {
+        "kind": "command",
+        "message": "Start Uav acknowledged"
+      },
+      {
+        "kind": "flight",
+        "message": "FLIGHT SESSION STARTED: aeris-97cc12ff"
+      },
+      {
+        "kind": "command",
+        "message": "Clear Fault acknowledged"
+      },
+      {
+        "kind": "command",
+        "message": "Stop Uav acknowledged"
+      },
+      {
+        "kind": "info",
+        "message": "Simulation reset"
+      }
+    ]
+  },
+  "mid_flight_state": {
+    "timestamp": "2026-09-13T09:57:10",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 77.10000000000001,
+    "oil_temperature": 48.400000000000006,
+    "cht": 41.400000000000006,
+    "egt": 7.1000000000000005,
+    "vibration": 0.998,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "EXCESSIVE_VIBRATION",
+    "confidence": null,
+    "severity": "SEVERE",
+    "mission_risk": null
+  },
+  "ending_state": {
+    "timestamp": "2026-09-13T09:58:46",
+    "simulation_state": null,
+    "simulation_time": null,
+    "oil_pressure": 76.80000000000001,
+    "oil_temperature": 47.300000000000004,
+    "cht": 38.2,
+    "egt": 2.8000000000000003,
+    "vibration": 0.994,
+    "wear_index": null,
+    "active_fault": null,
+    "classification": "EXCESSIVE_VIBRATION",
+    "confidence": null,
+    "severity": "SEVERE",
+    "mission_risk": null
+  },
+  "expected_classification": "MISFIRE",
+  "actual_classification": "EXCESSIVE_VIBRATION",
+  "classification_pass": false,
+  "mission_reached_idle": false,
+  "flight_closed": false,
+  "flight_closed_events": [],
+  "flights_api_response": {
+    "flights": [
+      {
+        "flight_id": "aeris-1c4dafea",
+        "mission_name": "Cruise ISR",
+        "mission_key": "cruise_isr",
+        "status": "STOPPED",
+        "start_time": 1789273233.612855,
+        "end_time": 1789273392.312522,
+        "duration_seconds": 158.699667,
+        "max_altitude_m": 3500.0,
+        "max_rpm": 2864.0,
+        "max_cht_c": 51.400000000000006,
+        "max_egt_c": 48.800000000000004,
+        "max_vibration_rms": 0.185,
+        "minimum_health_score": 92.37,
+        "final_health_score": 93.02,
+        "fault_detected": false,
+        "fault_type": "NORMAL",
+        "fault_first_seen": 0.0,
+        "fault_last_seen": 0.0,
+        "fault_event_count": 0,
+        "mission_progress": 0.017254901960784347,
+        "telemetry_points": 220
+      }
+    ]
+  }
+}
+

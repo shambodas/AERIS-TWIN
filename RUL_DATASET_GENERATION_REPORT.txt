@@ -1,0 +1,11 @@
+============================================================
+AERIS-TWIN — RUL DATASET GENERATION REPORT
+============================================================
+Total Trajectories: 90
+Total Samples: 5770
+GENTLE Profile Count: 30
+NOMINAL Profile Count: 30
+HARSH Profile Count: 30
+
+ISSUES FOUND:
+ None. Dataset is structurally valid, monotonic, and free of direct ground-truth leakage.

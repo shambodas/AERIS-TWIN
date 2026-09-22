@@ -1,0 +1,296 @@
+AERIS-TWIN SIH 2026
+DASHBOARD IMPLEMENTATION REPORT
+================================
+
+Date: 2026-09-02
+Scope: Work executed after the interactive GCS and Engine Dashboard prompt.
+
+1. REPOSITORY INSPECTION
+------------------------
+Inspected the existing Python simulator and integration surfaces before adding
+frontend code:
+
+- simulation/engine_simulator.py
+  - EngineSimulator.step(EngineInputs) is the authoritative physics operation.
+  - Existing true engine state and observed sensor state are both available.
+  - Existing fault activation methods were identified and reused.
+- simulation/mission.py
+  - MissionProfile.state_at() supplies mission state.
+  - MissionProfile.engine_inputs_at() supplies engine operating inputs.
+  - MissionRunner was inspected as the existing mission-to-engine integration.
+- sensors/sensor_model.py
+  - Synthetic sensor observations and sensor-drift separation were inspected.
+- telemetry/mqtt.py
+  - Existing MQTT configuration, topic manager, serializer, and publisher were
+    inspected.
+  - Existing telemetry topic: aeris-twin/engine/telemetry.
+- faults/cooling.py and the other fault modules
+  - Existing cooling, misfire, combustion-instability, and sensor-drift APIs
+    were inspected.
+- main.py
+  - Existing simulation loop, logging, CAN, MQTT, and fault configuration were
+    inspected.
+- data/logger.py and data/generated/
+  - Existing CSV logging and generated telemetry/history files were inspected.
+- config/engine_config.py and validation scripts
+  - Existing operating-point and physics validation context was inspected.
+
+2. FILES CREATED
+----------------
+- server.py
+  A thin HTTP/SSE adapter around the existing EngineSimulator. It maintains one
+  simulator instance, accepts validated control commands, broadcasts live state,
+  exposes bounded history, and optionally republishes telemetry through the
+  existing MQTT publisher.
+
+- web/index.html
+  A responsive single-page browser interface with two route-specific views:
+  /gcs for judge-facing UAV control and /engine for engine monitoring.
+
+- DASHBOARD_IMPLEMENTATION_REPORT.txt
+  This report.
+
+3. FILES MODIFIED
+-----------------
+- server.py was extended after the initial implementation to:
+  - validate mission names;
+  - validate finite altitude, speed, and heading values;
+  - clamp control values to defined operating ranges;
+  - expose /api/report;
+  - calculate a telemetry-derived mission report.
+- web/index.html was extended to:
+  - add replay controls;
+  - replay bounded session samples on the engine monitor;
+  - display a telemetry-derived mission report;
+  - keep ML explicitly marked as not connected.
+
+4. EXISTING FILES DELIBERATELY LEFT UNTOUCHED
+---------------------------------------------
+The existing engine physics, mission, sensor, fault, MQTT, CAN, logger, and
+validation modules were left untouched. The dashboard uses them as the source
+of truth and does not duplicate engine calculations in browser code.
+
+5. FRONTEND TECHNOLOGY
+----------------------
+- Plain HTML, CSS, and browser JavaScript.
+- No frontend build system or package installation was required.
+- The server serves the static page directly.
+- CSS includes responsive layouts for desktop and smaller screens.
+- Browser EventSource is used for live server-sent telemetry updates.
+- Canvas is used for bounded live trend charts.
+
+6. COMMUNICATION ARCHITECTURE
+-----------------------------
+Browser GCS and Engine Monitor
+        |
+        | HTTP commands and Server-Sent Events
+        v
+server.py adapter
+        |
+        | EngineInputs and EngineSimulator.step()
+        v
+Existing Python engine physics and sensor model
+        |
+        +--> browser telemetry state
+        +--> optional existing MQTT telemetry publisher
+
+Both browser routes connect to the same server process and simulator instance.
+The adapter binds to 0.0.0.0 by default, so it can be reached over a LAN.
+
+7. MQTT TOPICS
+--------------
+The existing telemetry topic was reused:
+
+- aeris-twin/engine/telemetry
+
+MQTT publishing is disabled by default for development. Enable it with:
+
+  AERIS_MQTT=1
+  AERIS_MQTT_HOST=<broker-host>
+  AERIS_MQTT_PORT=1883
+
+The current browser command path is HTTP POST /api/command. A future command
+bridge can publish the same validated command schema to an MQTT command topic.
+No redundant MQTT topic was added.
+
+8. LIVE STATE SCHEMA
+--------------------
+The adapter emits a JSON state containing:
+
+- uav: status, altitude_m, speed_mps, heading, progress
+- engine: status, rpm, cht_c, oil temperature, oil pressure, vibration,
+  fuel flow, throttle, load, torque, and intake pressure
+- digital_twin: synchronization status, telemetry rate, simulation time,
+  rule-based health percentage, active fault, and severity
+- mission: id, name, key, phase, progress, elapsed time, running, and paused
+- alerts: current rule-based operator alerts
+- telemetry: complete measured SensorState fields
+- events: recent command/system events
+
+The measured engine values come from the existing SensorModel. The simulator
+remains authoritative.
+
+9. COMMAND SCHEMA
+-----------------
+Commands are sent as:
+
+  {
+    "command": "start_mission",
+    "parameters": {"mission": "hot_weather"}
+  }
+
+Supported commands include:
+
+- start_mission
+- start_uav
+- stop_uav
+- pause_uav
+- reset_simulation
+- set_altitude
+- set_speed
+- set_heading
+- inject_fault
+- clear_fault
+
+Mission names, fault names, numeric ranges, and finite numeric values are
+validated before reaching the simulator. Unsupported throttle control is
+rejected because throttle currently follows MissionProfile inputs rather than
+being independently exposed by the adapter.
+
+10. GCS FEATURES IMPLEMENTED
+----------------------------
+- Judge-facing GCS route at /gcs.
+- Simulated mission map with base, waypoints, route, UAV position, heading, and
+  progress.
+- Animated UAV position tied to mission progress and heading state.
+- Mission selector for Cruise ISR, High Altitude, Long Endurance, Hot Weather,
+  and Rapid Throttle.
+- Start, stop, pause/resume, and reset controls.
+- Altitude, speed, and heading controls.
+- Compact live flight and engine telemetry.
+- Healthy, warning, and critical engine states.
+- Operator alerts.
+- Fault injection for cooling/overheating, misfire, combustion instability,
+  and sensor drift.
+- Command acknowledgement toast and command timeline.
+- Communication status indicator.
+
+11. ENGINE MONITOR FEATURES IMPLEMENTED
+---------------------------------------
+- Engine monitoring route at /engine.
+- Stylized intake, combustion, power, and propeller visualization.
+- Live RPM, CHT, oil temperature, oil pressure, vibration, fuel flow,
+  throttle, engine load, and intake pressure cards.
+- Bounded live charts for RPM/temperature and oil pressure/vibration.
+- Rule-based engine condition score clearly labeled as non-ML.
+- Thermal, lubrication, and vibration contributor indicators.
+- Digital twin synchronization status and telemetry rate.
+- Active fault and alert display.
+- Explicit ML integration placeholder with no fabricated prediction values.
+- Bounded session history table.
+- Session replay controls.
+- Telemetry-derived mission report.
+
+12. VALIDATION EXECUTED
+-----------------------
+The following checks were run successfully:
+
+- python -m py_compile server.py
+  Result: passed with no output/errors.
+
+- Runtime adapter check:
+  - imported server.py;
+  - confirmed initial HEALTHY state;
+  - sent start_mission for hot_weather;
+  - injected the existing cooling fault;
+  - confirmed COOLING_DEGRADATION in the resulting state.
+  Result: passed.
+
+- HTTP smoke test against a running server:
+  - /gcs returned HTTP 200;
+  - /engine returned HTTP 200;
+  - /api/state returned HTTP 200 and valid JSON.
+  Result: passed.
+
+- Command contract check:
+  - invalid mission rejected with Unsupported mission;
+  - report endpoint returned telemetry-derived sample data.
+  Result: passed.
+
+- Static diagnostics:
+  - server.py: no errors;
+  - web/index.html: no errors.
+
+13. HOW TO START
+----------------
+From the repository root:
+
+  python server.py
+
+The server prints:
+
+  http://localhost:8080/gcs
+  http://localhost:8080/engine
+
+Open both URLs in separate browser tabs on one computer. For a second device,
+use the host computer's LAN address, for example:
+
+  http://192.168.x.x:8080/gcs
+  http://192.168.x.x:8080/engine
+
+The host firewall must permit the selected port. The Python adapter is bound
+to 0.0.0.0 by default and can be configured with AERIS_HOST and AERIS_PORT.
+
+14. DEMONSTRATION FLOW
+----------------------
+1. Start server.py.
+2. Open /gcs and /engine.
+3. Select a mission such as Cruise ISR.
+4. Start the mission.
+5. Change altitude, speed, or heading.
+6. Observe UAV movement and telemetry changes.
+7. Inject cooling/overheating or another supported fault.
+8. Observe engine warnings, alerts, health changes, and charts.
+9. Clear the fault or reset the system.
+10. On /engine, load session history, play replay, or display the report.
+
+15. LIMITATIONS AND ASSUMPTIONS
+--------------------------------
+- The current adapter is a prototype HTTP/SSE bridge, not a production API.
+- Browser command traffic is not yet published to MQTT; only telemetry can be
+  optionally republished through the existing MQTT publisher.
+- The simulated UAV position uses mission progress and a visual route; the
+  existing engine project does not provide real latitude/longitude flight
+  dynamics.
+- Heading is currently a dashboard/UAV visualization control and is not an
+  engine physics input.
+- Throttle remains mission-profile controlled because the existing simulator
+  does not expose an independent runtime throttle command in this adapter.
+- Mission profiles reuse the existing default MissionProfile and apply small
+  scenario overrides where available; these are integration-layer operating
+  inputs, not a second engine model.
+- History and replay currently use an in-memory bounded buffer of 600 samples.
+  Existing generated CSV files were not rewritten or replaced.
+- The condition score is a transparent rule-based telemetry score and is not
+  an ML prediction.
+- No ML model was trained or implemented.
+- No real hardware sensor data is claimed.
+
+16. FUTURE INTEGRATION POINTS
+-----------------------------
+- Add a validated MQTT command subscriber beside the existing telemetry topic.
+- Replace or supplement the in-memory history with the existing CSV/database
+  history source.
+- Add a dedicated replay API that streams historical telemetry sequentially.
+- Add an independent Python ML service consuming standardized telemetry.
+- Feed ML anomaly scores, classifications, failure probability, confidence,
+  and RUL to both browser views without embedding ML in the frontend.
+- Add authentication and command authorization before deployment beyond a
+  trusted local network.
+
+FINAL STATUS
+------------
+The current prototype provides a shared-source GCS and Engine Monitor vertical
+slice around the existing Python Digital Twin. Commands flow into the existing
+simulator, telemetry flows out to both views, supported faults affect the real
+fault models, and ML remains an explicit future service boundary.

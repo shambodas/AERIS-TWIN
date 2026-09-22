@@ -1,0 +1,252 @@
+============================================================
+AERIS-TWIN — RUL VALIDATION REPORT (PHASE 2 — CORRECTED)
+============================================================
+Date: 2026-09-05
+Status: EXPERIMENTAL
+
+============================================================
+1. DATASET SUMMARY
+============================================================
+Generation:        data/generate_rul_dataset.py --runs 30
+Total Trajectories: 90
+  GENTLE:            30
+  NOMINAL:           30
+  HARSH:             30
+Total Samples:     5,770
+
+Structural Validation (data/validate_rul_dataset.py):
+  Monotonicity (ground-truth RUL):  PASS — all trajectories
+  EOL RUL = 0:                       PASS — all trajectories
+  Missing values:                    NONE
+  Duplicate trajectories:            NONE
+  Latent leakage (wear_rate, load):  NONE — not present in CSV
+
+Profile EOL Statistics:
+  GENTLE  : Avg 76.2s | Min 66.2s | Max 88.4s
+  NOMINAL : Avg 62.1s | Min 53.4s | Max 72.8s
+  HARSH   : Avg 52.6s | Min 45.9s | Max 60.5s
+  Qualitative order GENTLE > NOMINAL > HARSH preserved. PASS.
+
+InfluxDB Ingestion: COMPLETE — 90 trajectories, 5,770 points accepted.
+
+============================================================
+2. TRAJECTORY-LEVEL SPLIT (70 / 15 / 15)
+============================================================
+Method: trajectory-level (complete trajectories only)
+Seed:   42 (numpy default_rng, deterministic)
+Split record: ml/model_artifacts/rul_split.json
+
+TRAIN (63 trajectories, 4,036 rows):
+  run_001 run_002 run_003 run_004 run_005 run_006 run_008
+  run_010 run_011 run_016 run_017 run_018 run_019 run_021
+  run_022 run_024 run_025 run_026 run_027 run_028 run_029
+  run_030 run_032 run_033 run_034 run_038 run_039 run_040
+  run_041 run_043 run_044 run_045 run_046 run_047 run_049
+  run_051 run_052 run_053 run_056 run_057 run_058 run_060
+  run_061 run_062 run_063 run_064 run_068 run_070 run_071
+  run_072 run_074 run_075 run_077 run_080 run_082 run_083
+  run_084 run_085 run_086 run_087 run_088 run_089 run_090
+
+VALIDATION (14 trajectories, 851 rows):
+  run_007 run_012 run_023 run_031 run_035 run_042 run_050
+  run_055 run_059 run_069 run_073 run_076 run_079 run_081
+
+TEST — LOCKED (13 trajectories, 883 rows):
+  run_009 run_013 run_014 run_015 run_020 run_036 run_037
+  run_048 run_054 run_065 run_066 run_067 run_078
+
+Overlap checks:
+  TRAIN ∩ VAL  = 0 trajectories  PASS
+  TRAIN ∩ TEST = 0 trajectories  PASS
+  VAL   ∩ TEST = 0 trajectories  PASS
+
+TEST trajectories were NOT used for:
+  - feature selection
+  - hyperparameter tuning
+  - model selection
+  - validation-set evaluation
+
+============================================================
+3. HYPERPARAMETER SELECTION (VALIDATION SET ONLY)
+============================================================
+Candidates evaluated: 3 configurations per model
+  {n_estimators: 50,  max_depth: 8}
+  {n_estimators: 100, max_depth: 10}
+  {n_estimators: 100, max_depth: 15}
+Criterion: minimize VAL MAE
+
+Model A (physics + time_s):
+  Best HP: n_estimators=100, max_depth=15 | VAL MAE = 3.383s
+
+Model B (operating conditions only):
+  Best HP: n_estimators=50, max_depth=8   | VAL MAE = 12.603s
+
+Model C (time_s only):
+  Best HP: n_estimators=100, max_depth=15 | VAL MAE = 7.257s
+
+Model D (physics only, no elapsed time):
+  Best HP: n_estimators=100, max_depth=15 | VAL MAE = 3.428s
+
+============================================================
+4. MODEL SELECTION DECISION (VALIDATION SET ONLY)
+============================================================
+Deployment candidates: Model A, Model D
+Ablation references only: Model B, Model C
+
+Selection policy:
+  Prefer Model D (no elapsed time) unless Model A's VAL MAE is
+  more than 1.0s better (threshold represents meaningful improvement
+  above measurement noise level).
+
+Result:
+  val_mae(A) = 3.383s
+  val_mae(D) = 3.428s
+  Difference = A - D = -0.045s  (D within 1.0s threshold of A)
+  DECISION: Deploy Model D — physics-only, no elapsed time.
+
+Rationale: D is within noise of A. Deploying A would introduce
+elapsed simulation time as a potential hidden proxy for RUL, which
+the clock ablation design was intended to eliminate.
+
+============================================================
+5. CLOCK ABLATION — FINAL TEST SET (locked, evaluated once)
+============================================================
+Model A (physics + time_s):   MAE=2.748s  RMSE=3.524s  R2=0.9723
+Model B (op cond only):       MAE=13.962s RMSE=16.982s R2=0.3559
+Model C (time only):          MAE=9.268s  RMSE=11.016s R2=0.7290
+Model D (physics only):       MAE=2.778s  RMSE=3.548s  R2=0.9719
+
+Delta Model A vs D: 0.030s  (0.030 / 2.778 = 1.1% relative)
+
+Ablation interpretation:
+  - Model C (time only) is significantly weaker than D (9.268s vs 2.778s).
+  - Model D matches Model A within 0.030s on the locked TEST set.
+  - The model is learning degradation physics, NOT elapsed simulation time.
+  - Clock leakage not detected.
+
+============================================================
+6. FINAL SELECTED MODEL METRICS (Model D, TEST set)
+============================================================
+MAE:  2.778 seconds
+RMSE: 3.548 seconds
+R2:   0.9719
+
+Lifecycle Stage Metrics (Model D, TEST set):
+  Stage       | N    | MAE    | RMSE   | R2
+  ------------|------|--------|--------|-------
+  early       | 292  | 4.133s | 4.837s | 0.8219
+  mid         | 295  | 2.535s | 3.154s | 0.8705
+  near_eol    | 296  | 1.683s | 2.135s | 0.9087
+
+Near-EOL accuracy is highest (R2=0.91), which is the safety-critical
+region. Early-life predictions carry higher variance (R2=0.82), consistent
+with low sensor signal at minimal degradation.
+
+============================================================
+7. MONOTONICITY CHECK (Model D, TEST trajectories)
+============================================================
+Trajectories checked:   13
+Violations (tol ±0.5s): 13
+Result: FAIL
+
+Explanation:
+  Ground-truth RUL is monotonically non-increasing by construction.
+  However, the Random Forest regressor predicts independently per
+  time-step from sensor readings; it has no structural ordering
+  constraint. Predicted RUL may locally increase when sensor readings
+  fluctuate (noise), even though the underlying degradation is
+  monotone. This is a known property of unconstrained regression.
+
+  The ground-truth RUL delivered to the training set is monotone.
+  The model cannot manufacture future knowledge; it can only react
+  to current sensor values, which contain measurement noise.
+
+  Impact: Runtime RUL may exhibit small local increases.
+  This is documented in the EXPERIMENTAL classification.
+  Future work: isotonic regression post-processing, or use a
+  monotone model family (e.g. XGB with monotone_constraints).
+
+============================================================
+8. SENSOR ROBUSTNESS (5% Gaussian noise, TEST set)
+============================================================
+MAE (clean):  2.778s
+MAE (noisy):  3.218s
+Degradation:  15.8%
+
+Interpretation:
+  A 5% noise injection causes ~16% MAE increase.
+  This is acceptable for an EXPERIMENTAL model on simulation data.
+  No robustness threshold has been set for VALIDATED status.
+
+============================================================
+9. UNCERTAINTY / CONFIDENCE
+============================================================
+Method:           NONE
+Runtime field:    "confidence": null
+Rationale:
+  No validated uncertainty calibration has been implemented.
+  The value 0.87 that appeared in a previous version was derived
+  from the R² statistic of the training set, which is NOT a valid
+  confidence interval and has been removed.
+
+Future work required for uncertainty:
+  - Implement conformal prediction intervals or bootstrap ensembles
+  - Calibrate on VALIDATION set only
+  - Evaluate coverage (e.g. 90% nominal, actual ≥ 88%) on TEST set
+  - Document interval width, methodology, and limitations
+  - Only then may a "confidence" field carry a meaningful value
+
+============================================================
+10. RUNTIME INTEGRATION VERIFICATION
+============================================================
+Model artifact:      ml/model_artifacts/rul_model_d.pkl  EXISTS
+Feature list:        ml/model_artifacts/rul_features.txt  EXISTS
+Split record:        ml/model_artifacts/rul_split.json   EXISTS
+
+Pipeline (intelligence/pipeline.py):
+  - Model D loads on startup:               CONFIRMED
+  - confidence field = null at runtime:     CONFIRMED
+  - wear_index NOT used in inference:       CONFIRMED
+  - time_s NOT used in inference:           CONFIRMED
+  - No future telemetry accessed:           CONFIRMED
+  - No hidden simulator state accessed:     CONFIRMED
+  - Graceful fallback if model absent:      CONFIRMED
+
+Runtime RUL response example:
+  {
+    "available": true,
+    "estimated_rul": <float seconds>,
+    "confidence": null,
+    "status": "EXPERIMENTAL",
+    "reason": "Model D (physics-only, no elapsed time). ..."
+  }
+
+============================================================
+11. REGRESSION TESTS
+============================================================
+Test suite: tests/
+Result:     19 passed, 0 failed
+Command:    python -m pytest tests/ -x -q
+
+Phase 1B foundation tests:  PASS (no regressions)
+Normal-flight tests:        PASS
+Fault-injection tests:      PASS
+Pipeline integration tests: PASS
+
+============================================================
+12. FINAL CLASSIFICATION
+============================================================
+Classification: EXPERIMENTAL
+
+This classification is correct and MUST NOT be changed without
+the following additional evidence:
+
+  (a) Real-world run-to-failure data from the actual UAV engine
+  (b) Independent validation on unseen trajectory types
+  (c) Validated uncertainty quantification with documented coverage
+  (d) Review of monotonicity properties under real sensor noise
+  (e) Longer trajectory durations (current: 46–88 simulated seconds)
+
+============================================================
+END OF REPORT
+============================================================

@@ -1,0 +1,15 @@
+{
+    "project": "AERIS-TWIN",
+    "fault": "injector_abnormality",
+    "fault_severity": 0.8,
+    "requested_duration_s": 1275.0,
+    "actual_duration_s": 1275.0,
+    "timestep_s": 0.1,
+    "mission_duration_s": 1275.0,
+    "records_logged": 12750,
+    "can_frames": 76500,
+    "mqtt_messages": 12750,
+    "execution_time_s": 51.237549800018314,
+    "final_fault_type": "INJECTOR_ABNORMALITY",
+    "final_fault_label": 7
+}

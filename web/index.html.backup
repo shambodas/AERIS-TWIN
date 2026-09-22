@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AERIS-TWIN — Engine Health Intelligence</title>
+<meta name="description" content="AI-powered Digital Twin engine health monitoring for MALE UAV aero-piston engines">
+<link rel="stylesheet" href="styles.css?v=dark-demo">
+<style>
+/* ============================================================
+   DASHBOARD-SPECIFIC STYLES
+   ============================================================ */
+
+.dash {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+}
+
+/* Hero section */
+.dash-hero {
+  margin-bottom: 20px;
+}
+
+.dash-hero h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dash-hero p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  max-width: 520px;
+}
+
+.dash-hero-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dash-tagline {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+/* Grid */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.dash-wide {
+  grid-column: 1 / -1;
+}
+
+/* Health hero */
+.health-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 180px;
+}
+
+.health-score {
+  font-size: 88px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.health-score small {
+  font-size: 22px;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.health-status {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.health-copy {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 420px;
+  margin-top: 8px;
+}
+
+/* Health ring */
+.health-ring {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green) var(--pct, 0%), var(--border) 0%);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.health-ring::after {
+  content: '';
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  position: absolute;
+}
+
+.health-ring span {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  z-index: 1;
+}
+
+/* Status colors */
+.tone-healthy  { color: var(--green); }
+.tone-monitor  { color: var(--green); }
+.tone-warning  { color: var(--amber); }
+.tone-critical { color: var(--red); }
+.tone-severe   { color: var(--red); }
+
+/* Insight */
+.insight-card {
+  border-left: 3px solid var(--green);
+}
+
+.insight-card.insight-warning {
+  border-left-color: var(--amber);
+}
+
+.insight-card.insight-critical,
+.insight-card.insight-severe {
+  border-left-color: var(--red);
+}
+
+.insight-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.insight-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.insight-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 18px;
+}
+
+.insight-meta div {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.insight-meta b {
+  display: block;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-top: 4px;
+  text-transform: none;
+}
+
+.insight-explain {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 18px;
+  line-height: 1.5;
+}
+
+/* Expected vs Actual */
+.expected-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.expected-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+.expected-table th, .expected-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); text-align: right; }
+.expected-table th:first-child, .expected-table td:first-child { text-align: left; }
+.expected-table th { color: var(--text-muted); font-size: 10px; letter-spacing: .7px; text-transform: uppercase; }
+.expected-table td { color: var(--text-primary); }
+.expected-table .deviation { color: var(--amber); }
+.thinking-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; align-items: center; }
+.thinking-step { padding: 12px 8px; border: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text-secondary); }
+.thinking-arrow { color: var(--accent); text-align: center; }
+.mode-value { color: var(--accent); font-family: var(--mono); font-size: 13px; margin-top: 6px; }
+
+.expected-grid > div {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.expected-grid strong {
+  display: block;
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-top: 6px;
+  font-family: var(--sans);
+}
+
+.expected-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 18px;
+}
+
+/* Chart */
+.trend-chart {
+  height: 100px;
+  margin-top: 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.trend-chart svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.chart-expected-line {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+/* Parameters */
+.params-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.param {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.param:not(:last-child) {
+  border-right: 1px solid var(--border);
+  padding-right: 16px;
+  margin-right: 16px;
+}
+
+.param-name {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.param-value {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.param-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  margin-top: 4px;
+}
+
+.param-ok   { color: var(--green); }
+.param-warn { color: var(--amber); }
+.param-crit { color: var(--red); }
+
+/* Condition */
+.condition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+
+.condition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.condition-label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.condition-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Action */
+.action-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.action-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* RUL */
+.rul-compact {
+  display: grid;
+  gap: 12px;
+}
+
+.rul-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.rul-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green), var(--amber), var(--red));
+  border-radius: inherit;
+  transition: width 0.2s ease;
+}
+
+.rul-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.rul-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.rul-value {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.rul-status {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--amber);
+  margin-top: 6px;
+  text-align: right;
+}
+
+.rul-status.healthy { color: var(--green); }
+.rul-status.warning { color: var(--amber); }
+.rul-status.critical { color: var(--red); }
+
+.flight-history-panel {
+  margin-top: 18px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.02);
+}
+
+.flight-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.flight-history-toggle {
+  border: 1px solid var(--accent);
+  background: rgba(112, 208, 255, 0.08);
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--mono);
+}
+
+.flight-history-content {
+  margin-top: 16px;
+}
+
+.flight-history-content.hidden,
+.flight-history-detail.hidden {
+  display: none;
+}
+
+.flight-history-list {
+  display: grid;
+  gap: 12px;
+}
+
+.flight-history-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.flight-history-item h4 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.flight-history-item small {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+}
+
+.flight-history-meta {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.flight-history-btn {
+  border: 1px solid var(--accent);
+  background: rgba(112, 208, 255, 0.05);
+  color: var(--text-primary);
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+}
+
+.flight-history-detail {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+.flight-history-inline-detail {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.flight-history-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.flight-history-summary .stat {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+}
+
+.flight-history-summary .label {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.flight-history-summary .value {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.flight-history-faults {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background: rgba(232, 168, 62, 0.05);
+}
+
+.flight-history-faults > .chart-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.flight-history-fault {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.flight-history-fault .label {
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.flight-history-fault .value {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.flight-history-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.flight-history-chart {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255,255,255,0.02);
+}
+
+.flight-history-chart .chart-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.flight-history-chart svg {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .dash-wide { grid-column: auto; }
+  .expected-grid { grid-template-columns: 1fr 1fr; }
+  .params-grid { grid-template-columns: repeat(3, 1fr); }
+  .health-ring { display: none; }
+}
+
+@media (max-width: 700px) {
+  .dash { padding: 18px 14px 36px; }
+  .params-grid { grid-template-columns: 1fr 1fr; }
+  .health-score { font-size: 60px; }
+  .thinking-flow { grid-template-columns: 1fr 1fr; }
+  .thinking-arrow { display: none; }
+  .flight-history-item { grid-template-columns: 1fr; gap: 10px; }
+  .flight-history-fault { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-logo"><i></i></div>
+    <span class="header-title">AERIS-TWIN</span>
+    <span class="header-subtitle">AI-Powered Engine Health Intelligence</span>
+  </div>
+  <div class="header-status" id="connectionStatus">
+    <span class="status-dot green" id="statusDot"></span>
+    <span id="statusText">CONNECTING</span>
+  </div>
+</header>
+
+<!-- ============================================================
+     DASHBOARD CONTENT
+     ============================================================ -->
+<main class="dash">
+  <!-- Hero -->
+  <div class="dash-hero">
+    <div class="dash-hero-row">
+      <div>
+        <div class="dash-tagline">Real-time engine monitoring</div>
+        <h1>Engine Health Intelligence</h1>
+        <p>Detecting changes in engine behaviour before they become critical.</p>
+      </div>
+      <div class="header-status" id="monitorStatus" style="margin-top: 4px;">
+        <span class="status-dot green" id="monitorDot"></span>
+        <span id="monitorText">WAITING FOR TELEMETRY</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- ========== ENGINE HEALTH ========== -->
+    <section class="card dash-wide" id="healthCard">
+      <div class="card-label">Engine Health</div>
+      <div class="health-hero">
+        <div>
+          <div class="health-score" id="healthScore">--<small> / 100</small></div>
+          <div class="health-status tone-healthy" id="healthStatus">WAITING</div>
+          <p class="health-copy" id="healthCopy">Waiting for engine telemetry.</p>
+        </div>
+        <div class="health-ring" id="healthRing">
+          <span>LIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== AI INSIGHT ========== -->
+    <section class="card insight-card" id="insightCard">
+      <div class="card-label">AI Insight</div>
+      <div class="insight-title" id="insightTitle">Waiting for data.</div>
+      <p class="insight-text" id="insightText">AERIS-TWIN is comparing sensor data with expected engine behaviour.</p>
+      <div class="insight-meta">
+        <div>Detection<b id="insightDetection">--</b></div>
+        <div>Likely issue<b id="insightIssue">--</b></div>
+        <div>Confidence<b id="insightConfidence">--</b></div>
+        <div>Trend<b id="insightTrend">--</b></div>
+      </div>
+      <p class="insight-explain" id="insightExplain">A physics-informed virtual model estimates how the engine should behave and compares that with sensor data.</p>
+    </section>
+
+    <!-- ========== CURRENT CONDITION ========== -->
+    <section class="card">
+      <div class="card-label">Current Condition</div>
+      <div class="condition-grid">
+        <div class="condition-row">
+          <span class="condition-label">UAV</span>
+          <b class="condition-value" id="condUav">READY</b>
+        </div>
+        <div class="condition-row">
+          <span class="condition-label">Engine</span>
+          <b class="condition-value" id="condEngine">MONITORING</b>
+        </div>
+        <div class="condition-row">
+          <span class="condition-label">Health</span>
+          <b class="condition-value" id="condHealth">--</b>
+        </div>
+        <div class="condition-row">
+          <span class="condition-label">Status</span>
+          <b class="condition-value" id="condStatus">--</b>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== EXPECTED VS ACTUAL ========== -->
+    <section class="card dash-wide">
+      <div class="card-label">Expected vs Actual</div>
+      <table class="expected-table"><thead><tr><th>Parameter</th><th>Expected</th><th>Actual</th><th>Deviation</th></tr></thead><tbody id="expectedRows"></tbody></table>
+      <p class="expected-note" id="evNote">The physics-informed virtual model estimates expected behaviour for current conditions.</p>
+      <div class="trend-chart">
+        <svg viewBox="0 0 700 100" preserveAspectRatio="none" aria-label="Expected vs Actual temperature trend">
+          <path class="chart-grid" d="M0 25H700M0 50H700M0 75H700"/>
+          <polyline id="expectedLine" class="chart-expected-line" points="0,50 700,50"/>
+          <polyline id="actualLine" class="chart-line" points="0,50 700,50"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ========== KEY ENGINE PARAMETERS ========== -->
+    <section class="card dash-wide">
+      <div class="card-label">Key Engine Parameters</div>
+      <div class="params-grid" id="paramsGrid">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- ========== HEALTH TREND ========== -->
+    <section class="card dash-wide">
+      <div class="card-label">Health Trend</div>
+      <div class="trend-chart">
+        <svg viewBox="0 0 700 100" preserveAspectRatio="none" aria-label="Health trend">
+          <path class="chart-grid" d="M0 25H700M0 50H700M0 75H700"/>
+          <polyline id="healthLine" class="chart-line" points="0,10 700,10"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ========== RECOMMENDED ACTION ========== -->
+    <section class="card dash-wide">
+      <div class="card-label">Recommended Action</div>
+      <p class="action-text" id="actionText">No action required. Continue monitoring.</p>
+      <p class="action-sub">Detect engine degradation before it becomes a mission-impacting failure.</p>
+    </section>
+
+    <!-- ========== RUL ========== -->
+    <section class="card dash-wide" id="rulCard">
+      <div class="card-label">Remaining Useful Life</div>
+      <div class="rul-compact">
+        <div class="rul-bar"><span class="rul-fill" id="rulFill"></span></div>
+        <div class="rul-row">
+          <div>
+            <div class="rul-label">RUL</div>
+            <div class="rul-value" id="rulValue">MODEL UNAVAILABLE</div>
+          </div>
+          <div>
+            <div class="rul-label">Status</div>
+            <div class="rul-status" id="rulStatus">EXPERIMENTAL</div>
+          </div>
+        </div>
+        <p class="action-sub" id="rulReason">RUL is not yet validated for this runtime dataset.</p>
+      </div>
+    </section>
+
+    <!-- ========== FLIGHT HISTORY (SECONDARY / COLLAPSIBLE) ========== -->
+    <section class="card dash-wide flight-history-panel" id="historyCard">
+      <div class="flight-history-header">
+        <div class="card-label">Flight History</div>
+        <button class="flight-history-toggle" id="toggleFlightHistoryBtn" type="button">VIEW FLIGHT HISTORY</button>
+      </div>
+      <div id="flightHistoryContent" class="flight-history-content hidden">
+        <div id="flightHistoryStatus" class="flight-history-status">Loading previous flight records...</div>
+        <div id="flightHistoryList" class="flight-history-list"></div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============================================================
+     DASHBOARD LOGIC
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  // --- Helpers ---
+  const fmt = (v, d = 1) => Number.isFinite(Number(v)) ? Number(v).toFixed(d) : '--';
+  const $ = id => document.getElementById(id);
+
+  function toneClass(status) {
+    if (status === 'HEALTHY' || status === 'MONITOR') return 'tone-healthy';
+    if (status === 'WARNING') return 'tone-warning';
+    return 'tone-critical';
+  }
+
+  function dotClass(status) {
+    if (status === 'HEALTHY' || status === 'MONITOR') return 'green';
+    if (status === 'WARNING') return 'amber';
+    return 'red';
+  }
+
+  function ringColor(status) {
+    if (status === 'HEALTHY' || status === 'MONITOR') return 'var(--green)';
+    if (status === 'WARNING') return 'var(--amber)';
+    return 'var(--red)';
+  }
+
+  // --- History ---
+  const healthHistory = [];
+  const actualTempHistory = [];
+  const expectedTempHistory = [];
+  const MAX_POINTS = 80;
+
+  function pushHistory(arr, value) {
+    arr.push(value);
+    if (arr.length > MAX_POINTS) arr.shift();
+  }
+
+  function polyline(arr, min, max) {
+    if (arr.length < 2) return '0,50 700,50';
+    return arr.map((v, i) => {
+      const x = (i / (arr.length - 1)) * 700;
+      const clamped = Math.max(min, Math.min(max, v));
+      const y = 95 - ((clamped - min) / Math.max(1, max - min)) * 90;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+  }
+
+  // --- Render ---
+  function render(s) {
+    if (!s) return;
+
+    const e = s.engine || {};
+    const d = s.digital_twin || {};
+    const intel = s.intelligence || {};
+    const h = intel.health || {};
+    const diag = intel.diagnosis || {};
+    const rul = intel.rul || {};
+    const devs = intel.deviations || {};
+    const exp = intel.expected || {};
+    const trend = intel.trend || {};
+    const sfa = intel.sensor_fault_analysis || {};
+    const alerts = s.alerts || [];
+    const uav = s.uav || {};
+
+    // Health score — from intelligence pipeline
+    const score = Number.isFinite(Number(h.score)) ? Number(h.score) : null;
+    const status = e.status || 'WAITING';
+    const tone = toneClass(status);
+    const dot = dotClass(status);
+
+    // Connection status
+    const telemetryStatus = s.telemetry_status || 'READY';
+    const frozen = uav.status === 'STOPPED' || telemetryStatus === 'STOPPED';
+    $('statusText').textContent = frozen ? 'TELEMETRY FROZEN' : 'TELEMETRY ' + telemetryStatus;
+    $('statusDot').className = 'status-dot ' + (frozen ? 'red' : telemetryStatus === 'LIVE' ? 'green' : telemetryStatus === 'PAUSED' ? 'amber' : telemetryStatus === 'READY' ? 'blue' : 'red');
+
+    // Monitor status
+    if (s.telemetry_status === 'LIVE' && uav.status === 'FLYING') {
+      $('monitorText').textContent = 'MONITORING ACTIVE';
+      $('monitorDot').className = 'status-dot green';
+    } else if (s.telemetry_status === 'PAUSED' || uav.status === 'PAUSED') {
+      $('monitorText').textContent = 'MONITORING PAUSED';
+      $('monitorDot').className = 'status-dot amber';
+    } else if (frozen) {
+      $('monitorText').textContent = 'FLIGHT STOPPED / TELEMETRY FROZEN';
+      $('monitorDot').className = 'status-dot red';
+    } else {
+      $('monitorText').textContent = 'READY';
+      $('monitorDot').className = 'status-dot ' + dot;
+    }
+
+    // Engine health
+    $('healthScore').innerHTML = (score !== null ? fmt(score, 0) : '--') + '<small> / 100</small>';
+    $('healthStatus').textContent = status;
+    $('healthStatus').className = 'health-status ' + tone;
+
+    if (status === 'HEALTHY') {
+      $('healthCopy').textContent = 'Engine behaviour is within expected conditions.';
+    } else if (status === 'MONITOR') {
+      $('healthCopy').textContent = diag.interpretation || 'Engine behaviour is being monitored. Minor deviations detected.';
+    } else if (status === 'WARNING') {
+      $('healthCopy').textContent = diag.interpretation || 'Engine behaviour is beginning to diverge from expected conditions.';
+    } else if (status === 'CRITICAL' || status === 'SEVERE') {
+      $('healthCopy').textContent = diag.interpretation || 'Significant engine abnormality detected. Immediate attention required.';
+    }
+
+    // Ring
+    const ringEl = $('healthRing');
+    const pct = score !== null ? Math.max(0, Math.min(100, score)) : 0;
+    ringEl.style.setProperty('--pct', pct + '%');
+    ringEl.style.background = 'conic-gradient(' + ringColor(status) + ' ' + pct + '%, var(--border) 0%)';
+
+    // AI Insight
+    const insightCard = $('insightCard');
+    const hasFault = diag.fault_type && diag.fault_type !== 'NORMAL';
+    const hasAlerts = alerts.length > 0;
+
+    insightCard.className = 'card insight-card' + (status === 'WARNING' ? ' insight-warning' : (status === 'CRITICAL' || status === 'SEVERE') ? ' insight-critical' : '');
+
+    if (hasFault) {
+      $('insightTitle').textContent = (diag.title || diag.fault_type.replace(/_/g, ' ')).replace(/^NORMAL ENGINE OPERATION$/i, 'No abnormal behaviour detected.');
+    } else if (hasAlerts) {
+      $('insightTitle').textContent = 'Abnormal behaviour detected.';
+    } else {
+      $('insightTitle').textContent = '✓ No abnormal behaviour detected.';
+    }
+
+    // Sensor fault arbitration
+    if (sfa.likely_condition === 'POSSIBLE_SENSOR_FAULT' && hasFault) {
+      $('insightTitle').textContent = '⚠ Possible sensor abnormality detected.';
+      $('insightText').textContent = 'Single-sensor deviation without supporting evidence from other channels. May indicate a sensor issue rather than engine degradation.';
+      $('insightDetection').textContent = 'SENSOR ABNORMALITY';
+      $('insightIssue').textContent = 'SENSOR DRIFT';
+    } else if (hasFault) {
+      $('insightText').textContent = diag.interpretation || 'AERIS-TWIN detected a persistent deviation from expected engine behaviour.';
+      $('insightDetection').textContent = 'ABNORMAL BEHAVIOUR';
+      $('insightIssue').textContent = (diag.fault_type.replace(/_/g, ' ')).toUpperCase();
+    } else {
+      $('insightText').textContent = 'AERIS-TWIN is comparing sensor data with expected engine behaviour.';
+      $('insightDetection').textContent = 'NORMAL';
+      $('insightIssue').textContent = 'NONE';
+    }
+
+    $('insightConfidence').textContent = Number.isFinite(Number(d.ai_confidence)) ? Math.round(Number(d.ai_confidence) * 100) + '%' : '--';
+    $('insightTrend').textContent = (trend.direction || 'stable').replace(/_/g, ' ').toUpperCase();
+    $('insightExplain').textContent = d.intelligence_mode === 'MACHINE_LEARNING'
+      ? 'A physics-informed model and trained machine-learning models compare observed data with expected engine behaviour.'
+      : 'Validated physics-informed fallback intelligence compares observed data with expected engine behaviour. Machine-learning models are available for explicit validation.';
+
+    // Current condition
+    $('condUav').textContent = uav.status === 'FLYING' ? 'IN FLIGHT' : uav.status;
+    $('condEngine').textContent = status === 'HEALTHY' ? 'MONITORING' : status;
+    $('condHealth').textContent = status;
+    $('condHealth').className = 'condition-value ' + tone;
+    $('condStatus').textContent = s.telemetry_status || 'READY';
+
+    // Expected vs actual
+    const chtDev = devs.cht_deviation || {};
+    const delta = Number(chtDev.absolute);
+    const expCht = Number(exp.expected_cht);
+    const actCht = Number(e.cht_c);
+    const vibrationDeviation = Number((devs.vibration_deviation || {}).absolute);
+    const vibrationAbnormal = Number.isFinite(vibrationDeviation) && Math.abs(vibrationDeviation) > 0.12;
+    const rows = [
+      ['CHT', exp.expected_cht, e.cht_c, devs.cht_deviation, '°C'],
+      ['EGT', exp.expected_egt, e.egt_c, devs.egt_deviation, '°C'],
+      ['RPM', exp.expected_rpm, e.rpm, { absolute: Number(e.rpm) - Number(exp.expected_rpm) }, ''],
+      ['Oil temperature', exp.expected_oil_temperature, e.oil_temperature_c, devs.oil_temperature_deviation, '°C'],
+      ['Oil pressure', exp.expected_oil_pressure, e.oil_pressure_psi, devs.oil_pressure_deviation, 'psi'],
+      ['Vibration', exp.expected_vibration, e.vibration_rms, devs.vibration_deviation, 'RMS'],
+    ];
+    $('expectedRows').innerHTML = rows.map(row => {
+      const difference = Number(row[3] && row[3].absolute);
+      const threshold = row[0] === 'Vibration' ? 0.12 : 8;
+      const status = Number.isFinite(difference) && Math.abs(difference) > threshold ? 'deviation' : '';
+      return '<tr><td>' + row[0] + '</td><td>' + fmt(row[1], row[0] === 'RPM' ? 0 : 1) + ' ' + row[4] + '</td><td>' + fmt(row[2], row[0] === 'RPM' ? 0 : 1) + ' ' + row[4] + '</td><td class="' + status + '">' + (Number.isFinite(difference) ? (difference >= 0 ? '+' : '') + fmt(difference, row[0] === 'RPM' ? 0 : 1) + ' ' + row[4] : '--') + '</td></tr>';
+    }).join('');
+    $('evNote').textContent = Number.isFinite(delta) && Math.abs(delta) > 8
+      ? 'Observed engine behaviour is diverging from the physics expectation.'
+      : 'The physics-informed virtual model estimates expected behaviour for current conditions.';
+
+    // Temperature trend chart
+    if (!frozen) {
+      if (Number.isFinite(actCht)) pushHistory(actualTempHistory, actCht);
+      if (Number.isFinite(expCht)) pushHistory(expectedTempHistory, expCht);
+    }
+
+    const allTemps = actualTempHistory.concat(expectedTempHistory);
+    const tempMin = allTemps.length ? Math.min(...allTemps) - 10 : 0;
+    const tempMax = allTemps.length ? Math.max(...allTemps) + 10 : 300;
+
+    $('actualLine').setAttribute('points', polyline(actualTempHistory, tempMin, tempMax));
+    $('expectedLine').setAttribute('points', polyline(expectedTempHistory, tempMin, tempMax));
+
+    if (frozen) {
+      $('evNote').textContent = 'FLIGHT STOPPED — TELEMETRY FROZEN. The last valid expected-vs-actual values remain on display.';
+    }
+
+    // Key parameters
+    const params = [
+      { name: 'Temperature', value: fmt(e.cht_c) + ' °C', ok: !Number.isFinite(delta) || Math.abs(delta) <= 8, warn: Number.isFinite(delta) && Math.abs(delta) > 8 && Math.abs(delta) <= 20, label: Number.isFinite(delta) && Math.abs(delta) > 8 ? (delta > 0 ? 'Above expected' : 'Below expected') : 'Normal' },
+      { name: 'RPM', value: fmt(e.rpm, 0), ok: true, warn: false, label: 'Normal' },
+      { name: 'Oil Pressure', value: fmt(e.oil_pressure_psi) + ' psi', ok: Number(e.oil_pressure_psi) >= 20, warn: Number(e.oil_pressure_psi) < 20, label: Number(e.oil_pressure_psi) < 20 ? 'Check' : 'Normal' },
+      { name: 'Vibration', value: fmt(e.vibration_rms, 2) + ' RMS', ok: !vibrationAbnormal, warn: vibrationAbnormal, label: vibrationAbnormal ? 'Abnormal' : 'Normal' },
+      { name: 'Fuel Flow', value: fmt(Number(e.fuel_flow_kg_s) * 3600, 1) + ' kg/h', ok: true, warn: false, label: 'Normal' },
+    ];
+
+    $('paramsGrid').innerHTML = params.map(p =>
+      '<div class="param">' +
+        '<div class="param-name">' + p.name + '</div>' +
+        '<div class="param-value">' + p.value + '</div>' +
+        '<div class="param-status ' + (p.warn ? 'param-warn' : 'param-ok') + '">' +
+          (p.ok && !p.warn ? '✓ ' : '⚠ ') + p.label +
+        '</div>' +
+      '</div>'
+    ).join('');
+
+    // Health trend
+    if (score !== null) pushHistory(healthHistory, score);
+    $('healthLine').setAttribute('points', polyline(healthHistory, 0, 100));
+    // Change line color based on latest health
+    $('healthLine').style.stroke = score !== null && score < 50 ? 'var(--red)' : score !== null && score < 75 ? 'var(--amber)' : 'var(--accent)';
+
+    // Recommended action
+    $('actionText').textContent = diag.recommended_action || 'No action required. Continue monitoring.';
+
+    // RUL — truthful output from the runtime model when available; otherwise clearly labelled as experimental/unavailable.
+    const rulAvailable = Boolean(rul.available);
+    const rulValue = Number.isFinite(Number(rul.estimated_rul)) ? Number(rul.estimated_rul) : null;
+    const rulStatus = String(rul.status || 'experimental').toUpperCase();
+    const rulReason = String(rul.reason || 'RUL model not yet validated for this runtime dataset.');
+
+    $('rulValue').textContent = rulAvailable && rulValue !== null ? fmt(rulValue, 1) + ' h' : 'MODEL UNAVAILABLE';
+    $('rulStatus').textContent = rulAvailable && rulValue !== null ? rulStatus : 'EXPERIMENTAL';
+    $('rulStatus').className = 'rul-status ' + (rulAvailable && rulValue !== null && rulStatus !== 'EXPERIMENTAL' ? 'healthy' : 'warning');
+    $('rulReason').textContent = rulReason;
+
+    const fill = $('rulFill');
+    if (rulAvailable && rulValue !== null) {
+      const percent = Math.max(0, Math.min(100, (rulValue / 40.0) * 100));
+      fill.style.width = percent + '%';
+    } else {
+      fill.style.width = '12%';
+    }
+  }
+
+  // --- SSE Connection ---
+  function formatDuration(seconds) {
+    const total = Number(seconds) || 0;
+    const mins = Math.floor(total / 60);
+    const secs = Math.floor(total % 60);
+    return mins + ' min ' + secs + ' sec';
+  }
+
+  function shortFlightId(id) {
+    if (!id) return 'unknown';
+    return id.length > 12 ? id.slice(0, 12) + '...' : id;
+  }
+
+  function formatFlightDate(value) {
+    if (!value) return '--';
+    const numericValue = Number(value);
+    const date = Number.isFinite(numericValue)
+      ? new Date(numericValue < 100000000000 ? numericValue * 1000 : numericValue)
+      : new Date(value);
+    return Number.isNaN(date.getTime()) ? '--' : date.toLocaleString('en-GB');
+  }
+
+  function renderFlightHistoryCard(flight) {
+    return '<div class="flight-history-item">' +
+      '<div><h4>' + (flight.mission_name || 'Mission') + '</h4>' +
+      '<small>Flight: ' + shortFlightId(flight.flight_id) + '</small></div>' +
+      '<div class="flight-history-meta"><div>Date: ' + formatFlightDate(flight.start_time) + '</div>' +
+      '<div>Duration: ' + formatDuration(flight.duration_seconds) + '</div></div>' +
+      '<div class="flight-history-meta"><div>Final Health: ' + (flight.minimum_health_score !== undefined ? Math.round(flight.minimum_health_score) + '%' : '--') + '</div>' +
+      '<div>Status: ' + (flight.status || 'COMPLETED') + '</div></div>' +
+      '<div class="flight-history-action"><button class="flight-history-btn" data-flight-id="' + (flight.flight_id || '') + '">VIEW DETAILS</button></div>' +
+      '<div class="flight-history-inline-detail flight-history-detail hidden"></div>' +
+      '</div>';
+  }
+
+  function renderFlightHistory(flights) {
+    const list = $('flightHistoryList');
+    const status = $('flightHistoryStatus');
+    if (!Array.isArray(flights) || !flights.length) {
+      list.innerHTML = '<div class="flight-history-item"><div><h4>No previous flights recorded yet.</h4><small>Complete a mission to create your first flight record.</small></div></div>';
+      status.textContent = 'No previous flights recorded yet.';
+      return;
+    }
+    status.textContent = '';
+    list.innerHTML = flights.map(renderFlightHistoryCard).join('');
+    list.querySelectorAll('.flight-history-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const detail = btn.closest('.flight-history-item').querySelector('.flight-history-inline-detail');
+        const isOpen = !detail.classList.contains('hidden');
+        list.querySelectorAll('.flight-history-inline-detail').forEach(item => item.classList.add('hidden'));
+        list.querySelectorAll('.flight-history-btn').forEach(item => item.textContent = 'VIEW DETAILS');
+        if (!isOpen) {
+          detail.classList.remove('hidden');
+          btn.textContent = 'HIDE DETAILS';
+          loadFlightDetail(btn.dataset.flightId, detail);
+        }
+      });
+    });
+  }
+
+  function polylineFromData(values, min, max) {
+    if (!values.length) return '0,60 100,60';
+    if (values.length === 1) {
+      const y = 60 - ((Number(values[0]) - min) / Math.max(1, max - min)) * 60;
+      return '0,' + y.toFixed(1) + ' 100,' + y.toFixed(1);
+    }
+    const width = 100;
+    const height = 60;
+    return values.map((v, i) => {
+      const x = (i / Math.max(1, values.length - 1)) * width;
+      const y = height - ((Number(v) - min) / Math.max(1, max - min)) * height;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+  }
+
+  function renderFlightDetail(data, detail) {
+    if (!data || !data.flight) {
+      detail.classList.add('hidden');
+      return;
+    }
+    const summary = data.summary || {};
+    const flight = data.flight || {};
+    const faultEvents = Array.isArray(data.fault_events) ? data.fault_events : [];
+    const telemetry = Array.isArray(data.telemetry) ? data.telemetry : [];
+    const rpm = telemetry.map(p => Number(p.rpm) || 0);
+    const cht = telemetry.map(p => Number(p.cht_c) || 0);
+    const egt = telemetry.map(p => Number(p.egt_c) || 0);
+    const temp = telemetry.map(p => Number(p.oil_temperature_c) || 0);
+    const vib = telemetry.map(p => Number(p.vibration_rms) || 0);
+    const persistedHealth = telemetry.map(p => Number(p.health_score)).filter(Number.isFinite);
+    const health = persistedHealth.length === telemetry.length ? persistedHealth : [];
+
+    const safeRange = (values, fallbackMin, fallbackMax) => {
+      if (!values.length) return { min: fallbackMin, max: fallbackMax };
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      if (min === max) {
+        const padding = Math.max(Math.abs(min) * 0.1, 1);
+        return { min: min - padding, max: max + padding };
+      }
+      return { min: Number.isFinite(min) ? min : fallbackMin, max: Number.isFinite(max) ? max : fallbackMax };
+    };
+
+    const rpmRange = safeRange(rpm, 0, 1000);
+    const chtRange = safeRange(cht, 0, 200);
+    const egtRange = safeRange(egt, 0, 800);
+    const tempRange = safeRange(temp, 0, 150);
+    const vibRange = safeRange(vib, 0, 2);
+    const healthRange = safeRange(health, 0, 100);
+
+    const faultMarkup = faultEvents.length
+      ? faultEvents.map(event => '<div class="flight-history-fault fault-active">' +
+          '<div><div class="label">Fault Type</div><div class="value">' + (event.fault_type || 'UNKNOWN').replace(/_/g, ' ') + '</div></div>' +
+          '<div><div class="label">First Detected</div><div class="value">' + formatFlightDate(event.first_seen) + '</div></div>' +
+          '<div><div class="label">Last Detected</div><div class="value">' + formatFlightDate(event.last_seen) + '</div></div>' +
+          '<div><div class="label">Samples</div><div class="value">' + (event.sample_count || 0) + '</div></div>' +
+        '</div>').join('')
+      : '<div class="flight-history-fault"><div><div class="label">Fault Status</div><div class="value">NO FAULT RECORDED</div></div><div><div class="label">Detection Time</div><div class="value">--</div></div></div>';
+
+    const healthChartMarkup = health.length
+      ? '<div class="flight-history-chart"><div class="chart-label">Health Score vs Time (persisted)</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--accent)" stroke-width="1.5" points="' + polylineFromData(health, healthRange.min, healthRange.max) + '"/></svg></div>'
+      : '<div class="flight-history-chart"><div class="chart-label">Health history unavailable</div></div>';
+    detail.innerHTML = '<div class="flight-history-summary">' +
+      '<div class="stat"><div class="label">Mission</div><div class="value">' + (flight.mission_name || '--') + '</div></div>' +
+      '<div class="stat"><div class="label">Start</div><div class="value">' + formatFlightDate(flight.start_time) + '</div></div>' +
+      '<div class="stat"><div class="label">End</div><div class="value">' + formatFlightDate(flight.end_time) + '</div></div>' +
+      '<div class="stat"><div class="label">Duration</div><div class="value">' + formatDuration(flight.duration_seconds) + '</div></div>' +
+      '</div>' +
+      '<div class="flight-history-summary">' +
+      '<div class="stat"><div class="label">Max RPM</div><div class="value">' + (summary.max_rpm || 0) + '</div></div>' +
+      '<div class="stat"><div class="label">Max CHT</div><div class="value">' + Number(summary.max_cht_c || 0).toFixed(4) + '°C</div></div>' +
+      '<div class="stat"><div class="label">Max EGT</div><div class="value">' + (summary.max_egt_c || 0) + '°C</div></div>' +
+      '<div class="stat"><div class="label">Min Health</div><div class="value">' + (summary.minimum_health_score || 100) + '%</div></div>' +
+      '</div>' +
+      '<div class="flight-history-faults"><div class="chart-label">FAULT TIMELINE</div>' + faultMarkup + '</div>' +
+      '<div class="flight-history-charts">' +
+      '<div class="flight-history-chart"><div class="chart-label">RPM vs Time</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--accent)" stroke-width="1.5" points="' + polylineFromData(rpm, rpmRange.min, rpmRange.max) + '"/></svg></div>' +
+      '<div class="flight-history-chart"><div class="chart-label">CHT vs Time</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--amber)" stroke-width="1.5" points="' + polylineFromData(cht, chtRange.min, chtRange.max) + '"/></svg></div>' +
+      '<div class="flight-history-chart"><div class="chart-label">EGT vs Time</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--red)" stroke-width="1.5" points="' + polylineFromData(egt, egtRange.min, egtRange.max) + '"/></svg></div>' +
+      '<div class="flight-history-chart"><div class="chart-label">Oil Temperature vs Time</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="1.5" points="' + polylineFromData(temp, tempRange.min, tempRange.max) + '"/></svg></div>' +
+      '<div class="flight-history-chart"><div class="chart-label">Vibration vs Time</div><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--blue)" stroke-width="1.5" points="' + polylineFromData(vib, vibRange.min, vibRange.max) + '"/></svg></div>' +
+      healthChartMarkup +
+      '</div>';
+    detail.classList.remove('hidden');
+  }
+
+  function setFlightHistoryOpen(isOpen) {
+    const content = $('flightHistoryContent');
+    const btn = $('toggleFlightHistoryBtn');
+    const isVisible = !!isOpen;
+    content.classList.toggle('hidden', !isVisible);
+    btn.textContent = isVisible ? 'HIDE FLIGHT HISTORY' : 'VIEW FLIGHT HISTORY';
+    if (isVisible) {
+      loadFlightHistory();
+    }
+  }
+
+  function loadFlightHistory() {
+    const status = $('flightHistoryStatus');
+    const list = $('flightHistoryList');
+    status.textContent = 'Loading previous flight records...';
+    fetch('/api/flights?refresh=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => {
+        const flights = Array.isArray(data.flights) ? data.flights : [];
+        flights.sort((a, b) => Number(b.start_time || 0) - Number(a.start_time || 0));
+        list.dataset.loaded = 'true';
+        renderFlightHistory(flights);
+      })
+      .catch(() => {
+        list.dataset.loaded = 'false';
+        status.textContent = 'Unable to load flight history. Please check the database connection and try again.';
+        list.innerHTML = '<button class="flight-history-btn" id="retryFlightHistoryBtn" type="button">RETRY</button>';
+        $('retryFlightHistoryBtn')?.addEventListener('click', loadFlightHistory);
+      });
+  }
+
+  function loadFlightDetail(flightId, detail) {
+    if (!flightId) return;
+    detail.innerHTML = '<div class="flight-history-status">Loading flight details...</div>';
+    detail.classList.remove('hidden');
+    fetch('/api/flights/' + flightId)
+      .then(r => r.json())
+      .then(data => renderFlightDetail(data, detail))
+      .catch(() => {
+        detail.innerHTML = '<div class="flight-history-status">Unable to load flight details for this record.</div>';
+      });
+  }
+
+  function connect() {
+    fetch('/api/state')
+      .then(r => r.json())
+      .then(render)
+      .catch(() => {});
+
+    $('toggleFlightHistoryBtn').addEventListener('click', function () {
+      const isOpen = !$('flightHistoryContent').classList.contains('hidden');
+      setFlightHistoryOpen(!isOpen);
+    });
+
+    setFlightHistoryOpen(false);
+    setInterval(() => {
+      if (!$('flightHistoryContent').classList.contains('hidden')) {
+        loadFlightHistory();
+      }
+    }, 30000);
+
+    const stream = new EventSource('/api/stream');
+    stream.onmessage = e => render(JSON.parse(e.data));
+    stream.onerror = () => {
+      $('statusText').textContent = 'RECONNECTING';
+      $('statusDot').className = 'status-dot amber';
+    };
+  }
+
+  connect();
+})();
+</script>
+</body>
+</html>

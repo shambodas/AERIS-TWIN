@@ -1,0 +1,496 @@
+.venv\Lib\site-packages\influxdb_client\client\invokable_scripts_api.py:275:        return self._to_csv(response)
+.venv\Lib\site-packages\influxdb_client\client\query_api.py:107:        return self._to_csv(response)
+.venv\Lib\site-packages\influxdb_client\client\_base.py:255:    def _to_csv(self, response: HTTPResponse) -> CSVIterator:
+.venv\Lib\site-packages\narwhals\_pandas_like\dataframe.py:1026:        return self.native.to_csv(file, index=False)
+.venv\Lib\site-packages\pandas\core\frame.py:1395:        # helper used by to_csv
+.venv\Lib\site-packages\pandas\core\frame.py:2853:        DataFrame.to_csv : Write a csv file.
+.venv\Lib\site-packages\pandas\core\frame.py:3097:        DataFrame.to_csv : Write a csv file.
+.venv\Lib\site-packages\pandas\core\frame.py:3226:        DataFrame.to_csv : Write a csv file.
+.venv\Lib\site-packages\pandas\core\generic.py:2228:        to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\core\generic.py:2236:        For compatibility with :meth:`~DataFrame.to_csv`,
+.venv\Lib\site-packages\pandas\core\generic.py:2744:        DataFrame.to_csv : Write out to a csv file.
+.venv\Lib\site-packages\pandas\core\generic.py:3168:            These parameters will be passed to DataFrame.to_csv.
+.venv\Lib\site-packages\pandas\core\generic.py:3172:        DataFrame.to_csv : Write a DataFrame to a comma-separated values
+.venv\Lib\site-packages\pandas\core\generic.py:3730:    def to_csv(
+.venv\Lib\site-packages\pandas\core\generic.py:3757:    def to_csv(
+.venv\Lib\site-packages\pandas\core\generic.py:3784:    def to_csv(
+.venv\Lib\site-packages\pandas\core\generic.py:3932:        >>> df.to_csv("out.csv", index=False)  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\core\generic.py:3936:        >>> df.to_csv(index=False)
+.venv\Lib\site-packages\pandas\core\generic.py:3941:        >>> df.to_csv(
+.venv\Lib\site-packages\pandas\core\generic.py:3951:        >>> df.to_csv(filepath)  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\core\generic.py:3955:        >>> df.to_csv("folder/subfolder/out.csv")  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\core\generic.py:3959:        >>> df.to_csv("out1.csv", float_format="%.2f")  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\core\generic.py:3963:        >>> df.to_csv("out2.csv", float_format="{:.2e}".format)  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\core\generic.py:3976:        return DataFrameRenderer(formatter).to_csv(
+.venv\Lib\site-packages\pandas\errors\__init__.py:345:    >>> df.to_csv("test.csv", index=False)  # doctest: +SKIP
+.venv\Lib\site-packages\pandas\io\clipboards.py:151:    other keywords are passed to to_csv
+.venv\Lib\site-packages\pandas\io\clipboards.py:178:            obj.to_csv(buf, sep=sep, encoding="utf-8", **kwargs)
+.venv\Lib\site-packages\pandas\io\excel\_base.py:408:    DataFrame.to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\io\excel\_base.py:1544:    DataFrame.to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\io\formats\format.py:879:        - to_csv
+.venv\Lib\site-packages\pandas\io\formats\format.py:976:    def to_csv(
+.venv\Lib\site-packages\pandas\io\formats\style.py:602:        to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\io\formats\style.py:610:        For compatibility with :meth:`~DataFrame.to_csv`,
+.venv\Lib\site-packages\pandas\io\parsers\readers.py:773:    DataFrame.to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\io\parsers\readers.py:1336:    DataFrame.to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\io\parsers\readers.py:1534:    DataFrame.to_csv : Write DataFrame to a comma-separated values (csv) file.
+.venv\Lib\site-packages\pandas\tests\extension\base\io.py:34:        csv_output = df.to_csv(index=False, na_rep=np.nan)
+.venv\Lib\site-packages\pandas\tests\extension\list\test_list.py:27:def test_to_csv(data):
+.venv\Lib\site-packages\pandas\tests\extension\list\test_list.py:32:    res = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\extension\test_arrow.py:740:            csv_output = df.to_csv(index=False, na_rep="NA")
+.venv\Lib\site-packages\pandas\tests\extension\test_arrow.py:742:            csv_output = df.to_csv(index=False, na_rep=np.nan)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:36:    def test_to_csv_from_csv1(self, temp_file, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:40:        float_frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:41:        float_frame.to_csv(path, columns=["A", "B"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:42:        float_frame.to_csv(path, header=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:43:        float_frame.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:45:    def test_to_csv_from_csv1_datetime(self, temp_file, datetime_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:50:        datetime_frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:56:        datetime_frame.to_csv(path, index_label="index")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:62:        datetime_frame.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:66:    def test_to_csv_from_csv1_corner_case(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:74:        dm.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:79:    def test_to_csv_from_csv2(self, temp_file, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:87:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:98:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:104:        float_frame.to_csv(path, header=col_aliases)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:113:            float_frame.to_csv(path, header=["AA", "X"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:115:    def test_to_csv_from_csv3(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:120:        df1.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:121:        df2.to_csv(path, mode="a", header=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:128:    def test_to_csv_from_csv4(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:136:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:144:    def test_to_csv_from_csv5(self, temp_file, timezone_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:147:        timezone_frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:161:    def test_to_csv_cols_reordering(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:175:        df.to_csv(path, columns=cols, chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:181:    def test_to_csv_new_dupe_cols(self, temp_file, cols):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:192:        df.to_csv(path, columns=cols, chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:218:    def test_to_csv_dtnat(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:238:        df.to_csv(path, chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:264:            df.to_csv(temp_file, encoding="utf8", chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:269:            df.to_csv(temp_file, encoding="utf8", chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:355:    def test_to_csv_nrows(self, nrows, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:374:    def test_to_csv_idx_types(self, nrows, r_idx_type, c_idx_type, ncols, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:408:    def test_to_csv_idx_ncols(self, nrows, ncols, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:419:    def test_to_csv_dup_cols(self, nrows, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:440:    def test_to_csv_empty(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:446:    def test_to_csv_chunksize(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:472:    def test_to_csv_params(self, nrows, df_params, func_params, ncols, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:494:    def test_to_csv_from_csv_w_some_infs(self, temp_file, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:501:        float_frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:507:    def test_to_csv_from_csv_w_all_infs(self, temp_file, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:513:        float_frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:519:    def test_to_csv_no_index(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:520:        # GH 3624, after appending columns, to_csv fails
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:523:        df.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:527:        df.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:531:    def test_to_csv_with_mix_columns(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:533:        # names passed as columns parameter in to_csv
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:537:        assert df.to_csv() == df.to_csv(columns=[0, 1, "test"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:539:    def test_to_csv_headers(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:541:        # causes to_csv to have different header semantics.
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:545:        from_df.to_csv(path, header=["X", "Y"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:550:        from_df.to_csv(path, index=False, header=["X", "Y"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:557:    def test_to_csv_multiindex(self, temp_file, float_frame, datetime_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:565:        frame.to_csv(path, header=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:566:        frame.to_csv(path, columns=["A", "B"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:569:        frame.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:573:        # TODO to_csv drops column name
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:586:        tsframe.to_csv(path, index_label=["time", "foo"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:590:        # TODO to_csv drops column name
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:596:        tsframe.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:601:        tsframe.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:629:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:640:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:654:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:660:        df.to_csv(temp_file, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:666:        df.to_csv(temp_file, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:674:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:679:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:685:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:695:            df.to_csv(temp_file, columns=["foo", "bar"])
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:698:        tsframe[:0].to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:707:    def test_to_csv_interval_index(self, temp_file, using_infer_string):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:712:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:721:    def test_to_csv_float32_nanrep(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:728:        df.to_csv(path, na_rep=999)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:734:    def test_to_csv_withcommas(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:739:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:743:    def test_to_csv_mixed(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:785:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:789:    def test_to_csv_dups_cols(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:797:        df.to_csv(path)  # single dtype, fine
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:817:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:827:    def test_to_csv_dups_cols2(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:836:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:844:    def test_to_csv_chunking(self, chunksize, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:851:        aa.to_csv(path, chunksize=chunksize)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:856:    def test_to_csv_wide_frame_formatting(self, temp_file, monkeypatch):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:867:            df.to_csv(path, header=False, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:871:    def test_to_csv_bug(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:877:        newdf.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:883:    def test_to_csv_unicode(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:886:        df.to_csv(path, encoding="UTF-8")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:890:        df.to_csv(path, encoding="UTF-8", index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:894:    def test_to_csv_unicode_index_col(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:902:        df.to_csv(buf, encoding="UTF-8")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:908:    def test_to_csv_stringio(self, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:910:        float_frame.to_csv(buf)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:915:    def test_to_csv_float_format(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:923:        df.to_csv(path, float_format="%.2f")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:933:    def test_to_csv_float_format_over_decimal(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:936:        result = df.to_csv(
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:942:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:945:    def test_to_csv_unicodewriter_quoting(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:949:        df.to_csv(buf, index=False, quoting=csv.QUOTE_NONNUMERIC, encoding="utf-8")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:953:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:957:    def test_to_csv_quote_none(self, encoding):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:961:        df.to_csv(buf, quoting=csv.QUOTE_NONE, encoding=encoding, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:965:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:968:    def test_to_csv_index_no_leading_comma(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:972:        df.to_csv(buf, index_label=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:975:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:978:    def test_to_csv_lineterminators(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:984:        df.to_csv(path, lineterminator="\r\n")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:990:    def test_to_csv_lineterminators2(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:996:        df.to_csv(path, lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1002:    def test_to_csv_lineterminators3(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1007:        df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1023:    def test_to_csv_from_csv_categorical(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1030:        s.to_csv(res, header=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1033:        s2.to_csv(exp, header=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1040:        df.to_csv(res)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1043:        df2.to_csv(exp)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1047:    def test_to_csv_path_is_none(self, float_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1050:        # Series.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1051:        csv_str = float_frame.to_csv(path_or_buf=None)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1079:    def test_to_csv_compression(self, temp_file, df, encoding, compression):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1081:        df.to_csv(path, compression=compression, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1082:        # test the round trip - to_csv -> read_csv
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1086:        # test the round trip using file handle - to_csv -> read_csv
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1090:            df.to_csv(handles.handle, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1110:    def test_to_csv_date_format(self, temp_file, datetime_frame):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1116:        datetime_frame.to_csv(path, date_format="%Y%m%d")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1128:        datetime_frame.to_csv(path, date_format="%Y-%m-%d")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1141:        datetime_frame_columns.to_csv(path, date_format="%Y%m%d")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1160:        nat_frame.to_csv(path, date_format="%Y-%m-%d")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1167:    def test_to_csv_with_dst_transitions(self, td, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1181:        df.to_csv(path, index=True)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1195:    def test_to_csv_with_dst_transitions_with_pickle(self, start, end, temp_file):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1202:        df.to_csv(temp_file, index=True)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1220:    def test_to_csv_quoting(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1235:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1237:        result = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1240:        result = df.to_csv(quoting=None)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1248:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1250:        result = df.to_csv(quoting=csv.QUOTE_MINIMAL)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1258:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1260:        result = df.to_csv(quoting=csv.QUOTE_ALL)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1270:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1271:        result = df.to_csv(quoting=csv.QUOTE_NONNUMERIC)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1276:            df.to_csv(quoting=csv.QUOTE_NONE)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1279:            df.to_csv(quoting=csv.QUOTE_NONE, escapechar=None)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1286:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1287:        result = df.to_csv(quoting=csv.QUOTE_NONE, escapechar="!")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1295:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1296:        result = df.to_csv(quoting=csv.QUOTE_NONE, escapechar="f")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1302:        text = tm.convert_rows_list_to_csv_str(text_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1306:        df.to_csv(buf, encoding="utf-8", index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1315:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1316:        assert df.to_csv(quoting=csv.QUOTE_ALL) == expected
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1325:        result = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1328:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1332:        result = df.to_csv(date_format=date_format)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1335:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1343:        result = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1346:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1356:        result = df.to_csv(header=header)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1359:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1362:    def test_to_csv_single_level_multi_index(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1368:        result = df.to_csv(lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1375:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1379:        df.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1385:    def test_to_csv_numpy_16_bug(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1389:        frame.to_csv(buf)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1394:    def test_to_csv_na_quoting(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1399:            .to_csv(None, header=False, index=False, na_rep="")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1405:    def test_to_csv_categorical_and_ea(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1410:        result = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1412:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1415:    def test_to_csv_categorical_and_interval(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1429:        result = df.to_csv()
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1431:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1434:    def test_to_csv_warn_when_zip_tar_and_append_mode(self, tmp_path):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1446:            df.to_csv(zip_path, mode="a")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1451:            df.to_csv(tar_path, mode="a")
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1453:    def test_to_csv_escape_quotechar(self):
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1463:        result = df.to_csv(quotechar='"', escapechar="\\", quoting=csv.QUOTE_NONE)
+.venv\Lib\site-packages\pandas\tests\frame\methods\test_to_csv.py:1469:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:20:    def test_to_csv_with_single_column(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:33:        df1.to_csv(temp_file, header=None, index=None)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:42:        df2.to_csv(temp_file, header=None, index=None)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:46:    def test_to_csv_default_encoding(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:50:        # the default to_csv encoding is uft-8.
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:51:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:54:    def test_to_csv_quotechar(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:62:        df.to_csv(temp_file, quoting=1)  # 1=QUOTE_ALL
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:72:        df.to_csv(temp_file, quoting=1, quotechar="$")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:77:            df.to_csv(temp_file, quoting=1, quotechar=None)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:79:    def test_to_csv_doublequote(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:87:        df.to_csv(temp_file, quoting=1, doublequote=True)  # QUOTE_ALL
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:92:            df.to_csv(temp_file, doublequote=False)  # no escapechar set
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:94:    def test_to_csv_escapechar(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:102:        df.to_csv(temp_file, quoting=1, doublequote=False, escapechar="\\")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:113:        df.to_csv(temp_file, quoting=3, escapechar="\\")  # QUOTE_NONE
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:120:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:121:        assert df.to_csv() == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:123:    def test_to_csv_decimal(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:128:        expected_default = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:129:        assert df.to_csv() == expected_default
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:132:        expected_european_excel = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:133:        assert df.to_csv(decimal=",", sep=";") == expected_european_excel
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:136:        expected_float_format_default = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:137:        assert df.to_csv(float_format="%.2f") == expected_float_format_default
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:140:        expected_float_format = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:142:            df.to_csv(decimal=",", sep=";", float_format="%.2f")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:150:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:151:        assert df.to_csv(index=False, decimal="^") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:154:        assert df.set_index("a").to_csv(decimal="^") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:157:        assert df.set_index(["a", "b"]).to_csv(decimal="^") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:159:    def test_to_csv_float_format(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:165:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:166:        assert df.set_index("a").to_csv(float_format="%.2f") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:169:        assert df.set_index(["a", "b"]).to_csv(float_format="%.2f") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:171:    def test_to_csv_na_rep(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:177:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:179:        assert df.set_index("a").to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:180:        assert df.set_index(["a", "b"]).to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:185:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:187:        assert df.set_index("a").to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:188:        assert df.set_index(["a", "b"]).to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:193:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:195:        assert df.set_index("a").to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:196:        assert df.set_index(["a", "b"]).to_csv(na_rep="_") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:198:        csv = pd.Series(["a", pd.NA, "c"]).to_csv(na_rep="ZZZZZ")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:199:        expected = tm.convert_rows_list_to_csv_str([",0", "0,a", "1,ZZZZZ", "2,c"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:202:    def test_to_csv_na_rep_nullable_string(self, nullable_string_dtype):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:205:        expected = tm.convert_rows_list_to_csv_str([",0", "0,a", "1,ZZZZZ", "2,c"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:206:        csv = pd.Series(["a", pd.NA, "c"], dtype=nullable_string_dtype).to_csv(
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:211:    def test_to_csv_date_format(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:224:        expected_default_sec = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:225:        assert df_sec.to_csv() == expected_default_sec
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:235:        expected_ymdhms_day = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:236:        assert df_day.to_csv(date_format="%Y-%m-%d %H:%M:%S") == expected_ymdhms_day
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:246:        expected_ymd_sec = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:247:        assert df_sec.to_csv(date_format="%Y-%m-%d") == expected_ymd_sec
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:257:        expected_default_day = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:258:        assert df_day.to_csv() == expected_default_day
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:259:        assert df_day.to_csv(date_format="%Y-%m-%d") == expected_default_day
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:269:        expected_ymd_sec = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:272:        assert df_sec_grouped.mean().to_csv(date_format="%Y-%m-%d") == expected_ymd_sec
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:274:    def test_to_csv_different_datetime_formats(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:287:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:288:        assert df.to_csv(index=False) == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:290:    def test_to_csv_date_format_in_categorical(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:294:        expected = tm.convert_rows_list_to_csv_str(["0", "2021-03-27", '""'])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:295:        assert ser.to_csv(index=False) == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:303:        assert ser.to_csv(index=False, date_format="%Y-%m-%d") == expected
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:305:    def test_to_csv_float_ea_float_format(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:309:        result = df.to_csv(index=False, float_format="%.5f")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:310:        expected = tm.convert_rows_list_to_csv_str(
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:315:    def test_to_csv_float_ea_no_float_format(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:319:        result = df.to_csv(index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:320:        expected = tm.convert_rows_list_to_csv_str(
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:325:    def test_to_csv_float_ea_nan_distinguish(self, using_nan_is_na):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:326:        # GH#61617, GH#65227 - to_csv should not crash when FloatingArray
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:329:        result = df.to_csv(index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:331:            expected = tm.convert_rows_list_to_csv_str(["a,b", ",c", ",c", "3.0,c"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:333:            expected = tm.convert_rows_list_to_csv_str(["a,b", "nan,c", ",c", "3.0,c"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:336:    def test_to_csv_float_ea_nan_distinguish_series(self, using_nan_is_na):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:337:        # GH#65227 - Series.to_csv with FloatingArray containing both NaN and NA
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:340:        result = ser.to_csv()
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:342:            expected = tm.convert_rows_list_to_csv_str([",x", "a,1.0", "b,", "c,"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:344:            expected = tm.convert_rows_list_to_csv_str([",x", "a,1.0", "b,", "c,nan"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:347:    def test_to_csv_multi_index(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:352:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:353:        assert df.to_csv() == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:356:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:357:        assert df.to_csv(index=False) == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:366:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:367:        assert df.to_csv() == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:370:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:371:        assert df.to_csv(index=False) == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:376:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:377:        assert df.to_csv() == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:380:        exp = tm.convert_rows_list_to_csv_str(exp_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:381:        assert df.to_csv(index=False) == exp
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:398:    def test_to_csv_single_level_multi_index(self, ind, expected, frame_or_series):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:402:        result = obj.to_csv(lineterminator="\n", header=True)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:405:    def test_to_csv_string_array_ascii(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:414:        df.to_csv(temp_file, encoding="ascii")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:418:    def test_to_csv_string_array_utf8(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:427:        df.to_csv(temp_file, encoding="utf-8")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:431:    def test_to_csv_string_with_lf(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:448:        df.to_csv(temp_file, index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:454:        df.to_csv(temp_file, lineterminator="\n", index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:461:        df.to_csv(temp_file, lineterminator="\r\n", index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:465:    def test_to_csv_string_with_crlf(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:481:        df.to_csv(temp_file, index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:487:        df.to_csv(temp_file, lineterminator="\n", index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:496:        df.to_csv(temp_file, lineterminator="\r\n", index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:500:    def test_to_csv_stdout_file(self, capsys):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:504:        expected_ascii = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:506:        df.to_csv(sys.stdout, encoding="ascii")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:520:    def test_to_csv_write_to_open_file(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:531:            df.to_csv(f, header=None, index=None)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:535:    def test_to_csv_write_to_open_file_with_newline_py3(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:540:        expected = "manual header\n" + tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:544:            df.to_csv(f, header=None, index=None)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:551:    def test_to_csv_compression(
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:568:        df.to_csv(path_ext, compression=to_compression)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:572:    def test_to_csv_compression_dict(self, compression_only, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:582:        df.to_csv(path, compression={"method": method})
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:586:    def test_to_csv_compression_dict_no_method_raises(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:593:            df.to_csv(temp_file, compression=compression)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:596:    @pytest.mark.parametrize("archive_name", ["test_to_csv.csv", "test_to_csv.zip"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:597:    def test_to_csv_zip_arguments(self, compression, archive_name, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:602:        df.to_csv(
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:620:    def test_to_csv_zip_infer_name(self, tmp_path, filename, expected_arcname):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:624:        df.to_csv(path, compression="zip")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:631:    def test_to_csv_na_rep_long_string(self, df_new_type):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:636:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:638:        result = df.to_csv(index=False, na_rep="mynull", encoding="ascii")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:642:    def test_to_csv_timedelta_precision(self):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:646:        s.to_csv(buf)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:653:        expected = tm.convert_rows_list_to_csv_str(expected_rows)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:658:        result = pd.Series(range(8, 12)).to_csv(na_rep="-")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:659:        expected = tm.convert_rows_list_to_csv_str([",0", "0,8", "1,9", "2,10", "3,11"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:662:        result = pd.Series([True, False]).to_csv(na_rep="nan")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:663:        expected = tm.convert_rows_list_to_csv_str([",0", "0,True", "1,False"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:666:        result = pd.Series([1.1, 2.2]).to_csv(na_rep=".")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:667:        expected = tm.convert_rows_list_to_csv_str([",0", "0,1.1", "1,2.2"])
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:671:    def test_to_csv_errors(self, errors, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:676:        ser.to_csv(temp_file, errors=errors)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:681:    def test_to_csv_binary_handle(self, mode, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:695:            df.to_csv(handle, mode=mode)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:699:    def test_to_csv_encoding_binary_handle(self, mode, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:711:        df.to_csv(buffer, mode=mode, encoding="utf-8-sig", index=False)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:717:            DataFrame().to_csv(handle, mode=mode, encoding="utf-8-sig")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:723:def test_to_csv_iterative_compression_name(compression, temp_file):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:730:    df.to_csv(temp_file, compression=compression, chunksize=1)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:736:def test_to_csv_iterative_compression_buffer(compression):
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:744:        df.to_csv(buffer, compression=compression, chunksize=1)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:754:    result = df.to_csv(float_format="{:.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:761:    result = df.to_csv(float_format="{:,.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:768:    result = df.to_csv(float_format="{:.2e}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:775:    result = df.to_csv(float_format="{:.2f}", na_rep="NA", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:782:    result = df.to_csv(float_format="{:.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:789:    result = df.to_csv(float_format="{:.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:797:        df.to_csv(float_format="{:.2f")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:803:        df.to_csv(float_format="{:.2z}")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:808:    result = df.to_csv(float_format="%.2f", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:815:    result = df.to_csv(float_format=lambda x: f"{x:,.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:822:    result = df.to_csv(float_format=None, lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:829:    result = df.to_csv(float_format="{:.2e}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:836:    result = df.to_csv(float_format="{:+.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:843:    result = df.to_csv(float_format="{:.2f}€", encoding="utf-8", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:850:    result = df.to_csv(float_format="{:.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:857:    result = df.to_csv(float_format="{:.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:865:        df.to_csv(float_format=123)
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:870:    result = df.to_csv(float_format="{:.2f}", na_rep="NA", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:877:    result = df.to_csv(float_format="{:.10f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\formats\test_to_csv.py:884:    result = df.to_csv(float_format="Value: {:,.2f}", lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\io\parser\common\test_common_basic.py:643:    df.to_csv(path, index=False)
+.venv\Lib\site-packages\pandas\tests\io\parser\common\test_file_buffer_url.py:81:        df.to_csv, lambda p: parser.read_csv(p, index_col=0), temp_file
+.venv\Lib\site-packages\pandas\tests\io\parser\common\test_file_buffer_url.py:387:    expected.to_csv(path, index=False, compression=compression)
+.venv\Lib\site-packages\pandas\tests\io\parser\common\test_float.py:34:    data = df.to_csv(index=False)
+.venv\Lib\site-packages\pandas\tests\io\parser\common\test_index.py:166:    data = expected.to_csv(index=False) if round_trip else data
+.venv\Lib\site-packages\pandas\tests\io\parser\dtypes\test_dtypes_basic.py:44:    df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_compression.py:187:    df.to_csv(path_csv, index=False)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_compression.py:204:    data.to_csv(tar_path, index=False)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_c_parser_only.py:141:    df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_encoding.py:250:    expected.to_csv(temp_file, index=False, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_encoding.py:275:    df.to_csv(temp_file, index=False, header=False, encoding="utf-8")
+.venv\Lib\site-packages\pandas\tests\io\parser\test_encoding.py:308:    df.to_csv(temp_file, index=False, header=False, encoding="utf-8")
+.venv\Lib\site-packages\pandas\tests\io\parser\test_index_col.py:212:    expected.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_index_col.py:254:    df.to_csv(temp_file, index=False)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_mangle_dupes.py:143:        df = parser.read_csv(StringIO(df.to_csv()))
+.venv\Lib\site-packages\pandas\tests\io\parser\test_multi_thread.py:153:    df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\io\parser\test_network.py:212:        with BytesIO(df.to_csv().encode("utf-8")) as buf:
+.venv\Lib\site-packages\pandas\tests\io\parser\test_parse_dates.py:101:    df.to_csv(path)
+.venv\Lib\site-packages\pandas\tests\io\test_clipboard.py:231:        assert clipboard.text() == df.to_csv(sep="\t")
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:216:            (pd.DataFrame.to_csv, "os", OSError, "csv"),
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:332:            ("to_csv", {}, "os"),
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:440:        df.to_csv(temp_file)
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:455:        df.to_csv(temp_file, mode="w+b")
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:474:            df.to_csv(temp_file, compression=compression_, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:539:            expected.to_csv(encoded)
+.venv\Lib\site-packages\pandas\tests\io\test_common.py:564:            expected.to_csv(buffer, mode=f"w{mode}")
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:31:@pytest.mark.parametrize("method", ["to_pickle", "to_json", "to_csv"])
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:54:@pytest.mark.parametrize("method", ["to_csv", "to_json"])
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:79:        ("to_csv", {"index": False}, pd.read_csv),
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:104:        ("to_csv", {"index": False, "header": True}, pd.read_csv, {"squeeze": True}),
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:135:    # Assert that passing a file object to to_csv while explicitly specifying a
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:144:            df.to_csv(handles.handle, compression=compression_only)
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:162:        df.to_csv(file, mode="wb", compression=compression_only)
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:170:    df.to_csv(file, mode="wb", compression=compression_only)
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:194:    df.to_csv(path, compression=compression_options)
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:196:    df.to_csv(path, compression=compression_options)
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:215:    df.to_csv(buffer, compression=compression_options, mode="wb")
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:218:    df.to_csv(buffer, compression=compression_options, mode="wb")
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:249:            df.to_csv('foo.csv', compression='xz')
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:265:@pytest.mark.parametrize("method", ["to_pickle", "to_json", "to_csv"])
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:286:@pytest.mark.parametrize("method", ["to_pickle", "to_json", "to_csv"])
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:294:    if method == "to_csv":
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:308:@pytest.mark.parametrize("method", ["to_pickle", "to_json", "to_csv"])
+.venv\Lib\site-packages\pandas\tests\io\test_compression.py:364:    ).to_csv(file, compression={"method": "tar", "mode": "w:gz"}, index=False)
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:76:    text = str(df1.to_csv(index=False)).encode()
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:101:def test_to_csv(cleared_fs, df1):
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:102:    df1.to_csv("memory://test/test.csv", index=True)
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:125:def test_to_csv_fsspec_object(cleared_fs, binary_mode, df1):
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:131:        df1.to_csv(fsspec_object, index=True)
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:150:    df.to_csv(
+.venv\Lib\site-packages\pandas\tests\io\test_fsspec.py:161:    df.to_csv(
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:76:        df1.to_csv(path, index=True)
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:155:def test_to_csv_compression_encoding_gcs(
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:161:    GH 35677 (to_csv, compression), GH 26124 (to_csv, encoding), and
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:175:    df.to_csv(buffer, compression=compression, encoding=encoding, mode="wb")
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:179:    df.to_csv(path_gcs, compression=compression, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\io\test_gcs.py:193:    df.to_csv(path_gcs, compression=compression, encoding=encoding)
+.venv\Lib\site-packages\pandas\tests\io\test_http_headers.py:35:    return df.to_csv(index=False).encode("utf-8")
+.venv\Lib\site-packages\pandas\tests\io\xml\test_to_xml.py:1153:def test_style_to_csv(geom_df):
+.venv\Lib\site-packages\pandas\tests\io\xml\test_to_xml.py:1173:    out_csv = geom_df.to_csv(lineterminator="\n")
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:32:        datetime_series.to_csv(path, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:42:        datetime_series.to_csv(path, header=True)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:46:        string_series.to_csv(path, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:53:        string_series.to_csv(path, header=True)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:68:    def test_to_csv(self, datetime_series, temp_file):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:69:        datetime_series.to_csv(temp_file, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:75:        datetime_series.to_csv(temp_file, index=False, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:79:    def test_to_csv_unicode_index(self):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:83:        s.to_csv(buf, encoding="UTF-8", header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:89:    def test_to_csv_float_format(self, temp_file):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:91:        ser.to_csv(temp_file, float_format="%.2f", header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:97:    def test_to_csv_list_entries(self):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:103:        split.to_csv(buf, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:105:    def test_to_csv_path_is_none(self):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:107:        # Series.to_csv() was returning None, inconsistent with
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:108:        # DataFrame.to_csv() which returned string
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:110:        csv_str = s.to_csv(path_or_buf=None, header=False)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:129:    def test_to_csv_compression(self, s, encoding, compression, temp_file):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:131:        s.to_csv(filename, compression=compression, encoding=encoding, header=True)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:132:        # test the round trip - to_csv -> read_csv
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:141:        # test the round trip using file handle - to_csv -> read_csv
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:145:            s.to_csv(handles.handle, encoding=encoding, header=True)
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:166:    def test_to_csv_interval_index(self, using_infer_string, temp_file):
+.venv\Lib\site-packages\pandas\tests\series\methods\test_to_csv.py:170:        s.to_csv(temp_file, header=False)
+.venv\Lib\site-packages\pandas\tests\util\test_util.py:20:def test_convert_rows_list_to_csv_str():
+.venv\Lib\site-packages\pandas\tests\util\test_util.py:22:    ret = tm.convert_rows_list_to_csv_str(rows_list)
+.venv\Lib\site-packages\pandas\_testing\_io.py:56:        IO writing function (e.g. DataFrame.to_csv )
+.venv\Lib\site-packages\pandas\_testing\__init__.py:358:def convert_rows_list_to_csv_str(rows_list: list[str]) -> str:
+.venv\Lib\site-packages\pandas\_testing\__init__.py:362:    This method is used for creating expected value of to_csv() method.
+.venv\Lib\site-packages\pandas\_testing\__init__.py:372:        Expected output of to_csv() in current OS.
+.venv\Lib\site-packages\pandas\_testing\__init__.py:619:    "convert_rows_list_to_csv_str",
+.venv\Lib\site-packages\pygments\lexers\gsql.py:67:                'TAGSTGT', 'THEN', 'TO', 'TO_CSV', 'TO_DATETIME', 'TRAILING',
+ml\model_store.py:176:        combined.to_csv(dataset_path, index=False)

@@ -1,0 +1,15 @@
+{
+    "project": "AERIS-TWIN",
+    "fault": "combustion_instability",
+    "fault_severity": 0.8,
+    "requested_duration_s": 1275.0,
+    "actual_duration_s": 1275.0,
+    "timestep_s": 0.1,
+    "mission_duration_s": 1275.0,
+    "records_logged": 12750,
+    "can_frames": 76500,
+    "mqtt_messages": 12750,
+    "execution_time_s": 46.31244159996277,
+    "final_fault_type": "COMBUSTION_INSTABILITY",
+    "final_fault_label": 3
+}

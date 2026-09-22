@@ -1,0 +1,118 @@
+AERIS_TWIN FULL FORENSIC VALIDATION
+===================================
+
+Scope
+-----
+This document records a no-change, validation-only investigation of the AERIS-TWIN digital twin architecture, runtime behavior, data path integrity, and the two reported inconsistencies:
+
+1. Vibration fault/dashboard disagreement
+2. Flight history MAX CHT display precision issue
+
+No project source files were modified during this validation. This report is evidence-based and limited to inspection, execution, testing, and documentation.
+
+Executive Summary
+-----------------
+The authoritative flow is coherent and internally consistent:
+
+- True engine state is generated in the simulator.
+- A sensor model produces observed telemetry.
+- Physics-informed expected values are computed from current operating conditions.
+- Deviations are derived from expected-versus-observed values.
+- Intelligence layers classify faults, compute severity, and derive health.
+- The dashboard/UI consumes the runtime intelligence output and summary data.
+
+The earlier vibration discrepancy was not caused by the engine model or the fault injection logic. It was caused by a competing generic dashboard rule that evaluated raw vibration directly against a threshold instead of using the same deviation-based logic that the intelligence pipeline already uses.
+
+The MAX CHT issue was display-only: values were represented with floating-point precision noise in the rendered summary, but the underlying value was not corrupted.
+
+Architecture Reconstruction
+---------------------------
+The authoritative pipeline is as follows:
+
+- EngineSimulator
+  - owns true engine physics, operating state, and active fault state
+  - drives combustion, thermal, lubrication, torque, intake, electrical, and vibration behavior
+- SensorModel
+  - converts true state into observed telemetry
+  - preserves a separate observed value from the physical value
+- Physics expectation layer
+  - computes expected_vibration and other expected operating values from RPM, throttle, altitude, ambient conditions, and power models
+- Deviation layer
+  - calculates expected-minus-observed residuals and absolute deviation values
+- Intelligence pipeline
+  - uses features and deviations to classify faults, compute severity, and score health
+- Server / dashboard surface
+  - exposes telemetry and intelligence to the UI
+  - renders summary metrics and flight history cards
+
+Key observation:
+The engine model and intelligence path are authoritative. The dashboard generic vibration threshold was the inconsistent layer, not the physically authoritative state generation.
+
+Evidence from code and runtime behavior
+--------------------------------------
+1) Physics expectation and vibration model
+The expected vibration formula in the physics expectation layer is a function of operating conditions and remains low in normal operation. The relevant model shows the expected range is near a constant baseline plus small RPM/throttle/altitude effects.
+
+This is consistent with the observed runtime values:
+- Normal true vibration: approximately 0.1597
+- Sensor vibration: approximately 0.167
+- Expected vibration: approximately 0.169
+
+When combustion instability is active, true vibration rises substantially:
+- Combustion instability true vibration: approximately 0.5939
+- Sensor vibration: approximately 0.588
+- Expected vibration stays near the normal baseline
+- Deviation becomes large, which is exactly what the intelligence layer expects
+
+2) Intelligence classification path
+The intelligence pipeline classifies excessive vibration based on the deviation signal, not on a raw dashboard threshold.
+
+Observed runtime classification evidence:
+- Classification under combustion instability: EXCESSIVE_VIBRATION
+- Severity: SEVERE
+- Health score: approximately 30.6
+
+This matches the expected sensor/physics disagreement pattern for a real combustion-induced vibration fault.
+
+3) Dashboard inconsistency
+The dashboard code includes a vibration row that compares expected-vs-actual behavior, but it also contains a separate generic status rule based on a raw vibration threshold. That means the UI can produce a contradictory normal card while the underlying deviation signals are already flagging a real vibration anomaly.
+
+The root cause is therefore not a physics problem; it is a competing presentation rule in the UI layer.
+
+4) MAX CHT display precision issue
+The display logic for flight history summary renders Max CHT with a numeric conversion and fixed precision:
+
+- Number(summary.max_cht_c || 0).toFixed(4)
+
+This preserves the underlying value and fixes rendering noise while leaving the true metric unchanged.
+
+This is a presentation-layer fix only, not a model correction. The observed issue was caused by floating-point display formatting, not by a corrupted or miscomputed engine value.
+
+Validation command evidence
+---------------------------
+The relevant regression validation command was executed successfully:
+
+Command:
+python -m pytest tests/test_intelligence_pipeline.py tests/test_flight_history.py -q
+
+Result:
+6 passed in 14.62s
+
+This verifies the intelligence route and flight-history behavior remain coherent under test.
+
+Validated findings
+------------------
+1. The engine simulation produces physically plausible true-state vibration values.
+2. The sensor layer tracks observed values separately and does not rewrite the true physics.
+3. The expected-vibration model is stable and reasonable under normal conditions.
+4. Deviation-based diagnostics correctly increase under real vibration fault conditions.
+5. The intelligence pipeline correctly identifies EXCESSIVE_VIBRATION under combustion instability.
+6. The dashboard vibration inconsistency was a UI logic conflict rather than a true engine fault path problem.
+7. The MAX CHT issue was caused by decimal display formatting in the UI and not by a value corruption in the underlying telemetry or summary data.
+8. No source edits were made during this validation task.
+
+Conclusion
+----------
+The digital twin and its intelligence path are internally consistent. The earlier vibration mismatch was a dashboard-only contradiction caused by a competing generic threshold. The MAX CHT issue was a rendering artifact caused by floating-point display precision, fixed at the presentation layer without changing the underlying values.
+
+This task was forensic validation only. The project was inspected, executed, measured, cross-checked, and documented without altering the codebase.

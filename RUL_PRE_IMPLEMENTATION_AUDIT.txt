@@ -1,0 +1,69 @@
+============================================================
+AERIS-TWIN RUL PRE-IMPLEMENTATION AUDIT REPORT
+============================================================
+
+1. Existing architecture
+The system uses a physics-inspired Digital Twin (engine_simulator.py) consisting of subsystem models (intake, combustion, torque, etc.). A TwinController (server.py) ticks the simulation, passes states to the IntelligencePipeline (pipeline.py) for ML analysis, and writes telemetry to InfluxDB via InfluxWriter (influx_writer.py). 
+
+2. Current RUL implementation
+Hardcoded in intelligence/pipeline.py:
+"rul": {"available": False, "estimated_rul": None, "confidence": 0.0, "status": "experimental", "reason": "RUL unavailable — insufficient validated degradation data."}
+
+3. Existing degradation mechanisms
+The simulator has a wear_index, but currently, faults are injected at a static severity via API endpoints. There is no time-based progressive degradation mechanism implemented natively in the physics loop.
+
+4. Existing fault mechanisms
+Faults (e.g., misfire, cooling, combustion_instability, lubrication, sensor_drift) are injected via the TwinController._inject_fault method which passes a severity float to the engine_simulator. The severity modifies subsystem outputs (e.g., LubricationFaultModel).
+
+5. Existing health/severity logic
+HealthScore (health_score.py) starts at 100 and subtracts points based on anomaly_score, fault_confidence, deviations, and persistence. SeverityEngine (severity.py) maps composite risk scores to labels: NORMAL, INFORMATION, WARNING, CRITICAL, SEVERE.
+
+6. Existing EOL/failure mechanism
+There is NO End-of-Life (EOL) or engine failure condition. The simulator will continue to run indefinitely even if health reaches 0 or severity is SEVERE. There is no physics-based shutdown trigger.
+
+7. Existing database schema
+InfluxDB contains two measurements:
+- engine_telemetry: Time-series sensor data (rpm, cht_c, egt_c, etc.).
+- flight_records: Summarized flight data (duration, max_rpm, final_health_score, etc.).
+
+8. Existing telemetry fields
+Numeric fields written include: rpm, cht_c, egt_c, oil_temperature_c, oil_pressure_psi, vibration_rms, throttle_pct, load_pct, torque_nm, fuel_flow_kg_s, manifold_pressure_kpa. 
+
+9. Existing flight/session lifecycle
+Managed by TwinController. Starts when entering FLYING state, generates a UUID "aeris-...", and ends when the mission is completed, recovered, or stopped.
+
+10. Existing ML infrastructure
+IntelligencePipeline extracts features, computes deviations using PhysicsExpectationEngine, applies IsolationForest (AnomalyDetector) and RandomForest (FaultClassifier), and arbitrates sensor faults.
+
+11. Existing model artifacts
+Models are loaded from ml/model_artifacts via ModelStore if AERIS_ENABLE_ML is enabled.
+
+12. Existing tests
+Extensive test suite including test_e2e.py, test_live_acceptance.py, test_physics.py, test_influx_connection.py, etc.
+
+13. Exact files/modules relevant to RUL
+- intelligence/pipeline.py (where RUL must be output)
+- simulation/engine_simulator.py (where progressive degradation and EOL must be added)
+- server.py (mission handling regarding EOL)
+- intelligence/health_score.py
+
+14. What can be reused
+The IntelligencePipeline structure, feature extraction, InfluxDB telemetry schema, and ML storage framework are fully reusable for RUL.
+
+15. What is missing
+- Progressive, time-based degradation over a simulated lifecycle.
+- A hard EOL (End of Life) threshold/failure condition in the engine physics (e.g., engine stalls or breaks when degradation reaches 100%).
+- An RUL ML model (Regressor or Survival Analysis) trained on run-to-failure data.
+- True run-to-failure data generation scripts.
+
+16. Risks
+Training an RUL model on the current simulator will fail because "CRITICAL" health is not a terminal state. The label (EOL - CurrentTime) cannot be mathematically defined if the engine never dies.
+
+17. Recommended implementation plan
+Phase 1: Implement progressive wear/degradation in engine_simulator.py that increases over time.
+Phase 2: Implement a hard EOL failure state where the engine safely "dies" when wear reaches a critical limit.
+Phase 3: Generate run-to-failure datasets.
+Phase 4: Train RUL model (e.g., XGBoost regressor predicting remaining time).
+Phase 5: Integrate RUL prediction into IntelligencePipeline and dashboard.
+
+RUL FOUNDATION INCOMPLETE

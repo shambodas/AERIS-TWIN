@@ -1,0 +1,2492 @@
+AERIS-TWIN FINAL UI ROUTE x ENGINE CONDITION AUDIT REPORT
+=========================================================
+
+Timestamp: 2026-09-09T04:29:13.564542+00:00
+
+COVERAGE METRICS:
+- Unique Routes Tested: 68 / 68
+- Unique Conditions Tested: 6 / 6
+- Total Scenario Records: 408 / 408
+- Missing Pairs: 0
+- Duplicate Pairs: 0
+
+RESULT SUMMARY:
+- PASS: 18
+- PARTIAL: 335
+- FAIL: 55
+- NOT VERIFIED: 0
+
+FINAL VERDICT: COMPLETE - ISSUES DETECTED
+
+=========================================================
+INDIVIDUAL SCENARIO RESULTS
+=========================================================
+
+Scenario 1/408: [PASS]
+  Route: Delhi -> Jaipur
+  Condition: Healthy
+
+Scenario 2/408: [PASS]
+  Route: Delhi -> Jaipur
+  Condition: overheating
+
+Scenario 3/408: [PASS]
+  Route: Delhi -> Jaipur
+  Condition: low_oil_pressure
+
+Scenario 4/408: [PASS]
+  Route: Delhi -> Jaipur
+  Condition: excessive_vibration
+
+Scenario 5/408: [PASS]
+  Route: Delhi -> Jaipur
+  Condition: sensor_drift
+
+Scenario 6/408: [PARTIAL]
+  Route: Delhi -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 7/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 8/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - True fault active but AI classification is still NORMAL
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 9/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 10/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 11/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 12/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 13/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 14/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 15/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 16/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 17/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 18/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 19/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 20/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 21/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 22/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 23/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 24/408: [PARTIAL]
+  Route: Delhi -> Jaipur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 25/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 26/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 27/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 28/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 29/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 30/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 31/408: [FAIL]
+  Route: Delhi -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected SENSOR_DRIFT
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 32/408: [PARTIAL]
+  Route: Delhi -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 33/408: [PARTIAL]
+  Route: Delhi -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 34/408: [PARTIAL]
+  Route: Delhi -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 35/408: [PARTIAL]
+  Route: Delhi -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 36/408: [PARTIAL]
+  Route: Delhi -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 37/408: [FAIL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected SENSOR_DRIFT
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 38/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 39/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 40/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 41/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 42/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 43/408: [FAIL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 44/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 45/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 46/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 47/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 48/408: [PARTIAL]
+  Route: Delhi -> Jodhpur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 49/408: [FAIL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 50/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 51/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 52/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 53/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 54/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 55/408: [FAIL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 56/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 57/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 58/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 59/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 60/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 61/408: [FAIL]
+  Route: Delhi -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 62/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 63/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 64/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 65/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 66/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 67/408: [FAIL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 68/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 69/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 70/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 71/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 72/408: [PARTIAL]
+  Route: Delhi -> Ahmedabad -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 73/408: [FAIL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 74/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 75/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 76/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 77/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 78/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 79/408: [FAIL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 80/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 81/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 82/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 83/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 84/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 85/408: [FAIL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 86/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 87/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 88/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 89/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 90/408: [PARTIAL]
+  Route: Delhi -> Mumbai -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 91/408: [FAIL]
+  Route: Delhi -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 92/408: [PARTIAL]
+  Route: Delhi -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 93/408: [PARTIAL]
+  Route: Delhi -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 94/408: [PARTIAL]
+  Route: Delhi -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 95/408: [PARTIAL]
+  Route: Delhi -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 96/408: [PARTIAL]
+  Route: Delhi -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 97/408: [FAIL]
+  Route: Jaipur -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 98/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 99/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 100/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 101/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 102/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 103/408: [FAIL]
+  Route: Jaipur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 104/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 105/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 106/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 107/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 108/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 109/408: [FAIL]
+  Route: Jaipur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 110/408: [PARTIAL]
+  Route: Jaipur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 111/408: [PARTIAL]
+  Route: Jaipur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 112/408: [PARTIAL]
+  Route: Jaipur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 113/408: [PARTIAL]
+  Route: Jaipur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 114/408: [PARTIAL]
+  Route: Jaipur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 115/408: [FAIL]
+  Route: Jaipur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 116/408: [PARTIAL]
+  Route: Jaipur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 117/408: [PARTIAL]
+  Route: Jaipur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 118/408: [PARTIAL]
+  Route: Jaipur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 119/408: [PARTIAL]
+  Route: Jaipur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 120/408: [PARTIAL]
+  Route: Jaipur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 121/408: [FAIL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 122/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 123/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 124/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 125/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 126/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 127/408: [FAIL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 128/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 129/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 130/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 131/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 132/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 133/408: [FAIL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 134/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 135/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 136/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 137/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 138/408: [PARTIAL]
+  Route: Jaipur -> Jodhpur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 139/408: [FAIL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 140/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 141/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 142/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 143/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 144/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 145/408: [FAIL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 146/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 147/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 148/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 149/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 150/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 151/408: [FAIL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 152/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 153/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 154/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 155/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 156/408: [PARTIAL]
+  Route: Jaipur -> Ahmedabad -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 157/408: [FAIL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 158/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 159/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 160/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 161/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 162/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 163/408: [FAIL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 164/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 165/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 166/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 167/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 168/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 169/408: [FAIL]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+
+Scenario 170/408: [PASS]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: overheating
+
+Scenario 171/408: [PASS]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: low_oil_pressure
+
+Scenario 172/408: [PASS]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: excessive_vibration
+
+Scenario 173/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 174/408: [PARTIAL]
+  Route: Jaipur -> Mumbai -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 175/408: [FAIL]
+  Route: Jodhpur -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 176/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 177/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 178/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 179/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 180/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 181/408: [FAIL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 182/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 183/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 184/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 185/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 186/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 187/408: [FAIL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 188/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 189/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 190/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 191/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 192/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 193/408: [FAIL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 194/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 195/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 196/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 197/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 198/408: [PARTIAL]
+  Route: Jodhpur -> Jaipur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 199/408: [FAIL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 200/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 201/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 202/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 203/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 204/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 205/408: [FAIL]
+  Route: Jodhpur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 206/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 207/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 208/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 209/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 210/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 211/408: [FAIL]
+  Route: Jodhpur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 212/408: [PARTIAL]
+  Route: Jodhpur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 213/408: [PARTIAL]
+  Route: Jodhpur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 214/408: [PARTIAL]
+  Route: Jodhpur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 215/408: [PARTIAL]
+  Route: Jodhpur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 216/408: [PARTIAL]
+  Route: Jodhpur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 217/408: [FAIL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 218/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 219/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 220/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 221/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 222/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 223/408: [FAIL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 224/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 225/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 226/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 227/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 228/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 229/408: [FAIL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 230/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 231/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 232/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 233/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 234/408: [PARTIAL]
+  Route: Jodhpur -> Ahmedabad -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 235/408: [FAIL]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 236/408: [PASS]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: overheating
+
+Scenario 237/408: [PASS]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: low_oil_pressure
+
+Scenario 238/408: [PASS]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: excessive_vibration
+
+Scenario 239/408: [PASS]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: sensor_drift
+
+Scenario 240/408: [PASS]
+  Route: Jodhpur -> Mumbai -> Jaipur
+  Condition: misfire
+
+Scenario 241/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 242/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 243/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 244/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 245/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 246/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 247/408: [FAIL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 248/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 249/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 250/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 251/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 252/408: [PARTIAL]
+  Route: Jodhpur -> Mumbai -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 253/408: [FAIL]
+  Route: Ahmedabad -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 254/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 255/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 256/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 257/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 258/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 259/408: [FAIL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 260/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 261/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 262/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 263/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 264/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 265/408: [FAIL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 266/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 267/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 268/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 269/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 270/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 271/408: [FAIL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 272/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 273/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 274/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 275/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 276/408: [PARTIAL]
+  Route: Ahmedabad -> Jaipur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 277/408: [FAIL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 278/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 279/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 280/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 281/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 282/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 283/408: [FAIL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 284/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 285/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 286/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 287/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 288/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 289/408: [FAIL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 290/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 291/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 292/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 293/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 294/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 295/408: [FAIL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 296/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 297/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 298/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 299/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 300/408: [PARTIAL]
+  Route: Ahmedabad -> Jodhpur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 301/408: [FAIL]
+  Route: Ahmedabad -> Mumbai
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 302/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 303/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 304/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 305/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 306/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 307/408: [FAIL]
+  Route: Ahmedabad -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 308/408: [PARTIAL]
+  Route: Ahmedabad -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 309/408: [PARTIAL]
+  Route: Ahmedabad -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 310/408: [PARTIAL]
+  Route: Ahmedabad -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 311/408: [PARTIAL]
+  Route: Ahmedabad -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 312/408: [PARTIAL]
+  Route: Ahmedabad -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 313/408: [FAIL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 314/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 315/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 316/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 317/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 318/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 319/408: [FAIL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 320/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 321/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 322/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 323/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 324/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 325/408: [FAIL]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 326/408: [PARTIAL]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 327/408: [PASS]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: low_oil_pressure
+
+Scenario 328/408: [PASS]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: excessive_vibration
+
+Scenario 329/408: [PASS]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: sensor_drift
+
+Scenario 330/408: [PASS]
+  Route: Ahmedabad -> Mumbai -> Delhi
+  Condition: misfire
+
+Scenario 331/408: [PASS]
+  Route: Mumbai -> Jaipur
+  Condition: Healthy
+
+Scenario 332/408: [PARTIAL]
+  Route: Mumbai -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - True fault active but AI classification is still NORMAL
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 333/408: [PARTIAL]
+  Route: Mumbai -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 334/408: [PARTIAL]
+  Route: Mumbai -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 335/408: [PARTIAL]
+  Route: Mumbai -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 336/408: [PARTIAL]
+  Route: Mumbai -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 337/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 338/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - True fault active but AI classification is still NORMAL
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 339/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 340/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 341/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 342/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 343/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 344/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 345/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 346/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 347/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 348/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 349/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 350/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 351/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 352/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 353/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 354/408: [PARTIAL]
+  Route: Mumbai -> Jaipur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 355/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 356/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 357/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 358/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 359/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 360/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 361/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 362/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 363/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 364/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 365/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 366/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 367/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 368/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 369/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 370/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 371/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 372/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 373/408: [FAIL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 374/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 375/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 376/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 377/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 378/408: [PARTIAL]
+  Route: Mumbai -> Jodhpur -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 379/408: [FAIL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 380/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 381/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 382/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 383/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 384/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jaipur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 385/408: [FAIL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 386/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 387/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 388/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 389/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 390/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Jodhpur
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 391/408: [FAIL]
+  Route: Mumbai -> Ahmedabad
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 392/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 393/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 394/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 395/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 396/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 397/408: [FAIL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 398/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 399/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 400/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 401/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 402/408: [PARTIAL]
+  Route: Mumbai -> Ahmedabad -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 403/408: [FAIL]
+  Route: Mumbai -> Delhi
+  Condition: Healthy
+  Evidence/Issues:
+    - Healthy condition but AI detected OIL_PRESSURE_DEGRADATION
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 404/408: [PARTIAL]
+  Route: Mumbai -> Delhi
+  Condition: overheating
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 405/408: [PARTIAL]
+  Route: Mumbai -> Delhi
+  Condition: low_oil_pressure
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 406/408: [PARTIAL]
+  Route: Mumbai -> Delhi
+  Condition: excessive_vibration
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 407/408: [PARTIAL]
+  Route: Mumbai -> Delhi
+  Condition: sensor_drift
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events
+
+Scenario 408/408: [PARTIAL]
+  Route: Mumbai -> Delhi
+  Condition: misfire
+  Evidence/Issues:
+    - Flight session started but 'FLIGHT CLOSED' not found in events

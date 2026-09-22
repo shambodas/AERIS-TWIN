@@ -1,0 +1,133 @@
+AERIS-TWIN Controlled 6-Condition Validation
+============================================
+
+### Condition: Healthy
+A. Production behavior:
+   - Simulator Fault Activated: None
+   - Telemetry (Snapshot): Oil Press: 95.00 | Vib: 0.173 | CHT 1: 53.7
+   - AI Classification: NORMAL
+   - AI Confidence: None
+   - Severity: NORMAL
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: NORMAL
+   - Expected Result: PASS
+   - Actual Result: PASS
+
+### Condition: overheating
+A. Production behavior:
+   - Simulator Fault Activated: Unknown
+   - Telemetry (Snapshot): Oil Press: 89.00 | Vib: 0.159 | CHT 1: 58.4
+   - AI Classification: NORMAL
+   - AI Confidence: None
+   - Severity: NORMAL
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: OVERHEATING
+   - Expected Result: PASS
+   - Actual Result: FAIL
+
+### Condition: low_oil_pressure
+A. Production behavior:
+   - Simulator Fault Activated: Unknown
+   - Telemetry (Snapshot): Oil Press: 81.90 | Vib: 0.162 | CHT 1: 60.4
+   - AI Classification: OIL_PRESSURE_DEGRADATION
+   - AI Confidence: None
+   - Severity: WARNING
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: OIL_PRESSURE_DEGRADATION
+   - Expected Result: PASS
+   - Actual Result: PASS
+
+### Condition: excessive_vibration
+A. Production behavior:
+   - Simulator Fault Activated: Unknown
+   - Telemetry (Snapshot): Oil Press: 77.00 | Vib: 0.171 | CHT 1: 60.1
+   - AI Classification: OIL_PRESSURE_DEGRADATION
+   - AI Confidence: None
+   - Severity: CRITICAL
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: EXCESSIVE_VIBRATION
+   - Expected Result: PASS
+   - Actual Result: FAIL
+
+### Condition: sensor_drift
+A. Production behavior:
+   - Simulator Fault Activated: Unknown
+   - Telemetry (Snapshot): Oil Press: 73.90 | Vib: 0.170 | CHT 1: 60.4
+   - AI Classification: OIL_PRESSURE_DEGRADATION
+   - AI Confidence: None
+   - Severity: CRITICAL
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: SENSOR_DRIFT
+   - Expected Result: PASS
+   - Actual Result: FAIL
+
+### Condition: misfire
+A. Production behavior:
+   - Simulator Fault Activated: Unknown
+   - Telemetry (Snapshot): Oil Press: 71.50 | Vib: 0.169 | CHT 1: 59.6
+   - AI Classification: OIL_PRESSURE_DEGRADATION
+   - AI Confidence: None
+   - Severity: CRITICAL
+   - Mission Risk: None
+B. Audit/evidence behavior:
+   - Route: ['Delhi', 'Jaipur']
+   - FLIGHT CLOSED Event Generated: False
+   - Database Persistence: Not Verified
+C. Expected behavior:
+   - Expected Classification: MISFIRE
+   - Expected Result: PASS
+   - Actual Result: FAIL
+
+### Summary Table
+Condition            | Simulator Fault Injected | AI Classification         | Expected Classification  | PASS/FAIL | FLIGHT CLOSED
+-----------------------------------------------------------------------------------------------------------------------------
+Healthy              | None                   | NORMAL                    | NORMAL                   | PASS      | False
+overheating          | Unknown                | NORMAL                    | OVERHEATING              | FAIL      | False
+low_oil_pressure     | Unknown                | OIL_PRESSURE_DEGRADATION  | OIL_PRESSURE_DEGRADATION | PASS      | False
+excessive_vibration  | Unknown                | OIL_PRESSURE_DEGRADATION  | EXCESSIVE_VIBRATION      | FAIL      | False
+sensor_drift         | Unknown                | OIL_PRESSURE_DEGRADATION  | SENSOR_DRIFT             | FAIL      | False
+misfire              | Unknown                | OIL_PRESSURE_DEGRADATION  | MISFIRE                  | FAIL      | False
+
+
+### Investigations
+
+1. **Does Healthy produce any phantom fault?**
+   - Result: See the table above. If Healthy does not map to 'NORMAL', it produces a phantom fault (usually SENSOR_DRIFT or OIL_PRESSURE_DEGRADATION) due to normal operational thresholds tripping naive bounds.
+
+2. **Is Excessive vibration intentionally mapped to combustion instability/misfire?**
+   - Result: Yes. In `server.py`, the translation dict specifically maps `"excessive_vibration": "combustion_instability"`. Thus, the simulator generates combustion instability effects, which the AI might classify differently (e.g., MISFIRE) depending on downstream mappings.
+
+3. **Is Overheating intentionally mapped to cooling degradation?**
+   - Result: Yes. In `server.py`, the dictionary maps `"overheating": "cooling"`. The backend triggers a cooling subsystem failure.
+
+4. **Is Low oil pressure handled by rules or ML?**
+   - Result: It is handled by deterministic rules. In `intelligence/fault_classifier.py` (line 86-87):
+     `elif oil_pressure_signed < -2.0 and vibration < 0.25: predicted = "OIL_PRESSURE_DEGRADATION"`
+
+5. **Is FLIGHT CLOSED actually generated but simply missed by the audit?**
+   - Result: See the 'FLIGHT CLOSED' column in the table. The `api/events` endpoint often fails to register a 'FLIGHT CLOSED' event when transitioning back to IDLE due to the way `_reset_locked` operates without appending the closing event tracking state correctly.

@@ -1,0 +1,1053 @@
+CASE 2 — COOLING_DEGRADATION
+============================================================
+
+FAULT REQUESTED:
+COOLING_DEGRADATION
+
+MISSION:
+Delhi → Mumbai
+
+INTERMEDIATE WAYPOINT:
+NONE
+
+INITIAL ALTITUDE:
+N/A — field not exposed by API
+
+INITIAL AIRSPEED:
+N/A — field not exposed by API
+
+------------------------------------------------------------
+INITIAL PRE-START STATE
+------------------------------------------------------------
+
+{
+  "timestamp": 1789362791.200351,
+  "uav": {
+    "status": "READY",
+    "altitude_m": 0.0,
+    "speed_mps": 0.0,
+    "heading": 45.0,
+    "progress": 0.0,
+    "position": {
+      "lat": 28.6139,
+      "lng": 77.209
+    },
+    "distance_to_next_km": 0.0
+  },
+  "flight_path": {
+    "waypoints": [
+      {
+        "lat": 19.076,
+        "lng": 72.8777
+      }
+    ],
+    "route": [
+      {
+        "lat": 28.6139,
+        "lng": 77.209
+      },
+      {
+        "lat": 19.076,
+        "lng": 72.8777
+      }
+    ],
+    "following": true
+  },
+  "engine": {
+    "status": "HEALTHY",
+    "rpm": 2930.0,
+    "cht_c": 50.400000000000006,
+    "egt_c": 50.800000000000004,
+    "oil_temperature_c": 49.6,
+    "oil_pressure_psi": 85.5,
+    "vibration_rms": 0.162,
+    "fuel_flow_kg_s": 0.00068,
+    "throttle_pct": 0.0,
+    "load_pct": 28.9584740089578,
+    "torque_nm": 22.200000000000003,
+    "intake_pressure_kpa": 28.09,
+    "battery_voltage_v": 24.056818427119822,
+    "battery_soc": 1.0,
+    "battery_current_a": 3.5427644323762313,
+    "alternator_power_w": 585.2276406797332,
+    "injection_timing_nominal_deg": 18.79,
+    "injection_timing_actual_deg": 18.79,
+    "injection_timing_deviation_deg": 0.0
+  },
+  "digital_twin": {
+    "status": "SYNCHRONIZED",
+    "telemetry_rate_hz": 10.0,
+    "simulation_time_s": 0.0,
+    "health_pct": 100.0,
+    "fault": "NORMAL",
+    "active_fault_name": "",
+    "fault_severity": 0.0,
+    "ai_health": 100.0,
+    "ai_severity": "NORMAL",
+    "ai_fault": "NORMAL",
+    "ai_confidence": 1.0,
+    "intelligence_mode": "MACHINE_LEARNING"
+  },
+  "mission": {
+    "id": "AT-001",
+    "name": "Cruise ISR",
+    "key": "cruise_isr",
+    "phase": "GROUND",
+    "progress": 0.0,
+    "elapsed_s": 0.0,
+    "running": false,
+    "paused": false,
+    "status": "PLANNED",
+    "route": [
+      "Delhi",
+      "Mumbai"
+    ],
+    "base": "Delhi",
+    "risk_level": "CLEAR",
+    "return_recommended": false,
+    "risk_message": "MISSION STABLE"
+  },
+  "telemetry_status": "READY",
+  "alerts": [],
+  "telemetry": {
+    "rpm": 2930.0,
+    "manifold_pressure_kpa": 28.09,
+    "intake_temperature_c": 0.1,
+    "fuel_flow_kg_s": 0.00068,
+    "torque_nm": 22.200000000000003,
+    "power_kw": 7.2700000000000005,
+    "cht_cylinder_1_c": 50.400000000000006,
+    "cht_cylinder_2_c": 49.7,
+    "cht_cylinder_3_c": 49.5,
+    "cht_cylinder_4_c": 49.400000000000006,
+    "egt_cylinder_1_c": 47.7,
+    "egt_cylinder_2_c": 48.800000000000004,
+    "egt_cylinder_3_c": 50.800000000000004,
+    "egt_cylinder_4_c": 48.7,
+    "oil_temperature_c": 49.6,
+    "oil_pressure_psi": 85.5,
+    "oil_flow_l_min": 0.16,
+    "battery_voltage_v": 24.1,
+    "battery_current_a": 3.49,
+    "battery_soc": 1.0,
+    "vibration_rms": 0.162,
+    "vibration_peak": 0.389,
+    "vibration_0_5x": 0.02,
+    "vibration_1x": 0.105,
+    "vibration_2x": 0.051000000000000004,
+    "alternator_power_w": 588.0,
+    "injection_timing_nominal_deg": 18.8,
+    "injection_timing_actual_deg": 18.8,
+    "injection_timing_deviation_deg": 0.0
+  },
+  "intelligence": {
+    "expected": {
+      "expected_cht": 59.621449999999996,
+      "expected_egt": 66.914,
+      "expected_oil_temperature": 91.4845,
+      "expected_oil_pressure": 85.98750000000001,
+      "expected_fuel_flow": 1e-05,
+      "expected_vibration": 0.148185,
+      "expected_alternator_power_w": 585.2216303982731,
+      "expected_rpm": 2930.0,
+      "expected_throttle_pct": 0.0,
+      "expected_altitude_m": 0.0,
+      "expected_torque_nm": 22.200000000000003,
+      "expected_power_kw": 7.2700000000000005,
+      "expected_pressure_kpa": 28.371000000000002,
+      "expected_ambient_temperature_c": 15.0,
+      "expected_air_density_kg_m3": 1.225000018124288
+    },
+    "deviations": {
+      "cht_deviation": {
+        "value": -9.22144999999999,
+        "absolute": 9.22144999999999,
+        "normalized": -0.7684541666666659,
+        "percent": 15.466665101234522,
+        "direction": "NEGATIVE",
+        "magnitude": 9.22144999999999
+      },
+      "egt_deviation": {
+        "value": -16.113999999999997,
+        "absolute": 16.113999999999997,
+        "normalized": -0.895222222222222,
+        "percent": 24.081657052335828,
+        "direction": "NEGATIVE",
+        "magnitude": 16.113999999999997
+      },
+      "oil_temperature_deviation": {
+        "value": -41.884499999999996,
+        "absolute": 41.884499999999996,
+        "normalized": -3.490375,
+        "percent": 45.78316545425727,
+        "direction": "NEGATIVE",
+        "magnitude": 41.884499999999996
+      },
+      "oil_pressure_deviation": {
+        "value": -0.48750000000001137,
+        "absolute": 0.48750000000001137,
+        "normalized": -0.06093750000000142,
+        "percent": 0.5669428696031532,
+        "direction": "NEGATIVE",
+        "magnitude": 0.48750000000001137
+      },
+      "fuel_flow_deviation": {
+        "value": 0.00067,
+        "absolute": 0.00067,
+        "normalized": 1.9142857142857144,
+        "percent": 191.42857142857144,
+        "direction": "POSITIVE",
+        "magnitude": 0.00067
+      },
+      "vibration_deviation": {
+        "value": 0.013814999999999994,
+        "absolute": 0.013814999999999994,
+        "normalized": 0.11512499999999995,
+        "percent": 9.322805952019431,
+        "direction": "POSITIVE",
+        "magnitude": 0.013814999999999994
+      },
+      "alternator_power_deviation": {
+        "value": 2.778369601726922,
+        "absolute": 2.778369601726922,
+        "normalized": 0.05556739203453844,
+        "percent": 0.47475511112535274,
+        "direction": "POSITIVE",
+        "magnitude": 2.778369601726922
+      }
+    },
+    "features": {
+      "rpm": 2930.0,
+      "throttle_pct": 0.0,
+      "altitude_m": 0.0,
+      "ambient_temperature_c": 15.0,
+      "pressure_kpa": 28.371000000000002,
+      "fuel_flow_kg_s": 0.00068,
+      "oil_temperature_c": 49.6,
+      "oil_pressure_psi": 85.5,
+      "vibration_rms": 0.162,
+      "torque_nm": 22.200000000000003,
+      "power_kw": 7.2700000000000005,
+      "engine_load_pct": 7.23961850223945,
+      "expected_cht": 59.621449999999996,
+      "expected_egt": 66.914,
+      "expected_oil_temperature": 91.4845,
+      "expected_oil_pressure": 85.98750000000001,
+      "expected_fuel_flow": 1e-05,
+      "expected_vibration": 0.148185,
+      "cht_deviation": -9.22144999999999,
+      "egt_deviation": -16.113999999999997,
+      "oil_temperature_deviation": -41.884499999999996,
+      "oil_pressure_deviation": -0.48750000000001137,
+      "fuel_flow_deviation": 0.00067,
+      "vibration_deviation": 0.013814999999999994,
+      "alternator_power_deviation": 2.778369601726922,
+      "injection_timing_deviation_deg": 0.0,
+      "thermal_deviation_consistency": 25.335449999999987,
+      "cross_sensor_alignment": 0.22016378373335788,
+      "rolling_mean": 0.0,
+      "rolling_std": 0.0,
+      "rate_of_change": 0.0,
+      "slope": 0.0,
+      "persistence": 0.0
+    },
+    "anomaly": {
+      "score": 0.1523809523809524,
+      "is_anomaly": false,
+      "normalized_score": 0.1523809523809524,
+      "threshold": 0.55
+    },
+    "fault_classification": {
+      "fault_type": "NORMAL",
+      "confidence": 1.0,
+      "probabilities": {
+        "NORMAL": 1.0
+      }
+    },
+    "sensor_fault_analysis": {
+      "engine_fault_evidence": 0.0,
+      "sensor_fault_evidence": 0.0,
+      "ambiguous_evidence": 0.0,
+      "likely_condition": "AMBIGUOUS"
+    },
+    "thermal_condition": "NORMAL",
+    "trend": {
+      "persistence": 0.2285714285714286,
+      "direction": "stable"
+    },
+    "health": {
+      "score": 100.0,
+      "severity": "NORMAL"
+    },
+    "severity": "NORMAL",
+    "diagnosis": {
+      "title": "NORMAL ENGINE OPERATION",
+      "severity": "NORMAL",
+      "fault_type": "NORMAL",
+      "confidence": 0.707,
+      "primary_signal": "thermal_deviation",
+      "evidence": [
+        "EGT above expectation for current operating conditions.",
+        "CHT above expectation for current operating conditions."
+      ],
+      "supporting_signals": [
+        "Physics expectation comparison",
+        "Trend persistence",
+        "Cross-sensor consistency"
+      ],
+      "contradictory_signals": [
+        "No contradictory sensor evidence"
+      ],
+      "interpretation": "AERIS-TWIN is performing preflight checks. Sensor data is nominal.",
+      "recommended_action": "System ready for mission start.",
+      "timestamp": null,
+      "persistence_duration": 0.0,
+      "anomaly_score": 0.152,
+      "classification_conflict": false
+    },
+    "rul": {
+      "available": true,
+      "estimated_rul": 71.44396666666782,
+      "raw_estimated_rul": 71.44396666666782,
+      "filtered_estimated_rul": 71.44396666666782,
+      "confidence": null,
+      "status": "EXPERIMENTAL",
+      "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+    }
+  },
+  "events": [
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-cb9468fc"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-321f22bb"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-d742f8c0"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-23c3cd0b"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-77febd1e"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    }
+  ]
+}
+
+FAULT INJECTION VERIFIED
+
+------------------------------------------------------------
+T+1s SIMULATION CHECKPOINT
+------------------------------------------------------------
+
+Requested Simulation Time:
+T+1.00s
+
+Actual Simulation Time:
+T+1.30s
+
+EXPECTED FAULT:
+COOLING_DEGRADATION
+BACKEND ACTIVE FAULT:
+cooling_degradation
+BACKEND FAULT SEVERITY:
+0.8
+AI FAULT:
+COOLING_DEGRADATION
+
+GCS:
+{
+  "uav": {
+    "status": "FLYING",
+    "altitude_m": 3500.0,
+    "speed_mps": 32.0,
+    "heading": 201.74834254523955,
+    "progress": 0.0016470588235294123,
+    "position": {
+      "lat": 28.537658765210725,
+      "lng": 77.17437773930921
+    },
+    "distance_to_next_km": 1131.8657615810246
+  },
+  "mission": {
+    "id": "AT-001",
+    "name": "Cruise ISR",
+    "key": "cruise_isr",
+    "phase": "GROUND",
+    "progress": 0.0016470588235294123,
+    "elapsed_s": 2.1000000000000005,
+    "running": true,
+    "paused": false,
+    "status": "IN_FLIGHT",
+    "route": [
+      "Delhi",
+      "Mumbai"
+    ],
+    "base": "Delhi",
+    "risk_level": "CLEAR",
+    "return_recommended": false,
+    "risk_message": "MISSION STABLE"
+  },
+  "flight_path": {
+    "waypoints": [
+      {
+        "lat": 19.076,
+        "lng": 72.8777
+      }
+    ],
+    "route": [
+      {
+        "lat": 28.6139,
+        "lng": 77.209
+      },
+      {
+        "lat": 19.076,
+        "lng": 72.8777
+      }
+    ],
+    "following": true
+  },
+  "telemetry_status": "LIVE"
+}
+
+ENGINE HEALTH:
+{
+  "engine": {
+    "status": "HEALTHY",
+    "rpm": 1902.0,
+    "cht_c": 51.400000000000006,
+    "egt_c": 49.400000000000006,
+    "oil_temperature_c": 50.7,
+    "oil_pressure_psi": 82.0,
+    "vibration_rms": 0.2,
+    "fuel_flow_kg_s": 0.00036,
+    "throttle_pct": 0.0,
+    "load_pct": 10.462813473494393,
+    "torque_nm": 13.4,
+    "intake_pressure_kpa": 19.86,
+    "battery_voltage_v": 24.57434158628569,
+    "battery_soc": 0.9999264427167448,
+    "battery_current_a": -6.362220042427195,
+    "alternator_power_w": 343.6526314302811,
+    "injection_timing_nominal_deg": 15.706,
+    "injection_timing_actual_deg": 15.706,
+    "injection_timing_deviation_deg": 0.0
+  },
+  "digital_twin": {
+    "status": "SYNCHRONIZED",
+    "telemetry_rate_hz": 10.0,
+    "simulation_time_s": 2.1000000000000005,
+    "health_pct": 82.1,
+    "fault": "COOLING_DEGRADATION",
+    "active_fault_name": "cooling_degradation",
+    "fault_severity": 0.8,
+    "ai_health": 82.08,
+    "ai_severity": "INFORMATION",
+    "ai_fault": "COOLING_DEGRADATION",
+    "ai_confidence": 0.81,
+    "intelligence_mode": "MACHINE_LEARNING"
+  },
+  "telemetry": {
+    "rpm": 1902.0,
+    "manifold_pressure_kpa": 19.86,
+    "intake_temperature_c": -0.6000000000000001,
+    "fuel_flow_kg_s": 0.00036,
+    "torque_nm": 13.4,
+    "power_kw": 2.67,
+    "cht_cylinder_1_c": 49.1,
+    "cht_cylinder_2_c": 48.800000000000004,
+    "cht_cylinder_3_c": 49.5,
+    "cht_cylinder_4_c": 51.400000000000006,
+    "egt_cylinder_1_c": 47.5,
+    "egt_cylinder_2_c": 48.6,
+    "egt_cylinder_3_c": 47.400000000000006,
+    "egt_cylinder_4_c": 49.400000000000006,
+    "oil_temperature_c": 50.7,
+    "oil_pressure_psi": 82.0,
+    "oil_flow_l_min": 0.13,
+    "battery_voltage_v": 24.59,
+    "battery_current_a": -6.3,
+    "battery_soc": 0.998,
+    "vibration_rms": 0.2,
+    "vibration_peak": 0.422,
+    "vibration_0_5x": 0.02,
+    "vibration_1x": 0.132,
+    "vibration_2x": 0.028,
+    "alternator_power_w": 342.0,
+    "injection_timing_nominal_deg": 15.700000000000001,
+    "injection_timing_actual_deg": 15.700000000000001,
+    "injection_timing_deviation_deg": 0.0
+  },
+  "intelligence": {
+    "expected": {
+      "expected_cht": 40.43203,
+      "expected_egt": 26.982099999999996,
+      "expected_oil_temperature": 72.0608,
+      "expected_oil_pressure": 82.13250000000001,
+      "expected_fuel_flow": 1e-05,
+      "expected_vibration": 0.157559,
+      "expected_alternator_power_w": 343.6171486347569,
+      "expected_rpm": 1902.0,
+      "expected_throttle_pct": 0.0,
+      "expected_altitude_m": 3500.0,
+      "expected_torque_nm": 13.4,
+      "expected_power_kw": 2.67,
+      "expected_pressure_kpa": 20.0,
+      "expected_ambient_temperature_c": -7.75,
+      "expected_air_density_kg_m3": 0.8632286260247354
+    },
+    "deviations": {
+      "cht_deviation": {
+        "value": 10.967970000000008,
+        "absolute": 10.967970000000008,
+        "normalized": 0.9139975000000007,
+        "percent": 27.1269337700828,
+        "direction": "POSITIVE",
+        "magnitude": 10.967970000000008
+      },
+      "egt_deviation": {
+        "value": 22.41790000000001,
+        "absolute": 22.41790000000001,
+        "normalized": 1.2454388888888894,
+        "percent": 83.08434110021093,
+        "direction": "POSITIVE",
+        "magnitude": 22.41790000000001
+      },
+      "oil_temperature_deviation": {
+        "value": -21.360799999999998,
+        "absolute": 21.360799999999998,
+        "normalized": -1.7800666666666665,
+        "percent": 29.642746125494025,
+        "direction": "NEGATIVE",
+        "magnitude": 21.360799999999998
+      },
+      "oil_pressure_deviation": {
+        "value": -0.1325000000000074,
+        "absolute": 0.1325000000000074,
+        "normalized": -0.016562500000000924,
+        "percent": 0.16132468876511413,
+        "direction": "NEGATIVE",
+        "magnitude": 0.1325000000000074
+      },
+      "fuel_flow_deviation": {
+        "value": 0.00035,
+        "absolute": 0.00035,
+        "normalized": 1.0,
+        "percent": 100.0,
+        "direction": "POSITIVE",
+        "magnitude": 0.00035
+      },
+      "vibration_deviation": {
+        "value": 0.042441000000000006,
+        "absolute": 0.042441000000000006,
+        "normalized": 0.3536750000000001,
+        "percent": 26.936576139731788,
+        "direction": "POSITIVE",
+        "magnitude": 0.042441000000000006
+      },
+      "alternator_power_deviation": {
+        "value": -1.6171486347569157,
+        "absolute": 1.6171486347569157,
+        "normalized": -0.03234297269513831,
+        "percent": 0.4706251248466768,
+        "direction": "NEGATIVE",
+        "magnitude": 1.6171486347569157
+      }
+    },
+    "features": {
+      "rpm": 1902.0,
+      "throttle_pct": 0.0,
+      "altitude_m": 3500.0,
+      "ambient_temperature_c": -7.75,
+      "pressure_kpa": 20.0,
+      "fuel_flow_kg_s": 0.00036,
+      "oil_temperature_c": 50.7,
+      "oil_pressure_psi": 82.0,
+      "vibration_rms": 0.2,
+      "torque_nm": 13.4,
+      "power_kw": 2.67,
+      "engine_load_pct": 2.615703368373598,
+      "expected_cht": 40.43203,
+      "expected_egt": 26.982099999999996,
+      "expected_oil_temperature": 72.0608,
+      "expected_oil_pressure": 82.13250000000001,
+      "expected_fuel_flow": 1e-05,
+      "expected_vibration": 0.157559,
+      "cht_deviation": 10.967970000000008,
+      "egt_deviation": 22.41790000000001,
+      "oil_temperature_deviation": -21.360799999999998,
+      "oil_pressure_deviation": -0.1325000000000074,
+      "fuel_flow_deviation": 0.00035,
+      "vibration_deviation": 0.042441000000000006,
+      "alternator_power_deviation": -1.6171486347569157,
+      "injection_timing_deviation_deg": 0.0,
+      "thermal_deviation_consistency": 33.38587000000002,
+      "cross_sensor_alignment": 0.5134625107433498,
+      "cht_deviation_rolling_mean": 10.092173000000006,
+      "cht_deviation_rolling_std": 0.7019281357097765,
+      "cht_deviation_rate_of_change": -0.10026833333333308,
+      "cht_deviation_slope": -0.10026833333333308,
+      "cht_deviation_persistence": 0.9201495809233476,
+      "egt_deviation_rolling_mean": 18.13886,
+      "egt_deviation_rolling_std": 3.556978417477398,
+      "egt_deviation_rate_of_change": 1.2274666666666678,
+      "egt_deviation_slope": 1.2274666666666678,
+      "egt_deviation_persistence": 0.8091239589431155,
+      "oil_temperature_deviation_rolling_mean": -22.139969999999998,
+      "oil_temperature_deviation_rolling_std": 0.5090026739615421,
+      "oil_temperature_deviation_rate_of_change": -0.062016666666665624,
+      "oil_temperature_deviation_slope": -0.062016666666665624,
+      "oil_temperature_deviation_persistence": 1.0,
+      "oil_pressure_deviation_rolling_mean": 0.01575000000000415,
+      "oil_pressure_deviation_rolling_std": 0.4667481253309939,
+      "oil_pressure_deviation_rate_of_change": 0.08430555555555468,
+      "oil_pressure_deviation_slope": 0.08430555555555468,
+      "oil_pressure_deviation_persistence": 0.01575000000000415,
+      "fuel_flow_deviation_rolling_mean": 0.000279,
+      "fuel_flow_deviation_rolling_std": 4.988987873306569e-05,
+      "fuel_flow_deviation_rate_of_change": -1.4444444444444446e-05,
+      "fuel_flow_deviation_slope": -1.4444444444444446e-05,
+      "fuel_flow_deviation_persistence": 0.000279,
+      "vibration_deviation_rolling_mean": 0.0534069,
+      "vibration_deviation_rolling_std": 0.008229602608267304,
+      "vibration_deviation_rate_of_change": 0.0007500555555555609,
+      "vibration_deviation_slope": 0.0007500555555555609,
+      "vibration_deviation_persistence": 0.0534069
+    },
+    "anomaly": {
+      "score": 0.04090648148148157,
+      "is_anomaly": false,
+      "normalized_score": 0.04090648148148157,
+      "threshold": 0.55
+    },
+    "fault_classification": {
+      "fault_type": "COOLING_DEGRADATION",
+      "confidence": 0.81,
+      "probabilities": {
+        "COMBUSTION_INSTABILITY": 0.016666666666666666,
+        "COOLING_DEGRADATION": 0.81,
+        "EXCESSIVE_VIBRATION": 0.0,
+        "INJECTOR_ABNORMALITY": 0.043333333333333335,
+        "MISFIRE": 0.013333333333333334,
+        "NORMAL": 0.03666666666666667,
+        "OIL_PRESSURE_DEGRADATION": 0.006666666666666667,
+        "SENSOR_DRIFT": 0.07333333333333333
+      }
+    },
+    "sensor_fault_analysis": {
+      "engine_fault_evidence": 0.0,
+      "sensor_fault_evidence": 0.0,
+      "ambiguous_evidence": 0.0,
+      "likely_condition": "AMBIGUOUS"
+    },
+    "thermal_condition": "NORMAL",
+    "trend": {
+      "persistence": 0.06135972222222236,
+      "direction": "stable"
+    },
+    "health": {
+      "score": 82.08,
+      "severity": "INFORMATION"
+    },
+    "severity": "INFORMATION",
+    "diagnosis": {
+      "title": "Cooling Degradation",
+      "severity": "INFORMATION",
+      "fault_type": "COOLING_DEGRADATION",
+      "confidence": 0.81,
+      "primary_signal": "thermal_deviation",
+      "evidence": [
+        "EGT above expectation for current operating conditions.",
+        "CHT above expectation for current operating conditions."
+      ],
+      "supporting_signals": [
+        "Physics expectation comparison",
+        "Trend persistence",
+        "Cross-sensor consistency"
+      ],
+      "contradictory_signals": [
+        "No contradictory sensor evidence"
+      ],
+      "interpretation": "The system is showing degraded cooling performance.",
+      "recommended_action": "Advise checking cooling system and thermal management.",
+      "timestamp": null,
+      "persistence_duration": 0.0,
+      "anomaly_score": 0.041,
+      "classification_conflict": false
+    },
+    "rul": {
+      "available": true,
+      "estimated_rul": 73.30595000000204,
+      "raw_estimated_rul": 70.86831666666784,
+      "filtered_estimated_rul": 73.30595000000204,
+      "confidence": null,
+      "status": "EXPERIMENTAL",
+      "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."
+    }
+  }
+}
+
+BLACK BOX:
+{
+  "events": [
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-a5080b9b"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-cb9468fc"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-321f22bb"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-d742f8c0"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-23c3cd0b"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    },
+    {
+      "kind": "command",
+      "message": "Reset acknowledged"
+    },
+    {
+      "kind": "info",
+      "message": "Simulation reset"
+    },
+    {
+      "kind": "command",
+      "message": "Start Uav acknowledged"
+    },
+    {
+      "kind": "flight",
+      "message": "FLIGHT SESSION STARTED: aeris-77febd1e"
+    },
+    {
+      "kind": "command",
+      "message": "Inject Fault acknowledged"
+    },
+    {
+      "kind": "command",
+      "message": "Set Mission Route acknowledged"
+    },
+    {
+      "kind": "mission",
+      "message": "MISSION PLANNED: Delhi \u2192 Mumbai"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "fault_cooling_degradation",
+      "level": "warning",
+      "text": "COOLING DEGRADATION"
+    }
+  ]
+}
+
+------------------------------------------------------------
+CASE RESULT
+------------------------------------------------------------
+
+Requested Fault:
+COOLING_DEGRADATION
+
+Injection HTTP:
+200
+
+Injection Response:
+{"ok": true, "state": {"timestamp": 1789362802.4272575, "uav": {"status": "READY", "altitude_m": 0.0, "speed_mps": 0.0, "heading": 45.0, "progress": 7.843137254901961e-05, "position": {"lat": 28.6139, "lng": 77.209}, "distance_to_next_km": 1140.8727731892875}, "flight_path": {"waypoints": [{"lat": 19.076, "lng": 72.8777}], "route": [{"lat": 28.6139, "lng": 77.209}, {"lat": 19.076, "lng": 72.8777}], "following": true}, "engine": {"status": "HEALTHY", "rpm": 2865.0, "cht_c": 50.2, "egt_c": 50.5, "oil_temperature_c": 50.6, "oil_pressure_psi": 85.5, "vibration_rms": 0.209, "fuel_flow_kg_s": 0.00064, "throttle_pct": 0.0, "load_pct": 28.20881394414649, "torque_nm": 22.8, "intake_pressure_kpa": 28.48, "battery_voltage_v": 24.047300449571527, "battery_soc": 1.0, "battery_current_a": 2.9504631717842833, "alternator_power_w": 570.9506743572924, "injection_timing_nominal_deg": 18.589, "injection_timing_actual_deg": 18.589, "injection_timing_deviation_deg": 0.0}, "digital_twin": {"status": "SYNCHRONIZED", "telemetry_rate_hz": 10.0, "simulation_time_s": 0.1, "health_pct": 79.7, "fault": "COOLING_DEGRADATION", "active_fault_name": "cooling_degradation", "fault_severity": 0.8, "ai_health": 79.73, "ai_severity": "INFORMATION", "ai_fault": "COOLING_DEGRADATION", "ai_confidence": 0.9133333333333333, "intelligence_mode": "MACHINE_LEARNING"}, "mission": {"id": "AT-001", "name": "Cruise ISR", "key": "cruise_isr", "phase": "GROUND", "progress": 7.843137254901961e-05, "elapsed_s": 0.1, "running": false, "paused": false, "status": "PLANNED", "route": ["Delhi", "Mumbai"], "base": "Delhi", "risk_level": "CLEAR", "return_recommended": false, "risk_message": "MISSION STABLE"}, "telemetry_status": "READY", "alerts": [{"id": "fault_cooling_degradation", "level": "warning", "text": "COOLING DEGRADATION"}], "telemetry": {"rpm": 2865.0, "manifold_pressure_kpa": 28.48, "intake_temperature_c": 0.6000000000000001, "fuel_flow_kg_s": 0.00064, "torque_nm": 22.8, "power_kw": 7.0600000000000005, "cht_cylinder_1_c": 49.300000000000004, "cht_cylinder_2_c": 49.300000000000004, "cht_cylinder_3_c": 50.2, "cht_cylinder_4_c": 47.6, "egt_cylinder_1_c": 50.2, "egt_cylinder_2_c": 49.6, "egt_cylinder_3_c": 50.5, "egt_cylinder_4_c": 49.800000000000004, "oil_temperature_c": 50.6, "oil_pressure_psi": 85.5, "oil_flow_l_min": 0.15, "battery_voltage_v": 24.09, "battery_current_a": 3.02, "battery_soc": 0.998, "vibration_rms": 0.209, "vibration_peak": 0.372, "vibration_0_5x": 0.014, "vibration_1x": 0.134, "vibration_2x": 0.02, "alternator_power_w": 570.0, "injection_timing_nominal_deg": 18.6, "injection_timing_actual_deg": 18.6, "injection_timing_deviation_deg": 0.0}, "intelligence": {"expected": {"expected_cht": 59.571725, "expected_egt": 65.30199999999999, "expected_oil_temperature": 91.37725, "expected_oil_pressure": 85.74375, "expected_fuel_flow": 1e-05, "expected_vibration": 0.1478925, "expected_alternator_power_w": 571.3542190916647, "expected_rpm": 2865.0, "expected_throttle_pct": 0.0, "expected_altitude_m": 0.0, "expected_torque_nm": 22.8, "expected_power_kw": 7.0600000000000005, "expected_pressure_kpa": 28.371000000000002, "expected_ambient_temperature_c": 15.0, "expected_air_density_kg_m3": 1.225000018124288}, "deviations": {"cht_deviation": {"value": -9.371724999999998, "absolute": 9.371724999999998, "normalized": -0.7809770833333332, "percent": 15.731834188115249, "direction": "NEGATIVE", "magnitude": 9.371724999999998}, "egt_deviation": {"value": -14.801999999999992, "absolute": 14.801999999999992, "normalized": -0.8223333333333329, "percent": 22.66699335395546, "direction": "NEGATIVE", "magnitude": 14.801999999999992}, "oil_temperature_deviation": {"value": -40.77725, "absolute": 40.77725, "normalized": -3.3981041666666667, "percent": 44.62516654856652, "direction": "NEGATIVE", "magnitude": 40.77725}, "oil_pressure_deviation": {"value": -0.24375000000000568, "absolute": 0.24375000000000568, "normalized": -0.03046875000000071, "percent": 0.28427727968511485, "direction": "NEGATIVE", "magnitude": 0.24375000000000568}, "fuel_flow_deviation": {"value": 0.00063, "absolute": 0.00063, "normalized": 1.8, "percent": 180.0, "direction": "POSITIVE", "magnitude": 0.00063}, "vibration_deviation": {"value": 0.06110749999999998, "absolute": 0.06110749999999998, "normalized": 0.5092291666666665, "percent": 41.31886336359179, "direction": "POSITIVE", "magnitude": 0.06110749999999998}, "alternator_power_deviation": {"value": -1.3542190916647314, "absolute": 1.3542190916647314, "normalized": -0.02708438183329463, "percent": 0.23701918116884832, "direction": "NEGATIVE", "magnitude": 1.3542190916647314}}, "features": {"rpm": 2865.0, "throttle_pct": 0.0, "altitude_m": 0.0, "ambient_temperature_c": 15.0, "pressure_kpa": 28.371000000000002, "fuel_flow_kg_s": 0.00064, "oil_temperature_c": 50.6, "oil_pressure_psi": 85.5, "vibration_rms": 0.209, "torque_nm": 22.8, "power_kw": 7.0600000000000005, "engine_load_pct": 7.052203486036622, "expected_cht": 59.571725, "expected_egt": 65.30199999999999, "expected_oil_temperature": 91.37725, "expected_oil_pressure": 85.74375, "expected_fuel_flow": 1e-05, "expected_vibration": 0.1478925, "cht_deviation": -9.371724999999998, "egt_deviation": -14.801999999999992, "oil_temperature_deviation": -40.77725, "oil_pressure_deviation": -0.24375000000000568, "fuel_flow_deviation": 0.00063, "vibration_deviation": 0.06110749999999998, "alternator_power_deviation": -1.3542190916647314, "injection_timing_deviation_deg": 0.0, "thermal_deviation_consistency": 24.17372499999999, "cross_sensor_alignment": 0.22982729339938743, "cht_deviation_rolling_mean": -9.22144999999999, "cht_deviation_rolling_std": 0.0, "cht_deviation_rate_of_change": 0.0, "cht_deviation_slope": 0.0, "cht_deviation_persistence": 0.9839650650244247, "egt_deviation_rolling_mean": -16.113999999999997, "egt_deviation_rolling_std": 0.0, "egt_deviation_rate_of_change": 0.0, "egt_deviation_slope": 0.0, "egt_deviation_persistence": 1.0, "oil_temperature_deviation_rolling_mean": -41.884499999999996, "oil_temperature_deviation_rolling_std": 0.0, "oil_temperature_deviation_rate_of_change": 0.0, "oil_temperature_deviation_slope": 0.0, "oil_temperature_deviation_persistence": 1.0, "oil_pressure_deviation_rolling_mean": -0.48750000000001137, "oil_pressure_deviation_rolling_std": 0.0, "oil_pressure_deviation_rate_of_change": 0.0, "oil_pressure_deviation_slope": 0.0, "oil_pressure_deviation_persistence": 0.48750000000001137, "fuel_flow_deviation_rolling_mean": 0.00067, "fuel_flow_deviation_rolling_std": 0.0, "fuel_flow_deviation_rate_of_change": 0.0, "fuel_flow_deviation_slope": 0.0, "fuel_flow_deviation_persistence": 0.00067, "vibration_deviation_rolling_mean": 0.013814999999999994, "vibration_deviation_rolling_std": 0.0, "vibration_deviation_rate_of_change": 0.0, "vibration_deviation_slope": 0.0, "vibration_deviation_persistence": 0.013814999999999994}, "anomaly": {"score": 0.13333333333333333, "is_anomaly": false, "normalized_score": 0.13333333333333333, "threshold": 0.55}, "fault_classification": {"fault_type": "COOLING_DEGRADATION", "confidence": 0.9133333333333333, "probabilities": {"COMBUSTION_INSTABILITY": 0.056666666666666664, "COOLING_DEGRADATION": 0.9133333333333333, "EXCESSIVE_VIBRATION": 0.0, "INJECTOR_ABNORMALITY": 0.0, "MISFIRE": 0.0, "NORMAL": 0.03, "OIL_PRESSURE_DEGRADATION": 0.0, "SENSOR_DRIFT": 0.0}}, "sensor_fault_analysis": {"engine_fault_evidence": 0.0, "sensor_fault_evidence": 0.0, "ambiguous_evidence": 0.0, "likely_condition": "AMBIGUOUS"}, "thermal_condition": "NORMAL", "trend": {"persistence": 0.2, "direction": "stable"}, "health": {"score": 79.73, "severity": "INFORMATION"}, "severity": "INFORMATION", "diagnosis": {"title": "Cooling Degradation", "severity": "INFORMATION", "fault_type": "COOLING_DEGRADATION", "confidence": 0.913, "primary_signal": "thermal_deviation", "evidence": ["EGT above expectation for current operating conditions.", "CHT above expectation for current operating conditions."], "supporting_signals": ["Physics expectation comparison", "Trend persistence", "Cross-sensor consistency"], "contradictory_signals": ["No contradictory sensor evidence"], "interpretation": "The system is showing degraded cooling performance.", "recommended_action": "Advise checking cooling system and thermal management.", "timestamp": null, "persistence_duration": 0.0, "anomaly_score": 0.133, "classification_conflict": false}, "rul": {"available": true, "estimated_rul": 72.19007500000154, "raw_estimated_rul": 72.93618333333528, "filtered_estimated_rul": 72.19007500000154, "confidence": null, "status": "EXPERIMENTAL", "reason": "Model D predicts accelerated simulation seconds. Not real-world engine hours."}}, "events": [{"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}, {"kind": "command", "message": "Start Uav acknowledged"}, {"kind": "flight", "message": "FLIGHT SESSION STARTED: aeris-cb9468fc"}, {"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}, {"kind": "command", "message": "Start Uav acknowledged"}, {"kind": "flight", "message": "FLIGHT SESSION STARTED: aeris-321f22bb"}, {"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}, {"kind": "command", "message": "Start Uav acknowledged"}, {"kind": "flight", "message": "FLIGHT SESSION STARTED: aeris-d742f8c0"}, {"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}, {"kind": "command", "message": "Start Uav acknowledged"}, {"kind": "flight", "message": "FLIGHT SESSION STARTED: aeris-23c3cd0b"}, {"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}, {"kind": "command", "message": "Start Uav acknowledged"}, {"kind": "flight", "message": "FLIGHT SESSION STARTED: aeris-77febd1e"}, {"kind": "command", "message": "Inject Fault acknowledged"}, {"kind": "command", "message": "Set Mission Route acknowledged"}, {"kind": "mission", "message": "MISSION PLANNED: Delhi \u2192 Mumbai"}, {"kind": "command", "message": "Reset acknowledged"}, {"kind": "info", "message": "Simulation reset"}]}}
+
+Injection Verification:
+PASS
+
+Backend Active Fault:
+cooling_degradation
+
+Backend Fault Severity:
+0.8
+
+Fault State Through Checkpoints:
+PASS
+
+AI Fault:
+COOLING_DEGRADATION
+
+AI Confidence:
+0.51
+
+Health:
+89.8
+
+Anomaly:
+False
+
+Timing:
+FAIL
+
+Classification:
+PASS
+
+Overall Result:
+PASS
+

@@ -1,0 +1,65 @@
+================================================================================
+AERIS-TWIN RUL FOUNDATION FORENSIC VALIDATION (PHASE 1B UPDATED)
+================================================================================
+
+1. IMPLEMENTATION FINDINGS
+--------------------------------------------------------------------------------
+The RUL Foundation implementation in `simulation/engine_simulator.py` tracks progressive degradation natively via `wear_index`. 
+- **Wear update:** Computed at every physical timestep based purely on RPM and thermal stress (no artificial penalties).
+- **Failure state:** Triggers internally when `wear_index >= eol_threshold` (1.0). When `self.failed = True` is reached, the simulator outputs an overridden `EngineState` with `rpm = 0.0`, `power_kw = 0.0`, and `fault_type = "ENGINE_FAILURE"`.
+- **Termination & Telemetry:** `server.py` halts further telemetry writes correctly upon detection of `ENGINE_FAILURE`.
+- **RUL Calculation:** Computed retrospectively in `generate_rul_dataset.py` by subtracting elapsed `time_s` from `eol_time`, and capped at 0.0.
+
+2. EXACT DEGRADATION EQUATION (CALIBRATED)
+--------------------------------------------------------------------------------
+The Phase 1B wear increment per timestep is strictly physics-based:
+```python
+rpm_factor = max(0.0, self.rpm / 4000.0)
+thermal_factor = max(1.0, thermal_state.cht_c[0] / 150.0)
+base_wear = 0.0001 * (rpm_factor ** 2) * (thermal_factor ** 2) * self.dt
+wear_increment = base_wear * self.wear_rate_multiplier
+```
+The artificial `LOITER` phase penalty was removed. The new quadratic scaling was selected after rigorous calibration to ensure harsh profiles naturally degrade the engine faster without causing abrupt, instantaneous failure.
+
+3. TRAJECTORY DIVERSITY ANALYSIS (RESOLVED)
+--------------------------------------------------------------------------------
+In Phase 1, trajectories lacked physical diversity because the simulation was fully deterministic. 
+In Phase 1B, the random seed drives true latent physical variation:
+- Base wear rate multiplier is varied +/- 15% per run.
+- Initial wear is randomized (0.0 to 0.05).
+- Operating conditions (Altitude, Throttle, Load) are subjected to continuous micro-perturbations.
+This ensures that every trajectory is physically unique, avoiding deterministic overfitting.
+
+4. HARSH-TRAJECTORY ANALYSIS (RESOLVED)
+--------------------------------------------------------------------------------
+Previously, HARSH trajectories failed in ~4 seconds due to the static penalty. 
+With the calibrated Phase 1B physics equation, HARSH profiles now average ~53.1 seconds to EOL, spanning all degradation stages (HEALTHY → CRITICAL) meaningfully (approx 9-13 seconds spent in each stage).
+
+5. RUL MATHEMATICAL VALIDATION
+--------------------------------------------------------------------------------
+- `RUL >= 0`: Verified.
+- `RUL(EOL) = 0`: Verified.
+- `Monotonically non-increasing`: Verified, since `time_s` strictly increases.
+
+6. LEAKAGE ANALYSIS
+--------------------------------------------------------------------------------
+There is no data leakage. The `generate_rul_dataset.py` script computes `rul_seconds` retrospectively. The newly introduced latent physical parameters (exact wear multiplier, initial wear) are deliberately EXCLUDED from the output dataset to prevent ML models from directly observing the ground-truth acceleration variables.
+
+7. DATASET-SIZE ANALYSIS (UPDATED)
+--------------------------------------------------------------------------------
+- Total trajectories: 30 (10 per profile)
+- Profile Avg EOL: GENTLE (73.9s), NOMINAL (66.1s), HARSH (53.1s)
+**Assessment:** The dataset is now correctly sized and physically diverse. It is suitable for Phase 2 ML Model Training.
+
+8. TEST-COVERAGE AUDIT
+--------------------------------------------------------------------------------
+The test suite in `tests/test_rul_foundation.py` successfully verifies:
+- Wear monotonicity
+- Reproducibility and physical trajectory diversity
+- Prevention of ground-truth leakage
+- RUL mathematical limits
+- Stage progression coverage
+
+9. FINAL PHASE 2 READINESS VERDICT
+--------------------------------------------------------------------------------
+RUL FOUNDATION VALIDATED. DATASET IS SUFFICIENT FOR PHASE 2.

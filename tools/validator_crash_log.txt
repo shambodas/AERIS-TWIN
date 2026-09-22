@@ -1,0 +1,25 @@
+C:\Users\sayan\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.3) or chardet (6.0.0.post1)/charset_normalizer (3.4.4) doesn't match a supported version!
+  warnings.warn(
+================================================================================
+AERIS-TWIN FAULT VALIDATOR
+================================================================================
+Routes: 68
+Conditions: 6
+Expected cases: 408
+================================================================================
+001 | Delhi -> Jaipur | Healthy | ML=NORMAL | THERMAL=NORMAL | PASS
+002 | Delhi -> Jaipur | Cooling Degradation | ML=COOLING_DEGRADATION | THERMAL=NORMAL | PASS
+003 | Delhi -> Jaipur | Low Oil Pressure | ML=OIL_PRESSURE_DEGRADATION | THERMAL=NORMAL | PASS
+004 | Delhi -> Jaipur | Excessive Vibration | ML=EXCESSIVE_VIBRATION | THERMAL=NORMAL | PASS
+005 | Delhi -> Jaipur | Sensor Drift | ML=SENSOR_DRIFT | THERMAL=NORMAL | PASS
+006 | Delhi -> Jaipur | Misfire | ML=MISFIRE | THERMAL=NORMAL | PASS
+007 | Delhi -> Jaipur -> Jodhpur | Healthy | ML=NORMAL | THERMAL=NORMAL | PASS
+Traceback (most recent call last):
+  File "C:\Users\sayan\aeris_twin\tools\thermal_fault_validator.py", line 231, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\sayan\aeris_twin\tools\thermal_fault_validator.py", line 112, in main
+    time.sleep(2.5)
+    ~~~~~~~~~~^^^^^
+KeyboardInterrupt
+^C

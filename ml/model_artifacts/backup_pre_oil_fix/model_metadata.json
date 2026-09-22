@@ -1,0 +1,29 @@
+{
+  "dataset": "C:\\Users\\sayan\\aeris_twin\\data\\generated\\_combined_training_dataset.csv",
+  "trained_at_utc": "2026-09-10T04:27:57.838454+00:00",
+  "feature_columns": [
+    "rpm",
+    "throttle_pct",
+    "altitude_m",
+    "fuel_flow_kg_s",
+    "oil_temperature_c",
+    "oil_pressure_psi",
+    "vibration_rms",
+    "cht_deviation",
+    "egt_deviation",
+    "oil_temperature_deviation",
+    "oil_pressure_deviation",
+    "fuel_flow_deviation",
+    "vibration_deviation"
+  ],
+  "label_values": [
+    "COMBUSTION_INSTABILITY",
+    "COOLING_DEGRADATION",
+    "MISFIRE",
+    "NORMAL",
+    "OIL_PRESSURE_DEGRADATION",
+    "SENSOR_DRIFT"
+  ],
+  "anomaly_model": "isolation_forest.pkl",
+  "fault_model": "fault_classifier.pkl"
+}

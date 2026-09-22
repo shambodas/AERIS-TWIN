@@ -1,0 +1,425 @@
+AERIS-TWIN
+FINAL SYSTEM STABILIZATION AND VALIDATION REPORT
+================================================
+
+Date: 2026-09-03
+Scope: All work performed after the final system stabilization prompt.
+
+EXECUTIVE SUMMARY
+-----------------
+
+The stabilization pass traced the normal-flight warning through the complete
+simulation and intelligence chain. The warning was not caused by the frontend.
+There were several backend and model-contract problems:
+
+1. The first telemetry sample used generic 70 percent throttle inputs instead
+   of the mission ground operating point.
+2. The fallback anomaly detector averaged incompatible raw units such as RPM,
+   altitude, and sensor deviations, causing normal values to saturate anomaly
+   scoring.
+3. Oil-temperature deviations were calculated against a missing field alias,
+   effectively comparing measured oil temperature with zero.
+4. Severity applied a fixed affected-channel penalty to every sample.
+5. The propeller coefficient was capped below the documented calibration
+   range, leaving propeller load far below engine torque and causing RPM/EGT
+   runaway during normal operation.
+6. EGT cooling was scaled by 0.22 even though the simulator's operating range
+   required approximately full cooling transfer for stable normal EGT.
+7. EGT, CHT, oil temperature, and oil pressure expectation terms did not match
+   the simulator's measured normal operating envelope.
+8. Fault clearing did not reset temporal intelligence history, delaying
+   recovery classification.
+9. Persisted ML training used raw CSV columns while runtime inference expected
+   engineered features. The first generated model bundle was therefore not
+   compatible with runtime inference.
+
+After the expectation, scoring, initialization, and physics calibration fixes,
+the validated normal operating matrix produced NORMAL classification, no
+anomaly flag, NORMAL severity, and health scores from approximately 87 to 91
+after ten seconds of operation.
+
+The ML train/save/load lifecycle now works technically and tests pass. However,
+the refreshed models still do not pass live runtime quality validation for all
+current scenarios. Therefore the default server runtime intentionally uses the
+validated FALLBACK_INTELLIGENCE path. MACHINE_LEARNING requires explicit
+AERIS_ENABLE_ML=1 and is not claimed as the default demo intelligence.
+
+
+FILES CHANGED
+-------------
+
+server.py
+  - Added explicit READY, FLYING, PAUSED, and STOPPED lifecycle state.
+  - Added authoritative telemetry_status values: READY, LIVE, PAUSED, STOPPED.
+  - Added atomic start_flight command.
+  - Made command responses update the shared state immediately.
+  - Added backend-owned UAV position and movement.
+  - Added backend-owned waypoint list and path-following state.
+  - Added set_waypoints, follow_path, and clear_path commands.
+  - Added movement advancement to the authoritative simulation tick.
+  - Added intelligence_mode to Digital Twin state.
+  - Changed published engine health to use intelligence health rather than the
+    previous independent server-side health calculation.
+  - Changed engine status mapping to use intelligence severity.
+  - Reset intelligence temporal history when faults are cleared.
+  - Changed first sample creation to use MissionProfile operating inputs.
+
+web/gcs.html
+  - Removed browser-owned UAV movement simulation.
+  - Removed the browser as an independent source of position and motion.
+  - Added map-click waypoint submission to the backend.
+  - Added route line, waypoint markers, FOLLOW PATH, and CLEAR PATH controls.
+  - Changed lifecycle and telemetry labels to use backend state.
+  - Changed aircraft position and trail rendering to use backend position.
+
+web/index.html
+  - Changed dashboard monitoring state to use backend telemetry_status and UAV
+    status.
+  - Changed dashboard engine condition to use backend engine.status.
+  - Changed the telemetry header so it no longer always says TELEMETRY LIVE.
+  - Added an honest explanation of FALLBACK_INTELLIGENCE versus
+    MACHINE_LEARNING runtime mode.
+  - Added explicit FLIGHT STOPPED and MONITORING PAUSED presentation states.
+
+intelligence/physics_expectation.py
+  - Calibrated CHT, EGT, oil temperature, oil pressure, fuel flow, and
+    vibration expectations using the simulator's normal operating envelope.
+  - Expectations continue to vary with RPM, throttle, altitude, air density,
+    and ambient temperature where those inputs are available.
+
+intelligence/pipeline.py
+  - Added the oil_temperature field alias required by deviation calculation.
+  - Added reset_history().
+  - Derived affected channel count from significant normalized deviations.
+  - Passed the actual classifier fault type into health scoring.
+  - Made severity use anomaly evidence only when is_anomaly is true.
+  - Added explicit runtime mode selection.
+  - Added compatibility validation for persisted model feature columns.
+  - Added AERIS_ENABLE_ML opt-in for persisted runtime models.
+
+intelligence/health_score.py
+  - Stopped treating confidence in an explicitly NORMAL classification as fault
+    evidence.
+  - Preserved classifier-confidence penalties for non-normal classifications.
+
+intelligence/anomaly_detector.py
+  - Replaced mixed-unit fallback scoring with normalized deviation scoring.
+  - Kept persisted model scoring available when explicitly enabled.
+
+intelligence/fault_classifier.py
+  - Added mapping from numeric persisted labels to runtime fault names.
+
+ml/model_store.py
+  - Added the runtime 13-feature schema.
+  - Changed training rows to use runtime-style expectation/deviation features.
+  - Changed training labels to use fault-type names.
+  - Made default training combine all generated normal and fault datasets.
+  - Moved intelligence imports inside training preparation to avoid a circular
+    import during normal ML module loading.
+
+engine/propeller.py
+  - Corrected the documented fixed-pitch propeller load coefficient from 5.5
+    to 50.0.
+  - Raised the stale coefficient ceiling so the calibration can take effect.
+
+engine/thermal.py
+  - Corrected EGT cooling ratio from 0.22 to 1.0 for the current reduced-order
+    thermal model calibration.
+
+requirements.txt
+  - Added numpy, pandas, scikit-learn, and pytest version requirements.
+
+data/generated/*.csv and run_summary_*.json
+  - Regenerated normal, cooling, misfire, combustion-instability, and sensor
+    drift data using the current simulator physics.
+
+ml/model_artifacts/*
+  - Generated persisted Isolation Forest, Random Forest, and metadata files.
+  - These files are loadable, but the default server does not claim them as
+    active unless AERIS_ENABLE_ML=1 is set.
+
+
+ROOT-CAUSE INTERPRETATION
+-------------------------
+
+The original normal warning was a chain of independent contract errors rather
+than one frontend display mistake.
+
+At the beginning of the audit, a normal simulator sample had approximately:
+
+  CHT:             50 C
+  EGT:             55 C
+  oil temperature: 50 C
+  oil pressure:    86 psi
+  vibration:       0.16 RMS
+
+The expectation model predicted values such as CHT 93 C, EGT 106 C, oil
+pressure 55 psi, and fuel flow 0.285 kg/s. These mismatches created large
+deviations. The oil-temperature field mismatch made the problem worse by
+comparing against zero.
+
+The fallback anomaly detector then averaged raw engineering values. RPM near
+3,000 dominated the score even when all normalized deviations were small.
+Health also subtracted classifier confidence even when the classifier said
+NORMAL, and severity added a fixed two-channel penalty.
+
+After those intelligence corrections, long-running normal operation still
+showed EGT runaway. Direct physics tracing showed engine torque near 65-88 Nm
+while propeller torque was only approximately 3-6 Nm. The coefficient cap made
+the documented propeller calibration unreachable. EGT cooling at 22 percent
+also allowed thermal accumulation. Correcting those physics constants made
+the simulator's normal operating envelope stable enough to calibrate expected
+values meaningfully.
+
+
+TESTS RUN AND RESULTS
+---------------------
+
+1. Initial lifecycle smoke test
+   Command: direct TwinController start/stop check.
+   Result: FAILED before stabilization.
+   Interpretation: stop changed running flags but left last_state UAV status
+   as FLYING. This identified stale authoritative payload state.
+
+2. Lifecycle smoke test after backend state fix
+   Result: PASS.
+   Verified READY -> FLYING -> PAUSED -> FLYING -> STOPPED.
+   Verified stopped simulation time remained unchanged on later ticks.
+
+3. Navigation smoke test
+   Result: PASS.
+   Verified heading-based position movement, waypoint state, path-following
+   heading changes, and frozen position after stop.
+
+4. Atomic start-flight smoke test
+   Result: PASS.
+   Verified altitude, airspeed, heading, and FLYING state are initialized by a
+   single backend command.
+
+5. Normal operating matrix before final calibration
+   Result: FAILED.
+   Normal cases produced INFORMATION or WARNING despite NORMAL classification.
+   Interpretation: health and severity were over-penalizing low anomaly scores,
+   and physics expectations did not match simulator behavior.
+
+6. Normal operating matrix after intelligence corrections
+   Result: PARTIAL PASS.
+   Normal classifier labels and anomaly flags improved, but long-running RPM
+   and EGT runaway remained. This identified a physics calibration problem.
+
+7. Steady-state physics trace before propeller cap correction
+   Result: FAILED.
+   RPM rose toward 6,000 and EGT rose continuously under normal throttle.
+   Propeller load remained far below engine torque.
+
+8. In-memory physics experiments
+   Result: PASS for diagnosis.
+   A coefficient near 50 and EGT cooling ratio near 1.0 produced balanced
+   torque and stable EGT in the reduced-order model.
+
+9. Final normal operating matrix
+   Cases: low altitude, medium altitude, cruise altitude, high altitude, and
+   higher airspeed.
+   Result: PASS.
+   Each case ran for ten simulated seconds and produced:
+     - fault classification NORMAL
+     - anomaly is_anomaly False
+     - severity NORMAL
+     - health approximately 87-91
+   The final matrix also showed expected CHT deviations approximately zero at
+   the measured steady-state points.
+
+10. Pytest before environment repair
+    Result: NOT RUN.
+    System interpreter did not have pytest. Bundled .venv referenced a missing
+    Python 3.14 executable.
+
+11. Python environment repair
+    Result: PASS.
+    Configured the system Python 3.13.7 environment and installed pytest.
+
+12. Full pytest suite after stabilization
+    Command: python -m pytest -q
+    Result: PASS: 4 passed.
+    Only sklearn feature-name UserWarnings remained.
+
+13. Python syntax validation
+    Command: python -m py_compile on all edited Python modules.
+    Result: PASS with no output/errors.
+
+14. JavaScript syntax validation
+    Result: PASS for GCS and dashboard scripts using node --check.
+
+15. ML artifact discovery
+    Result: initial artifacts were absent.
+    Interpretation: model loading correctly fell back because the artifact
+    directory was empty.
+
+16. First ML training lifecycle attempt
+    Result: models saved and loaded technically, but runtime schema was wrong.
+    Interpretation: trainer used raw CSV columns while runtime expected
+    engineered features.
+
+17. ML trainer compatibility fix
+    Result: pytest ML persistence tests passed; 13 runtime features were saved.
+
+18. Refreshed multi-scenario data generation
+    Result: PASS.
+    Five scenario datasets were regenerated from current physics.
+
+19. Active ML runtime validation
+    Result: FAILED quality gate.
+    Models loaded, but normal live samples could be classified as SENSOR_DRIFT
+    and overheating was not consistently anomalous. This is why default
+    runtime remains FALLBACK_INTELLIGENCE and the dashboard discloses it.
+
+20. Fault/recovery fallback validation
+    Result: PASS for the validated fallback path after settled baselines.
+    Normal -> fault -> clear -> sufficient simulated recovery returned to
+    NORMAL. Sensor drift produced POSSIBLE_SENSOR_FAULT during the relevant
+    early evidence window.
+
+
+BROWSER VALIDATION
+------------------
+
+URLs tested:
+  http://localhost:8080/gcs
+  http://localhost:8080/
+
+Initial clean server state:
+  GCS:       READY
+  Telemetry: TELEMETRY READY
+  Engine:    HEALTHY
+  Dashboard runtime mode: FALLBACK_INTELLIGENCE
+
+Start/stop/restart browser sequence:
+  1. START FLIGHT
+     GCS: FLIGHT ACTIVE
+     GCS: TELEMETRY LIVE
+  2. STOP FLIGHT
+     GCS: STOPPED
+     GCS: TELEMETRY STOPPED
+  3. Wait and read state
+     Backend remains stopped and simulation time is frozen.
+  4. START FLIGHT again
+     GCS: FLIGHT ACTIVE
+     GCS: TELEMETRY LIVE
+
+Two-screen synchronization:
+  - Dashboard changed to MONITORING ACTIVE while GCS was active.
+  - Dashboard showed UAV IN FLIGHT and status LIVE.
+  - After GCS stop, dashboard changed to FLIGHT STOPPED.
+  - Dashboard showed UAV STOPPED, status STOPPED, and TELEMETRY STOPPED.
+
+Direct HTTP acceptance flow:
+  - reset
+  - start_flight with altitude, speed, and heading
+  - set_altitude
+  - set_heading
+  - set_waypoints
+  - follow_path
+  - inject_fault overheating
+  - clear_fault
+  - stop_uav
+  Result: PASS.
+  Final state reported STOPPED, telemetry STOPPED, and fault NORMAL.
+
+Waypoint browser interaction:
+  - Backend waypoint registration and path following passed direct controller
+    and HTTP tests.
+  - Leaflet map-click automation was unreliable in the browser harness because
+    the map container did not remain stable for automated clicks.
+  - The human UI remains map-click based; no alternate user-facing mechanism
+    was added.
+
+
+ML STATUS
+---------
+
+Model files:
+  ml/model_artifacts/isolation_forest.pkl
+  ml/model_artifacts/fault_classifier.pkl
+  ml/model_artifacts/model_metadata.json
+
+Training:
+  - Uses all generated normal and supported fault scenario CSV files.
+  - Builds runtime-style expectation/deviation features.
+  - Saves a 13-feature bundle.
+
+Loading:
+  - Explicit custom-root model loading works and is covered by pytest.
+  - Default loading is disabled unless AERIS_ENABLE_ML=1.
+
+Runtime default:
+  FALLBACK_INTELLIGENCE
+
+Reason:
+  The persisted models load, but current live quality validation does not yet
+  reliably separate calibrated normal operation from all fault cases. It is
+  more truthful to use the validated fallback than to claim ML detection that
+  fails the live acceptance criteria.
+
+
+KNOWN LIMITATIONS
+-----------------
+
+1. The trained ML bundle is technically functional but not yet accepted as the
+   default runtime detector because live inference quality is inconsistent.
+2. sklearn emits feature-name warnings because inference currently passes lists
+   while models are fitted with DataFrames. This does not fail the tests but
+   should be cleaned up in a future ML quality pass.
+3. The current UI label Oil Pressure maps to the existing simulator misfire
+   API because the project does not contain a dedicated oil-pressure fault
+   model. The existing supported fault mapping was preserved rather than
+   inventing a new backend fault.
+4. Sensor drift arbitration is strongest during the early single-channel
+   evidence window. Over longer simulated periods, unrelated simulator thermal
+   dynamics can add correlated deviations and reduce confidence in the sensor
+   diagnosis.
+5. Browser automation did not reliably perform a Leaflet map click, although
+   backend waypoint, path, and movement behavior passed direct and HTTP tests.
+6. The bundled .venv remains unusable because its Python 3.14 target is missing.
+   Tests were run successfully using system Python 3.13.7 with requirements
+   installed.
+7. The dashboard can show a warning at an operator target that is outside the
+   validated steady-state matrix, such as the current GCS default of 3,500 m,
+   if the simulator has not settled or the operating point differs from the
+   calibrated normal cases. This is exposed as intelligence output rather than
+   hidden.
+
+
+FINAL INTERPRETATION
+--------------------
+
+The system now has a single backend-owned runtime state for lifecycle,
+telemetry, engine status, health, UAV movement, and path state. GCS and the
+dashboard are two consumers of that state. Stop and restart are deterministic,
+and the dashboard no longer claims live monitoring after the backend stops.
+
+The normal-flight false positive was investigated at the physics and
+intelligence layers. It was not hidden with frontend conditions. The corrected
+fallback path recognizes the validated normal operating envelope as NORMAL and
+produces high health. Fault injection remains distinguishable from normal
+operation, and clearing a fault resets temporal history so recovery can be
+observed.
+
+The ML lifecycle is now reproducible and test-covered at the persistence level,
+but the active model quality gate honestly remains open. The project therefore
+does not claim machine-learning detection in the default demo. The dashboard
+explicitly identifies validated fallback intelligence, while explicit ML
+opt-in remains available for continued model calibration.
+
+Overall status:
+  SYSTEM STATE:            PASS
+  NORMAL BASELINE:         PASS for validated matrix
+  GCS/DASHBOARD SYNC:      PASS
+  STOP/RESTART:            PASS
+  FAULT PIPELINE:          PASS on fallback path
+  PYTEST:                  PASS (4 passed)
+  ML PERSISTENCE:          PASS
+  ML LIVE QUALITY:         NOT YET ACCEPTED
+  BROWSER WAYPOINT CLICK:  BACKEND PASS, AUTOMATION PARTIAL
+  DEMO TRUTHFULNESS:       PASS, with fallback mode disclosed
+
+END OF REPORT

@@ -1,0 +1,200 @@
+AERIS-TWIN TECHNICAL AUDIT
+==========================
+
+1. ARCHITECTURE MAP
+-------------------
+- engine: Contains first-principles numerical models for physics components (combustion, lubrication, propeller, thermal, torque, vibration). Responsibilities include computing instantaneous thermodynamic, mechanical, and thermal states per simulation tick based on RPM and throttle.
+- sensors: Implements `sensor_model.py` which maps true physical engine states into simulated sensor outputs by injecting Gaussian noise and sensor-specific bias.
+- faults: Provides parameterized perturbation classes (e.g., `cooling.py`, `misfire.py`) that hijack and alter the physics simulation (e.g. dropping combustion efficiency, dropping cooling health) to generate realistic failure signatures.
+- intelligence: The digital twin reasoning layer. Computes expected baseline behavior (`physics_expectation.py`), extracts deviations, predicts RUL/Faults (`fault_classifier.py`), and separately calculates condition-based thermal states (`thermal_diagnostics.py`).
+- ml: Holds the training pipeline (`train_rul.py`) and feature definitions used to train the Random Forest models that run inside the intelligence module.
+- telemetry: Responsible for formatting internal states into standardized CAN bus or MQTT payloads for downstream consumption.
+- simulation: The overarching event driver (`engine_simulator.py`) that steps the physical model forward in time given environmental conditions and mission profiles.
+- database: Handles the storage of telemetry and intelligence frames (typically InfluxDB).
+- web: Ground control dashboard containing HTML/JS for visualizing telemetry and submitting fault commands.
+
+Full data flow:
+simulation (mission targets) -> faults (perturbations) -> engine (physics stepped dt=0.1s) -> sensors (noise/bias applied) -> server.py (event loop) -> intelligence (expectation vs actual deviation) -> ml (classification) -> intelligence (thermal logic) -> server.py (websocket/SSE broadcast) -> web (UI render).
+
+2. GOVERNING EQUATIONS — EXTRACTED VERBATIM
+-------------------------------------------
+
+Propeller Advance Ratio (engine/propeller.py:145-155)
+```python
+advance_ratio = (
+    forward_velocity_mps
+    / (
+        rotational_speed_rps
+        * self.diameter_m
+    )
+)
+```
+Formula: J = V / (n * D)
+Inputs: forward_velocity_mps [m/s] (from flight condition), rotational_speed_rps [rev/s] (RPM/60), diameter_m [m] (PropellerConfig).
+
+Propeller Torque Coefficient (engine/propeller.py:195-200)
+```python
+cq = (
+    cq_static
+    - 0.040 * J
+    + 0.012 * J ** 2
+)
+```
+Formula: Cq = Cq_static - 0.040*J + 0.012*J^2
+Inputs: cq_static=0.213 (hardcoded from config), J = Advance ratio.
+
+Propeller Torque (engine/propeller.py:270-275)
+```python
+torque = (
+    torque_coefficient
+    * rho
+    * n ** 2
+    * D ** 5
+)
+```
+Formula: Q = Cq * rho * n^2 * D^5
+Inputs: torque_coefficient [dimensionless], rho [kg/m^3] (air density), n [rev/s], D [m].
+
+Propeller Power (engine/propeller.py:285-290)
+```python
+propeller_power = (
+    torque_nm
+    * 2.0
+    * math.pi
+    * rotational_speed_rps
+)
+```
+Formula: P = Q * 2π * n
+Inputs: torque_nm [Nm], rotational_speed_rps [rev/s].
+
+Engine Friction MEP (engine/torque.py:230-234)
+```python
+fmep = (
+    BASE_FMEP_PA
+    + FMEP_SPEED_COEFFICIENT
+    * speed_ratio ** 1.5
+)
+```
+Formula: FMEP = 80000 + 15000 * (RPM/5000)^1.5
+Inputs: BASE_FMEP_PA=80000, FMEP_SPEED_COEFFICIENT=15000, speed_ratio=RPM/5000.
+
+Combustion Indicated MEP (engine/combustion.py:255-259)
+```python
+imep = (
+    efficiency
+    * fuel_energy_j
+    / self.displacement_m3
+)
+```
+Formula: IMEP = eta * (m_fuel * LHV) / V_d
+Inputs: efficiency (combustion efficiency, default 0.95), fuel_energy_j [J], displacement_m3 [m^3].
+
+Vibration RMS (engine/vibration.py:302-306)
+```python
+rms_vibration = (
+    BASE_VIBRATION_G
+    * speed_ratio ** 2.0
+    * imep_ratio
+)
+```
+Formula: V_rms = 0.5 * (RPM/3000)^2 * (IMEP/600000)
+Inputs: speed_ratio=RPM/3000, imep_ratio=IMEP/600000. BASE_VIBRATION_G = 0.5.
+
+Thermal CHT Cooling (engine/thermal.py)
+```python
+cht_cooling_power_w = (
+    BASE_CHT_HA
+    * cooling_health
+    * rpm_factor
+    * density_factor
+    * (cht_k[i] - ambient_temp_k)
+)
+```
+Formula: Q_cool = hA * H_cool * (RPM/3000)^0.8 * (rho/1.225)^0.5 * (T_cht - T_amb)
+Inputs: BASE_CHT_HA=130.0, cooling_health (fault perturbed, default 1.0), T_cht [K], T_amb [K].
+
+Oil Pressure (engine/lubrication.py)
+```python
+oil_pressure_pa = (
+    BASE_OIL_PRESSURE_PA
+    + OIL_PRESSURE_SPEED_COEFFICIENT * speed_ratio ** 1.5
+    - OIL_PRESSURE_TEMP_COEFFICIENT * temp_diff
+)
+```
+Formula: P_oil = 150000 + 350000*(RPM/3000)^1.5 - 2000*(T_oil - 90)
+Inputs: speed_ratio, temp_diff (T_oil_C - 90.0).
+
+3. FAULT INJECTION — FULL INVENTORY
+-----------------------------------
+- CoolingDegradationFault (UI: COOLING_DEGRADATION)
+  Logic: Directly reduces `cooling_health` multiplier in thermal model. `cooling_health = max(0.1, 1.0 - (0.8 * severity))`.
+
+- CombustionInstabilityFault (UI: COMBUSTION_INSTABILITY)
+  Logic: Lowers combustion efficiency by (0.15 * severity), increases base vibration, and adds heavy cycle-to-cycle random noise to efficiency. Randomness uses `random.uniform(-0.08, 0.08)`.
+
+- MisfireFault (UI: MISFIRE)
+  Logic: Discrete event chance to force `efficiency = 0` for a cylinder. `probability = severity * 0.4`.
+
+- LubricationFault (UI: LUBRICATION_DEGRADATION)
+  Logic: Reduces oil pressure output by `severity * 300,000` Pa, increases friction (FMEP) by `severity * 40000` Pa.
+
+- SensorDriftFault (UI: SENSOR_DRIFT)
+  Logic: Applies time-linear bias to a target sensor. `drift = max_drift * severity * elapsed_time`.
+
+4. HEALTH MONITORING — PARAMETER COVERAGE
+-----------------------------------------
+Parameter | Modeled (Physics) | Sensored (Noise/Bias) | UI/Telemetry | ML Model Feature
+RPM | Yes | Yes | Yes | Yes
+CHT Cylinder 1-4 | Yes | Yes | Yes | Yes
+EGT Cylinder 1-4 | Yes | Yes | Yes | Yes
+Oil Pressure | Yes | Yes | Yes | Yes
+Oil Temperature | Yes | Yes | Yes | Yes
+Fuel Flow | Yes | Yes | Yes | Yes
+Vibration (RMS) | Yes | Yes | Yes | Yes
+Vibration (Orders) | No (Stub) | No | No | No
+Battery Voltage | Yes | Yes | Yes | Yes
+Battery Current | Yes | Yes | Yes | No
+Battery SOC | Yes | Yes | No | No
+Injection Timing | No | No | No | No
+
+5. ML/AI LAYER — FEATURE AND DECISION LOGIC
+-------------------------------------------
+Features extracted (`intelligence/physics_expectation.py` and `ml/features_rul.py`):
+Residuals (actual - expected) for RPM, manifold pressure, fuel flow, CHT, EGT, oil temp, oil pressure, vibration, bus voltage.
+
+Model Invocation (`intelligence/fault_classifier.py`):
+```python
+prediction = self.model.predict(features)
+probabilities = self.model.predict_proba(features)[0]
+confidence = float(max(probabilities))
+```
+FLAG: There is no minimum confidence threshold. The highest probability class is always returned.
+
+Classes Trained:
+NORMAL, OVERHEATING, OIL_PRESSURE_DEGRADATION, EXCESSIVE_VIBRATION, MISFIRE, FUEL_FLOW_ABNORMALITY, SENSOR_BIAS, SENSOR_DRIFT, SENSOR_DROPOUT, ABNORMAL_TEMPERATURE_RESPONSE, COOLING_DEGRADATION.
+
+Fallback Logic:
+If the model is missing, rule-based if/else statements trigger on specific residuals (e.g., if vibration_dev > 0.85 -> EXCESSIVE_VIBRATION).
+
+6. THERMAL/OVERHEATING STATE LOGIC
+----------------------------------
+Implemented in `intelligence/thermal_diagnostics.py`.
+- OVERHEATING (CRITICAL): CHT >= 140.0 C or Oil Temp >= 110.0 C.
+- OVERHEATING (WARNING): CHT >= 120.0 C.
+- OVERHEATING (TREND): CHT > 90.0 C AND derivative (dT/dt) > 0.5 C/sec over a 10-second history window.
+- NORMAL: Otherwise.
+
+Cooling degradation separation:
+The ML model predicts COOLING_DEGRADATION (mechanical issue). ThermalDiagnostics independently computes OVERHEATING (thermal state). The UI mappings have been decoupled.
+
+7. RANDOMNESS AND DETERMINISM AUDIT
+-----------------------------------
+- Global `random.gauss` and `random.uniform` are heavily used across `sensors/sensor_model.py` and `faults/`.
+- No explicit `random.seed()` is enforced in `server.py` at runtime startup. Therefore, consecutive runs under identical loads will yield slightly non-deterministic telemetry unless the external executor seeds the global state.
+
+8. KNOWN GAPS, STUBS, AND DEAD CODE
+-----------------------------------
+- `engine/vibration.py`: Docstrings claim order-based harmonic generation, but only broad RMS is calculated and exported.
+- `faults/misfire.py`: Comment "TODO: Implement cylinder-specific mapping" exists; misfires currently affect all cylinders randomly.
+- Battery SOC and Injection Timing are partially modeled but discarded before reaching the ML logic or UI telemetry stream.
+- Magic numbers in `propeller.py`: 0.040 and 0.012 for torque coefficient polynomial are hardcoded.
