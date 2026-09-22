@@ -280,7 +280,7 @@ class TwinController:
         if self.mission_name == "high_altitude":
             inputs.altitude_m = max(inputs.altitude_m, 8000.0)
         elif self.mission_name == "hot_weather":
-            # Simulate a +20 K ISA deviation (approx. 45 °C day at sea level)
+            # Simulate a +20 K ISA deviation (approx. 45 Â°C day at sea level)
             # so the atmosphere model raises ambient temperature, reducing air
             # density AND elevating the baseline CHT / oil temperature.
             inputs.temperature_offset_k = 20.0
@@ -342,7 +342,7 @@ class TwinController:
             except Exception as exc:
                 self.events.appendleft({
                     "kind": "warning",
-                    "message": f"Telemetry persistence unavailable — live simulation continues."
+                    "message": f"Telemetry persistence unavailable â€” live simulation continues."
                 })
 
         intelligence = self.intelligence.process(true_state, sensor_state, timestamp=true_state.time_s)
@@ -493,12 +493,12 @@ class TwinController:
                     self.simulator.step(inputs)
                 self.intelligence.invalidate_cache()
                 
-                route_desc = " → ".join(route) if route else "Custom Map Route"
+                route_desc = " â†’ ".join(route) if route else "Custom Map Route"
                 self.events.appendleft({"kind": "mission", "message": "MISSION STARTED: " + route_desc})
             elif command == "set_mission_route":
                 route = self._set_route_locked(params.get("route", []), place_at_start=True)
                 self.mission_status = "PLANNED"
-                self.events.appendleft({"kind": "mission", "message": "MISSION PLANNED: " + " → ".join(route)})
+                self.events.appendleft({"kind": "mission", "message": "MISSION PLANNED: " + " â†’ ".join(route)})
             elif command == "return_to_base":
                 if self.flight_state not in {"FLYING", "STOPPED", "PAUSED"}:
                     raise ValueError("RTB requires an active or stopped flight")
@@ -612,7 +612,7 @@ class TwinController:
                 self.position = target.copy()
                 self.waypoints.pop(0)
                 if self.mission_status == "RETURNING":
-                    self.events.appendleft({"kind": "mission", "message": "✓ MISSION RECOVERED"})
+                    self.events.appendleft({"kind": "mission", "message": "âœ“ MISSION RECOVERED"})
                     self.mission_status = "RECOVERED"
                     self.following_path = False
                     self.running = False
@@ -623,11 +623,11 @@ class TwinController:
                     return
                 if self.mission_route:
                     reached = self.mission_route[1] if len(self.mission_route) > 1 else self.mission_route[0]
-                    self.events.appendleft({"kind": "mission", "message": f"✓ WAYPOINT REACHED: {reached}"})
+                    self.events.appendleft({"kind": "mission", "message": f"âœ“ WAYPOINT REACHED: {reached}"})
                     self.mission_route = self.mission_route[1:]
                 if not self.waypoints:
                     self.mission_status = "COMPLETED"
-                    self.events.appendleft({"kind": "mission", "message": "✓ MISSION COMPLETED"})
+                    self.events.appendleft({"kind": "mission", "message": "âœ“ MISSION COMPLETED"})
                     self.following_path = False
                     self.running = False
                     self.flight_state = "READY"
@@ -677,156 +677,185 @@ class TwinController:
 controller = TwinController()
 
 
-class Client:
-    def __init__(self, handler): self.handler = handler
+
+
+
+
+import queue
+import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+
+class SSEClientAdapter:
+    def __init__(self):
+        self.queue = queue.Queue()
     def send(self, state):
-        data = ("data: " + json.dumps(state) + "\n\n").encode()
+        self.queue.put(state)
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/api/state")
+async def api_state(): return controller.last_state
+
+@app.get("/api/twin/state")
+async def api_twin_state(): return controller.last_state
+
+@app.get("/api/telemetry")
+async def api_telemetry(): return controller.last_state.get("telemetry", {}) if controller.last_state else {}
+
+@app.get("/api/health")
+async def api_health(): return controller.last_state.get("intelligence", {}).get("health", {}) if controller.last_state else {}
+
+@app.get("/api/alerts")
+async def api_alerts(): return controller.last_state.get("alerts", []) if controller.last_state else []
+
+@app.get("/api/diagnostics")
+async def api_diagnostics(): return controller.last_state.get("intelligence", {}).get("diagnosis", {}) if controller.last_state else {}
+
+@app.get("/api/history")
+async def api_history(): return controller.history_data()
+
+@app.get("/api/report")
+async def api_report(): return controller.report()
+
+@app.get("/api/events")
+async def api_events(): return list(controller.events)
+
+@app.get("/api/flights")
+async def api_flights():
+    try:
+        flights = controller.influx_writer.get_flights(limit=50)
+        flights.sort(key=lambda flight: float(flight.get("start_time") or 0.0), reverse=True)
+        return {"flights": flights}
+    except Exception as exc:
+        return JSONResponse({"flights": [], "error": f"Flight database temporarily unavailable: {exc}"}, 503)
+
+@app.get("/api/flights/{flight_id}")
+async def api_flight(flight_id: str):
+    if not flight_id:
+        return JSONResponse({"error": "Missing flight_id"}, 400)
+    try:
+        flight = controller.influx_writer.get_flight_by_id(flight_id)
+        telemetry = controller.influx_writer.get_flight_telemetry(flight_id, limit=1200)
+        summary = controller.influx_writer.get_flight_by_id(flight_id) or {}
+        if flight is None and not telemetry:
+            return JSONResponse({"error": "Flight not found"}, 404)
+        payload = {
+            "flight": {
+                "flight_id": flight_id,
+                "mission_name": summary.get("mission_name", "UNKNOWN"),
+                "mission_key": summary.get("mission_key", "unknown"),
+                "status": summary.get("status", "COMPLETED"),
+                "start_time": summary.get("start_time"),
+                "end_time": summary.get("end_time"),
+                "duration_seconds": summary.get("duration_seconds", 0),
+            },
+            "summary": {
+                "max_altitude_m": summary.get("max_altitude_m", 0),
+                "max_rpm": summary.get("max_rpm", 0),
+                "max_cht_c": summary.get("max_cht_c", 0),
+                "max_egt_c": summary.get("max_egt_c", 0),
+                "max_vibration_rms": summary.get("max_vibration_rms", 0),
+                "minimum_health_score": summary.get("minimum_health_score", 100),
+                "fault_detected": summary.get("fault_detected", False),
+                "fault_type": summary.get("fault_type", "NORMAL"),
+                "fault_first_seen": summary.get("fault_first_seen", 0),
+                "fault_last_seen": summary.get("fault_last_seen", 0),
+                "fault_event_count": summary.get("fault_event_count", 0),
+                "telemetry_points": summary.get("telemetry_points", 0),
+            },
+            "telemetry": telemetry,
+            "health_trend": [],
+            "fault_events": ([{
+                "fault_type": summary.get("fault_type", "NORMAL"),
+                "first_seen": summary.get("fault_first_seen", 0),
+                "last_seen": summary.get("fault_last_seen", 0),
+                "sample_count": summary.get("fault_event_count", 0),
+            }] if summary.get("fault_detected") else []),
+        }
+        return payload
+    except Exception as exc:
+        return JSONResponse({"error": f"Flight database temporarily unavailable: {exc}"}, 503)
+
+@app.get("/api/inference")
+async def api_inference_get(): return controller.last_state.get("intelligence", {}) if controller.last_state else {}
+
+@app.get("/api/stream")
+async def api_stream(request: Request):
+    client = SSEClientAdapter()
+    controller.clients.append(client)
+    client.send(controller.last_state)
+
+    async def event_generator():
         try:
-            self.handler.wfile.write(data); self.handler.wfile.flush()
-        except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
-            raise ConnectionError("SSE client disconnected")
+            while True:
+                if await request.is_disconnected():
+                    break
+                try:
+                    state = client.queue.get(timeout=2.0)
+                    yield f"data: {json.dumps(state)}\n\n"
+                except queue.Empty:
+                    yield ": keepalive\n\n"
+        finally:
+            if client in controller.clients:
+                controller.clients.remove(client)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
+
+@app.post("/api/command")
+@app.post("/api/simulation/start")
+@app.post("/api/simulation/stop")
+@app.post("/api/simulation/reset")
+@app.post("/api/fault/inject")
+@app.post("/api/inference")
+async def api_post_handler(request: Request):
+    try:
+        path = request.url.path
+        if path == "/api/simulation/start": body = {"command": "start_uav"}
+        elif path == "/api/simulation/stop": body = {"command": "stop_uav"}
+        elif path == "/api/simulation/reset": body = {"command": "reset_simulation"}
+        else: body = await request.json()
+
+        if path == "/api/inference":
+            return {"ok": True, "result": controller.intelligence.process(controller.simulator.last_true_state, controller.simulator.last_sensor_state, timestamp=controller.simulator.time_s)}
+        
+        if path == "/api/fault/inject": body = {"command": "inject_fault", "parameters": body}
+        
+        controller.command(body)
+        return {"ok": True, "state": controller.last_state}
+    except (ValueError, TypeError, json.JSONDecodeError) as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, 400)
 
 
-class Handler(BaseHTTPRequestHandler):
-    def _json(self, data, status=200):
-        raw = json.dumps(data).encode()
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(raw)))
-        self.send_header("Access-Control-Allow-Origin", "*")
-        try:
-            self.end_headers()
-            self.wfile.write(raw)
-        except Exception:
-            pass
-    def do_GET(self):
-        path = urlparse(self.path).path
-        if path == "/api/state": return self._json(controller.last_state)
-        if path == "/api/twin/state": return self._json(controller.last_state)
-        if path == "/api/telemetry": return self._json(controller.last_state.get("telemetry", {}) if controller.last_state else {})
-        if path == "/api/health": return self._json(controller.last_state.get("intelligence", {}).get("health", {}) if controller.last_state else {})
-        if path == "/api/alerts": return self._json(controller.last_state.get("alerts", []) if controller.last_state else [])
-        if path == "/api/diagnostics": return self._json(controller.last_state.get("intelligence", {}).get("diagnosis", {}) if controller.last_state else {})
-        if path == "/api/history": return self._json(controller.history_data())
-        if path == "/api/report": return self._json(controller.report())
-        if path == "/api/events": return self._json(list(controller.events))
-        if path == "/api/flights":
-            try:
-                flights = controller.influx_writer.get_flights(limit=50)
-                flights.sort(key=lambda flight: float(flight.get("start_time") or 0.0), reverse=True)
-                return self._json({"flights": flights})
-            except Exception as exc:
-                self._json({"flights": [], "error": f"Flight database temporarily unavailable: {exc}"}, 503)
-                return
-        if path.startswith("/api/flights/"):
-            flight_id = path.split("/api/flights/", 1)[1].strip()
-            if not flight_id:
-                return self._json({"error": "Missing flight_id"}, 400)
-            try:
-                flight = controller.influx_writer.get_flight_by_id(flight_id)
-                telemetry = controller.influx_writer.get_flight_telemetry(flight_id, limit=1200)
-                summary = controller.influx_writer.get_flight_by_id(flight_id) or {}
-                if flight is None and not telemetry:
-                    return self._json({"error": "Flight not found"}, 404)
-                payload = {
-                    "flight": {
-                        "flight_id": flight_id,
-                        "mission_name": summary.get("mission_name", "UNKNOWN"),
-                        "mission_key": summary.get("mission_key", "unknown"),
-                        "status": summary.get("status", "COMPLETED"),
-                        "start_time": summary.get("start_time"),
-                        "end_time": summary.get("end_time"),
-                        "duration_seconds": summary.get("duration_seconds", 0),
-                    },
-                    "summary": {
-                        "max_altitude_m": summary.get("max_altitude_m", 0),
-                        "max_rpm": summary.get("max_rpm", 0),
-                        "max_cht_c": summary.get("max_cht_c", 0),
-                        "max_egt_c": summary.get("max_egt_c", 0),
-                        "max_vibration_rms": summary.get("max_vibration_rms", 0),
-                        "minimum_health_score": summary.get("minimum_health_score", 100),
-                        "fault_detected": summary.get("fault_detected", False),
-                        "fault_type": summary.get("fault_type", "NORMAL"),
-                        "fault_first_seen": summary.get("fault_first_seen", 0),
-                        "fault_last_seen": summary.get("fault_last_seen", 0),
-                        "fault_event_count": summary.get("fault_event_count", 0),
-                        "telemetry_points": summary.get("telemetry_points", 0),
-                    },
-                    "telemetry": telemetry,
-                    "health_trend": [],
-                    "fault_events": ([{
-                        "fault_type": summary.get("fault_type", "NORMAL"),
-                        "first_seen": summary.get("fault_first_seen", 0),
-                        "last_seen": summary.get("fault_last_seen", 0),
-                        "sample_count": summary.get("fault_event_count", 0),
-                    }] if summary.get("fault_detected") else []),
-                }
-                return self._json(payload)
-            except Exception as exc:
-                self._json({"error": f"Flight database temporarily unavailable: {exc}"}, 503)
-                return
-        if path == "/api/inference": return self._json(controller.last_state.get("intelligence", {}) if controller.last_state else {})
-        if path == "/api/stream":
-            self.send_response(200); self.send_header("Content-Type", "text/event-stream"); self.send_header("Cache-Control", "no-cache"); self.send_header("Connection", "keep-alive"); self.end_headers()
-            client = Client(self); controller.clients.append(client); client.send(controller.last_state)
-            try:
-                while True: time.sleep(10); self.wfile.write(b": keepalive\n\n"); self.wfile.flush()
-            except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
-                if client in controller.clients: controller.clients.remove(client)
-            return
-        if path == "/gcs":
-            raw = (WEB_ROOT / "gcs.html").read_bytes(); self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.send_header("Content-Length", str(len(raw))); self.end_headers();
-            try:
-                self.wfile.write(raw)
-            except Exception:
-                pass
-            return
-        if path in {"/", "/engine", "/dashboard"}:
-            raw = (WEB_ROOT / "index.html").read_bytes(); self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.send_header("Content-Length", str(len(raw))); self.end_headers();
-            try:
-                self.wfile.write(raw)
-            except Exception:
-                pass
-            return
-        # Static file serving for web assets
-        MIME_TYPES = {".css": "text/css", ".js": "application/javascript", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".ico": "image/x-icon", ".webp": "image/webp", ".woff2": "font/woff2", ".woff": "font/woff"}
-        safe_path = path.lstrip("/")
-        file_path = WEB_ROOT / safe_path
-        if file_path.is_file() and WEB_ROOT in file_path.resolve().parents:
-            ext = file_path.suffix.lower()
-            content_type = MIME_TYPES.get(ext, "application/octet-stream")
-            raw = file_path.read_bytes(); self.send_response(200); self.send_header("Content-Type", content_type); self.send_header("Content-Length", str(len(raw))); self.send_header("Cache-Control", "public, max-age=3600"); self.end_headers();
-            try:
-                self.wfile.write(raw)
-            except Exception:
-                pass
-            return
-        self.send_error(404)
-    def do_POST(self):
-        if self.path in {"/api/command", "/api/simulation/start", "/api/simulation/stop", "/api/simulation/reset", "/api/fault/inject", "/api/inference"}:
-            try:
-                if self.path == "/api/simulation/start": body = {"command": "start_uav"}
-                elif self.path == "/api/simulation/stop": body = {"command": "stop_uav"}
-                elif self.path == "/api/simulation/reset": body = {"command": "reset_simulation"}
-                else: body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
-                
-                if self.path == "/api/inference":
-                    self._json({"ok": True, "result": controller.intelligence.process(controller.simulator.last_true_state, controller.simulator.last_sensor_state, timestamp=controller.simulator.time_s)})
-                else:
-                    if self.path == "/api/fault/inject": body = {"command": "inject_fault", "parameters": body}
-                    controller.command(body); self._json({"ok": True, "state": controller.last_state})
-            except (ValueError, TypeError, json.JSONDecodeError) as exc: self._json({"ok": False, "error": str(exc)}, 400)
-        else:
-            return self._json({"error": "Not found"}, 404)
-    def log_message(self, *_): pass
+@app.get("/gcs")
+async def serve_gcs():
+    return FileResponse(WEB_ROOT / "gcs.html", media_type="text/html")
 
+@app.get("/")
+@app.get("/engine")
+@app.get("/dashboard")
+async def serve_index():
+    return FileResponse(WEB_ROOT / "index.html", media_type="text/html")
+
+app.mount("/", StaticFiles(directory=str(WEB_ROOT)), name="static")
+
+@app.on_event("startup")
+async def startup_event():
+    global SIMULATION_THREAD, SIMULATION_STOP
+    # if using global start mechanism
+    threading.Thread(target=lambda: [controller.tick() or time.sleep(TICK_SECONDS) for _ in iter(int, 1)], daemon=True).start()
 
 def run():
-    server = ThreadingHTTPServer((HOST, PORT), Handler)
-    threading.Thread(target=lambda: [controller.tick() or time.sleep(TICK_SECONDS) for _ in iter(int, 1)], daemon=True).start()
-    print(f"AERIS-TWIN Dashboard:  http://localhost:{PORT}/")
-    print(f"Ground Control System: http://localhost:{PORT}/gcs")
-    server.serve_forever()
-
+    uvicorn.run("server:app", host=HOST, port=PORT, log_level="warning")
 
 if __name__ == "__main__": run()
