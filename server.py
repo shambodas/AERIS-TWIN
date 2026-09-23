@@ -208,6 +208,7 @@ class TwinController:
         self.following_path = False
         self.active_fault_name = ""
         self.history.clear()
+        self.intelligence.reset_history()
         self.current_flight_id = None
         self.flight_start_time = None
         self.flight_active = False
