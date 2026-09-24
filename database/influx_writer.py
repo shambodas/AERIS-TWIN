@@ -74,6 +74,18 @@ class InfluxWriter:
             return {"flights": {}, "telemetry": {}}
 
     def _save_fallback(self, data):
+
+        # Keep only the last 50 telemetry flights to prevent infinite growth
+        if len(data.get('telemetry', {})) > 50:
+            flight_ids = list(data['telemetry'].keys())
+            for old_id in flight_ids[:-50]:
+                del data['telemetry'][old_id]
+        
+        if len(data.get('flights', {})) > 50:
+            flight_ids = list(data['flights'].keys())
+            for old_id in flight_ids[:-50]:
+                del data['flights'][old_id]
+
         self.fallback_path.parent.mkdir(parents=True, exist_ok=True)
         with self.fallback_path.open("w", encoding="utf-8") as handle:
             json.dump(data, handle, indent=2)
