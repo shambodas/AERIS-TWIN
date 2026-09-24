@@ -1,1 +1,59 @@
+# ============================================================
+# AERIS-TWIN .gitignore
+# ============================================================
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
 .env
+venv/
+.venv/
+
+# Logs
+*.log
+debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# ============================================================
+# Generated training datasets (offline only, NOT runtime deps)
+# The trained .pkl models ARE retained.
+# ============================================================
+data/generated/_combined_training_dataset.csv
+data/generated/fault_training_generalized/generalized_fault_dataset.csv
+data/generated/expectation_training/aeris_twin_generalized_expectations.csv
+scratch/backup_pre_hybrid/_combined_training_dataset.csv
+
+# ============================================================
+# Temporary forensic/debug artifacts
+# ============================================================
+compare_timing.py
+convert.py
+fastapi_server.py
+repro_049.py
+repro_out.json
+repro_sequence.py
+run_case_049_x5.py
+test_sse.py
+test_tick.py
+temp.txt
+temp.js
+validator_log.txt
+verify_all.py
+verify_out.txt
+verify_out_clean.txt
+final_audit.txt
+
+# Runtime outputs
+tools/fresh_408_results.csv
